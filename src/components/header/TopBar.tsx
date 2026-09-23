@@ -1,24 +1,26 @@
 "use client";
 
 import React from "react";
-import { MapPin, Phone, Mail, Clock, Globe } from "lucide-react";
+import { MapPin, Phone, Mail, Clock } from "lucide-react";
 import { useLanguage } from "@/context/LanguageContext";
 
 export default function TopBar() {
   const { language, setLanguage, t } = useLanguage();
 
   return (
-    <div className="bg-slate-900 border-b border-slate-800 text-slate-300 text-xs py-2 px-4 transition-colors">
-      <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-2">
+    <div className="bg-[#090D14] border-b border-white/5 text-slate-300 text-xs py-2 px-4 transition-colors relative z-40">
+      <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-2.5">
         {/* Left: Location & Working Hours */}
         <div className="flex flex-wrap items-center justify-center md:justify-start gap-4 text-center md:text-left">
-          <div className="flex items-center gap-1.5 hover:text-white transition-colors">
-            <MapPin className="h-3.5 w-3.5 text-brand-red shrink-0" />
-            <span>{t("storeAddress")}</span>
+          <div className="flex items-center gap-1.5 hover:text-white transition-colors group">
+            <MapPin className="h-3.5 w-3.5 text-brand-ruby shrink-0 group-hover:scale-110 transition-transform" />
+            <span className="font-medium text-slate-300 group-hover:text-white transition-colors">
+              {t("storeAddress")}
+            </span>
           </div>
-          <span className="hidden sm:inline text-slate-600">|</span>
+          <span className="hidden sm:inline text-white/10">|</span>
           <div className="hidden lg:flex items-center gap-1.5 text-slate-400">
-            <Clock className="h-3.5 w-3.5 text-brand-accent-green shrink-0" />
+            <Clock className="h-3.5 w-3.5 text-emerald-400 shrink-0" />
             <span>{t("workingHours")}</span>
           </div>
         </div>
@@ -26,12 +28,12 @@ export default function TopBar() {
         {/* Right: Phone, Email, Language Switcher & Socials */}
         <div className="flex items-center gap-3 sm:gap-4 text-xs">
           {/* Language Switcher Toggle Pill */}
-          <div className="flex items-center rounded-lg bg-slate-800 p-0.5 border border-slate-700">
+          <div className="flex items-center rounded-full bg-slate-900/90 p-0.5 border border-white/10 shadow-inner">
             <button
               onClick={() => setLanguage("en")}
-              className={`px-2 py-0.5 rounded text-[11px] font-bold transition-all ${
+              className={`px-2.5 py-0.5 rounded-full text-[11px] font-bold tracking-wider transition-all duration-200 ${
                 language === "en"
-                  ? "bg-brand-red text-white shadow-sm"
+                  ? "bg-brand-ruby text-white shadow-ruby"
                   : "text-slate-400 hover:text-white"
               }`}
             >
@@ -39,9 +41,9 @@ export default function TopBar() {
             </button>
             <button
               onClick={() => setLanguage("hi")}
-              className={`px-2 py-0.5 rounded text-[11px] font-bold transition-all ${
+              className={`px-2.5 py-0.5 rounded-full text-[11px] font-bold tracking-wider transition-all duration-200 ${
                 language === "hi"
-                  ? "bg-brand-red text-white shadow-sm"
+                  ? "bg-brand-ruby text-white shadow-ruby"
                   : "text-slate-400 hover:text-white"
               }`}
             >
@@ -49,27 +51,27 @@ export default function TopBar() {
             </button>
           </div>
 
-          <span className="text-slate-600">|</span>
+          <span className="text-white/10">|</span>
 
           <a
             href="tel:+919065224224"
-            className="flex items-center gap-1.5 font-medium hover:text-brand-red transition-colors text-white"
+            className="flex items-center gap-1.5 font-semibold hover:text-white transition-colors text-slate-200 group"
           >
-            <Phone className="h-3.5 w-3.5 text-brand-red shrink-0" />
-            <span>+91 9065224224</span>
+            <Phone className="h-3.5 w-3.5 text-brand-ruby shrink-0 group-hover:scale-110 transition-transform" />
+            <span className="tracking-wide">+91 9065224224</span>
           </a>
 
-          <span className="hidden sm:inline text-slate-600">|</span>
+          <span className="hidden sm:inline text-white/10">|</span>
 
           <a
             href="mailto:info@nanheyaccessories.com"
-            className="hidden sm:flex items-center gap-1.5 hover:text-brand-red transition-colors"
+            className="hidden sm:flex items-center gap-1.5 text-slate-400 hover:text-white transition-colors group"
           >
-            <Mail className="h-3.5 w-3.5 text-brand-red shrink-0" />
+            <Mail className="h-3.5 w-3.5 text-brand-ruby shrink-0 group-hover:scale-110 transition-transform" />
             <span>info@nanheyaccessories.com</span>
           </a>
 
-          <span className="hidden sm:inline text-slate-600">|</span>
+          <span className="hidden sm:inline text-white/10">|</span>
 
           {/* Social Icons */}
           <div className="flex items-center gap-2.5">
@@ -77,7 +79,7 @@ export default function TopBar() {
               href="https://facebook.com"
               target="_blank"
               rel="noopener noreferrer"
-              className="text-slate-400 hover:text-[#1877F2] transition-colors"
+              className="text-slate-400 hover:text-[#1877F2] hover:scale-110 transition-all"
               aria-label="Facebook"
             >
               <svg className="h-3.5 w-3.5 fill-current" viewBox="0 0 24 24">
@@ -88,7 +90,7 @@ export default function TopBar() {
               href="https://wa.me/919065224224"
               target="_blank"
               rel="noopener noreferrer"
-              className="text-slate-400 hover:text-brand-accent-green transition-colors"
+              className="text-slate-400 hover:text-emerald-400 hover:scale-110 transition-all"
               aria-label="WhatsApp"
             >
               <svg className="h-3.5 w-3.5 fill-current" viewBox="0 0 24 24">

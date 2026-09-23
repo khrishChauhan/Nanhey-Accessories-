@@ -41,22 +41,22 @@ export default function ValuePropositionStrip() {
   ];
 
   return (
-    <div className="bg-white border-b border-slate-200/80 py-5 px-4 shadow-sm relative z-10">
+    <div className="bg-white/90 backdrop-blur-md border-b border-slate-200/80 py-4 sm:py-5 px-4 shadow-[0_4px_20px_-4px_rgba(0,0,0,0.02)] relative z-10">
       <div className="max-w-7xl mx-auto">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-4 items-center">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-3.5 items-center">
           {/* 4 Standard Value Propositions */}
           {valueProps.map((item, idx) => {
             const Icon = item.icon;
             return (
               <div
                 key={idx}
-                className="flex items-center gap-3.5 p-3 rounded-xl bg-slate-50/70 hover:bg-slate-100/80 border border-slate-100 transition-colors group"
+                className="flex items-center gap-3.5 p-3 rounded-xl bg-slate-50/70 hover:bg-white border border-slate-200/60 hover:border-brand-ruby/25 hover:shadow-card-hover transition-all duration-300 group"
               >
-                <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-red-50 text-brand-red group-hover:bg-brand-red group-hover:text-white transition-all shadow-sm">
+                <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-brand-ruby-light text-brand-ruby group-hover:bg-brand-ruby group-hover:text-white group-hover:shadow-ruby transition-all duration-300">
                   <Icon className="h-5 w-5" />
                 </div>
                 <div>
-                  <h4 className="text-xs font-black text-slate-800 tracking-tight leading-tight group-hover:text-brand-red transition-colors">
+                  <h4 className="text-xs font-black text-slate-800 tracking-tight leading-tight group-hover:text-brand-ruby transition-colors">
                     {item.title}
                   </h4>
                   <p className="text-[11px] text-slate-500 font-medium leading-tight mt-0.5">
@@ -75,7 +75,7 @@ export default function ValuePropositionStrip() {
             href="https://wa.me/919065224224?text=Hi%20Nanhey%20Accessories,%20I%20want%20to%20place%20an%20order%20or%20inquire%20about%20CCTV%20cameras."
             target="_blank"
             rel="noopener noreferrer"
-            className="flex items-center justify-between p-3.5 rounded-xl bg-gradient-to-r from-emerald-600 to-green-600 hover:from-emerald-700 hover:to-green-700 text-white shadow-md shadow-green-600/20 hover:shadow-lg hover:shadow-green-600/30 transition-all group active:scale-[0.98]"
+            className="flex items-center justify-between p-3.5 rounded-xl bg-gradient-to-r from-emerald-600 via-emerald-500 to-green-600 hover:from-emerald-700 hover:to-green-700 text-white shadow-md shadow-emerald-600/20 hover:shadow-lg hover:shadow-emerald-600/30 hover:scale-[1.01] transition-all duration-300 group active:scale-[0.98]"
           >
             <div className="flex items-center gap-3">
               <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-white/20 text-white backdrop-blur-sm group-hover:scale-110 transition-transform">

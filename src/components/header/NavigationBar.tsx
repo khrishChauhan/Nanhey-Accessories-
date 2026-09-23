@@ -13,9 +13,6 @@ import {
   Video,
   Cable,
   Zap,
-  Tag,
-  PhoneCall,
-  Info,
   X,
 } from "lucide-react";
 
@@ -55,7 +52,7 @@ export default function NavigationBar({
   ];
 
   return (
-    <nav className="bg-slate-900 border-t border-slate-800 text-white relative z-20">
+    <nav className="bg-[#090D14]/95 backdrop-blur-md border-t border-white/10 text-white relative z-20 shadow-lg">
       <div className="max-w-7xl mx-auto px-4">
         <div className="flex items-center justify-between h-14">
           {/* Left: Prominent Category Mega-Dropdown Button */}
@@ -63,7 +60,7 @@ export default function NavigationBar({
             <button
               onClick={() => setIsCategoryMenuOpen(!isCategoryMenuOpen)}
               onMouseEnter={() => setIsCategoryMenuOpen(true)}
-              className="flex items-center gap-2.5 bg-brand-red hover:bg-brand-red-600 text-white font-black text-xs sm:text-sm tracking-wider uppercase px-4 sm:px-6 py-4 shadow-md transition-colors"
+              className="flex items-center gap-2.5 bg-brand-ruby hover:bg-brand-ruby-600 text-white font-extrabold text-xs sm:text-sm tracking-wider uppercase px-4 sm:px-6 py-4 shadow-ruby hover:shadow-glow transition-all duration-200"
             >
               <Menu className="h-5 w-5 stroke-[2.5]" />
               <span>ALL CATEGORIES</span>
@@ -78,9 +75,9 @@ export default function NavigationBar({
             {isCategoryMenuOpen && (
               <div
                 onMouseLeave={() => setIsCategoryMenuOpen(false)}
-                className="absolute top-full left-0 w-72 sm:w-80 bg-white text-slate-800 rounded-b-xl shadow-2xl border border-slate-200 py-2 z-50 animate-in fade-in slide-in-from-top-1"
+                className="absolute top-full left-0 w-72 sm:w-80 bg-white text-slate-800 rounded-b-2xl shadow-2xl border border-slate-200 py-2 z-50 animate-in fade-in slide-in-from-top-1"
               >
-                <div className="px-4 py-2 border-b border-slate-100 bg-slate-50 text-[11px] font-bold text-slate-500 uppercase tracking-wider">
+                <div className="px-4 py-2 border-b border-slate-100 bg-slate-50/80 text-[11px] font-bold text-slate-500 uppercase tracking-wider">
                   Top Product Categories
                 </div>
                 {categories.map((cat, idx) => {
@@ -90,18 +87,18 @@ export default function NavigationBar({
                       key={idx}
                       href={cat.href}
                       onClick={() => setIsCategoryMenuOpen(false)}
-                      className="flex items-center justify-between px-4 py-2.5 hover:bg-red-50/60 hover:text-brand-red transition-colors group"
+                      className="flex items-center justify-between px-4 py-2.5 hover:bg-red-50/60 hover:text-brand-ruby transition-colors group"
                     >
                       <div className="flex items-center gap-3">
-                        <div className="flex h-7 w-7 items-center justify-center rounded-lg bg-slate-100 text-slate-600 group-hover:bg-brand-red group-hover:text-white transition-colors">
+                        <div className="flex h-7 w-7 items-center justify-center rounded-lg bg-slate-100 text-slate-600 group-hover:bg-brand-ruby group-hover:text-white transition-all">
                           <Icon className="h-3.5 w-3.5" />
                         </div>
-                        <span className="text-xs font-semibold text-slate-800 group-hover:text-brand-red">
+                        <span className="text-xs font-semibold text-slate-800 group-hover:text-brand-ruby transition-colors">
                           {cat.name}
                         </span>
                       </div>
                       {cat.isHot ? (
-                        <span className="bg-brand-red text-white text-[9px] font-black px-1.5 py-0.5 rounded uppercase">
+                        <span className="bg-brand-ruby text-white text-[9px] font-black px-1.5 py-0.5 rounded-full uppercase shadow-sm">
                           HOT
                         </span>
                       ) : (
@@ -117,15 +114,15 @@ export default function NavigationBar({
           </div>
 
           {/* Desktop Nav Links */}
-          <div className="hidden lg:flex items-center space-x-1 xl:space-x-2 text-xs font-bold tracking-wide">
+          <div className="hidden lg:flex items-center space-x-1 xl:space-x-2 text-xs font-bold tracking-wider">
             {navLinks.map((link, idx) => (
               <Link
                 key={idx}
                 href={link.href}
-                className="px-2.5 py-2 rounded-lg text-slate-200 hover:text-white hover:bg-slate-800 transition-colors relative flex items-center gap-1 group"
+                className="px-2.5 py-2 rounded-lg text-slate-300 hover:text-white hover:bg-white/5 transition-all relative flex items-center gap-1 group"
               >
                 <span>{link.label}</span>
-                <span className="absolute bottom-0 left-2.5 right-2.5 h-0.5 bg-brand-red scale-x-0 group-hover:scale-x-100 transition-transform origin-left"></span>
+                <span className="absolute bottom-0 left-2.5 right-2.5 h-0.5 bg-brand-ruby scale-x-0 group-hover:scale-x-100 transition-transform origin-left rounded-full"></span>
               </Link>
             ))}
           </div>
@@ -134,16 +131,16 @@ export default function NavigationBar({
           <div className="flex items-center gap-2">
             <Link
               href="/installation"
-              className="flex items-center gap-2 bg-gradient-to-r from-brand-red to-red-600 hover:from-brand-red-600 hover:to-red-700 text-white font-extrabold text-xs uppercase tracking-wider px-3.5 sm:px-4 py-2 rounded-lg shadow-md shadow-brand-red/20 hover:shadow-brand-red/40 transition-all active:scale-95"
+              className="flex items-center gap-2 bg-gradient-to-r from-brand-ruby via-red-600 to-brand-ruby-deep hover:from-brand-ruby-600 hover:to-brand-ruby text-white font-extrabold text-xs uppercase tracking-wider px-3.5 sm:px-4 py-2 rounded-xl shadow-ruby hover:shadow-glow transition-all duration-300 active:scale-95 group"
             >
-              <Wrench className="h-4 w-4 animate-bounce" />
+              <Wrench className="h-4 w-4 group-hover:rotate-45 transition-transform" />
               <span>REQUEST INSTALLATION</span>
             </Link>
 
             {/* Mobile Menu Toggle Button */}
             <button
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              className="lg:hidden p-2 text-slate-300 hover:text-white hover:bg-slate-800 rounded-lg transition-colors"
+              className="lg:hidden p-2 text-slate-300 hover:text-white hover:bg-white/10 rounded-xl transition-colors"
               aria-label="Toggle Navigation Menu"
             >
               {mobileMenuOpen ? (
@@ -158,14 +155,14 @@ export default function NavigationBar({
 
       {/* Mobile Menu Drawer */}
       {mobileMenuOpen && (
-        <div className="lg:hidden bg-slate-950 border-t border-slate-800 px-4 py-4 space-y-2 animate-in slide-in-from-top">
-          <div className="grid grid-cols-2 gap-2 pb-3 border-b border-slate-800">
+        <div className="lg:hidden bg-[#090D14] border-t border-white/10 px-4 py-4 space-y-2 animate-in slide-in-from-top">
+          <div className="grid grid-cols-2 gap-2 pb-3 border-b border-white/10">
             {navLinks.map((link, idx) => (
               <Link
                 key={idx}
                 href={link.href}
                 onClick={() => setMobileMenuOpen(false)}
-                className="flex items-center justify-between p-2 rounded-lg bg-slate-900 text-xs font-semibold text-slate-200 hover:bg-brand-red hover:text-white transition-colors"
+                className="flex items-center justify-between p-2.5 rounded-xl bg-slate-900/80 border border-white/5 text-xs font-semibold text-slate-200 hover:bg-brand-ruby hover:text-white transition-colors"
               >
                 <span>{link.label}</span>
               </Link>
@@ -176,7 +173,7 @@ export default function NavigationBar({
             <Link
               href="/installation"
               onClick={() => setMobileMenuOpen(false)}
-              className="w-full flex items-center justify-center gap-2 bg-brand-red text-white py-2.5 rounded-lg text-xs font-bold uppercase tracking-wider shadow-lg"
+              className="w-full flex items-center justify-center gap-2 bg-brand-ruby text-white py-3 rounded-xl text-xs font-bold uppercase tracking-wider shadow-ruby active:scale-95 transition-all"
             >
               <Wrench className="h-4 w-4" />
               Book Installation Technician
