@@ -14,6 +14,7 @@ import {
   Zap,
   Lock,
 } from "lucide-react";
+import { useLanguage } from "@/context/LanguageContext";
 
 interface HeroSectionProps {
   onShopNow?: () => void;
@@ -24,11 +25,13 @@ export default function HeroSection({
   onShopNow,
   onRequestQuote,
 }: HeroSectionProps) {
+  const { t } = useLanguage();
+
   const uspChips = [
-    { text: "High Quality Products", icon: Award },
-    { text: "Best Price Guaranteed", icon: Zap },
-    { text: "Expert Installation", icon: CheckCircle2 },
-    { text: "After Sales Support", icon: Clock },
+    { text: t("chipQuality"), icon: Award },
+    { text: t("chipPrice"), icon: Zap },
+    { text: t("chipInstall"), icon: CheckCircle2 },
+    { text: t("chipSupport"), icon: Clock },
   ];
 
   const trustBadges = [
@@ -56,23 +59,22 @@ export default function HeroSection({
                 <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-brand-red"></span>
               </span>
               <span className="text-xs font-bold tracking-wider uppercase text-slate-300">
-                #1 CCTV & Security Solutions in Begusarai
+                {t("heroPill")}
               </span>
             </div>
 
             {/* Main Headline */}
             <h1 className="text-3xl sm:text-5xl lg:text-6xl font-black tracking-tight leading-[1.1] text-white">
-              PREMIUM SECURITY –{" "}
+              {t("heroTitlePrefix")}{" "}
               <span className="text-transparent bg-clip-text bg-gradient-to-r from-red-500 via-brand-red to-orange-500">
-                SMARTER PROTECTION
+                {t("heroTitleHighlight")}
               </span>{" "}
-              FOR EVERY PLACE
+              {t("heroTitleSuffix")}
             </h1>
 
             {/* Subtitle */}
             <p className="text-base sm:text-lg text-slate-300 max-w-2xl mx-auto lg:mx-0 leading-relaxed font-normal">
-              High Quality CCTV Cameras & Security Solutions for Home, Shop, Office & Industry. 
-              Authorized seller of CP Plus, Hikvision, Dahua & Realtime biometric systems in Begusarai, Bihar.
+              {t("heroSubtitle")}
             </p>
 
             {/* Feature Chips */}
@@ -94,11 +96,11 @@ export default function HeroSection({
             {/* CTA Buttons */}
             <div className="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4 pt-4">
               <a
-                href="#bestsellers"
+                href="#catalog"
                 onClick={onShopNow}
                 className="w-full sm:w-auto inline-flex items-center justify-center gap-3 bg-brand-red hover:bg-brand-red-600 text-white font-black text-sm uppercase tracking-wider px-8 py-4 rounded-xl shadow-xl shadow-brand-red/30 transition-all hover:scale-[1.02] active:scale-[0.98] group"
               >
-                <span>SHOP NOW</span>
+                <span>{t("shopNow")}</span>
                 <ArrowRight className="h-4 w-4 group-hover:translate-x-1 transition-transform" />
               </a>
 
@@ -108,7 +110,7 @@ export default function HeroSection({
                 className="w-full sm:w-auto inline-flex items-center justify-center gap-2.5 bg-slate-800/90 hover:bg-slate-700/90 text-white font-bold text-sm tracking-wide px-6 py-4 rounded-xl border border-slate-700 hover:border-slate-500 transition-all hover:scale-[1.02] active:scale-[0.98]"
               >
                 <Cctv className="h-4 w-4 text-brand-red" />
-                <span>Build Custom CCTV Package</span>
+                <span>{t("buildCustomPackage")}</span>
               </a>
             </div>
 
@@ -145,7 +147,6 @@ export default function HeroSection({
 
               {/* Graphic Mockup Area */}
               <div className="relative rounded-xl bg-slate-950 border border-slate-800 p-4 mb-6 shadow-inner text-center">
-                {/* SVG Visual Graphic of CCTV Dome + Bullet Setup */}
                 <div className="relative h-44 w-full flex items-center justify-center bg-radial from-slate-800/50 to-slate-950 rounded-lg overflow-hidden">
                   <div className="absolute inset-0 flex items-center justify-center opacity-15">
                     <div className="w-48 h-48 border border-brand-red rounded-full animate-ping"></div>

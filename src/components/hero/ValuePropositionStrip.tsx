@@ -6,33 +6,35 @@ import {
   RotateCcw,
   ShieldCheck,
   Headphones,
-  MessageSquare,
   ArrowRight,
 } from "lucide-react";
+import { useLanguage } from "@/context/LanguageContext";
 
 export default function ValuePropositionStrip() {
+  const { t } = useLanguage();
+
   const valueProps = [
     {
-      title: "Free Delivery",
-      subtitle: "On All Orders",
+      title: t("vpFreeDelivery"),
+      subtitle: t("vpFreeDeliverySub"),
       icon: Truck,
       highlight: "Quick Dispatch",
     },
     {
-      title: "Easy Returns",
-      subtitle: "7 Days Return Policy",
+      title: t("vpReturns"),
+      subtitle: t("vpReturnsSub"),
       icon: RotateCcw,
       highlight: "Hassle Free",
     },
     {
-      title: "Secure Payment",
-      subtitle: "100% Secure Payments",
+      title: t("vpSecure"),
+      subtitle: t("vpSecureSub"),
       icon: ShieldCheck,
       highlight: "UPI / Cards / COD",
     },
     {
-      title: "Online Support",
-      subtitle: "Mon - Sat 10AM - 8PM",
+      title: t("vpSupport"),
+      subtitle: t("vpSupportSub"),
       icon: Headphones,
       highlight: "Dedicated Helpline",
     },
@@ -83,7 +85,7 @@ export default function ValuePropositionStrip() {
               </div>
               <div>
                 <p className="text-[10px] font-bold uppercase tracking-wider text-green-100">
-                  Quick WhatsApp Order
+                  {t("vpWhatsapp")}
                 </p>
                 <p className="text-xs font-black tracking-wide text-white">
                   9065224224

@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
+import Link from "next/link";
 import {
   ShieldCheck,
   Search,
@@ -11,18 +12,15 @@ import {
   Cctv,
 } from "lucide-react";
 import { useShop } from "@/context/ShopContext";
+import { useLanguage } from "@/context/LanguageContext";
 
 interface MainHeaderProps {
   onOpenAccount?: () => void;
 }
 
 export default function MainHeader({ onOpenAccount }: MainHeaderProps) {
-  const {
-    cartCount,
-    cartTotalFormatted,
-    wishlistCount,
-    openCart,
-  } = useShop();
+  const { cartCount, cartTotalFormatted, wishlistCount, openCart } = useShop();
+  const { t } = useLanguage();
 
   const [selectedCategory, setSelectedCategory] = useState("All Categories");
   const [searchQuery, setSearchQuery] = useState("");
@@ -30,7 +28,10 @@ export default function MainHeader({ onOpenAccount }: MainHeaderProps) {
   const handleSearch = (e: React.FormEvent) => {
     e.preventDefault();
     if (!searchQuery.trim()) return;
-    alert(`Searching for "${searchQuery}" in "${selectedCategory}"`);
+    const el = document.getElementById("catalog");
+    if (el) {
+      el.scrollIntoView({ behavior: "smooth" });
+    }
   };
 
   const handleOpenWishlist = () => {
@@ -46,7 +47,7 @@ export default function MainHeader({ onOpenAccount }: MainHeaderProps) {
       <div className="max-w-7xl mx-auto flex flex-col lg:flex-row items-center justify-between gap-4">
         {/* Brand Logo & Tagline */}
         <div className="flex items-center justify-between w-full lg:w-auto">
-          <a href="/" className="flex items-center gap-3 group">
+          <Link href="/" className="flex items-center gap-3 group">
             {/* Logo Badge */}
             <div className="relative flex h-12 w-12 items-center justify-center rounded-2xl bg-gradient-to-br from-brand-red to-red-700 text-white shadow-lg shadow-brand-red/25 group-hover:scale-105 transition-transform">
               <ShieldCheck className="h-7 w-7 text-white" />
@@ -72,7 +73,7 @@ export default function MainHeader({ onOpenAccount }: MainHeaderProps) {
                 </span>
               </div>
             </div>
-          </a>
+          </Link>
         </div>
 
         {/* Global Search Bar with Category Selector */}
@@ -105,7 +106,7 @@ export default function MainHeader({ onOpenAccount }: MainHeaderProps) {
                 type="text"
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
-                placeholder="Search CCTV cameras, DVR, NVR, CP Plus, Hikvision, Hard Disks..."
+                placeholder={t("searchPlaceholder")}
                 className="w-full px-3.5 py-2.5 text-sm text-slate-800 placeholder:text-slate-400 focus:outline-none"
               />
             </div>
@@ -118,7 +119,7 @@ export default function MainHeader({ onOpenAccount }: MainHeaderProps) {
             >
               <Search className="h-4 w-4 stroke-[2.5]" />
               <span className="hidden sm:inline text-xs uppercase tracking-wider font-extrabold">
-                Search
+                {t("searchBtn")}
               </span>
             </button>
           </form>
@@ -128,7 +129,7 @@ export default function MainHeader({ onOpenAccount }: MainHeaderProps) {
         <div className="flex items-center justify-between sm:justify-end gap-3 sm:gap-6 w-full lg:w-auto pt-1 lg:pt-0 border-t lg:border-t-0 border-slate-100">
           {/* User Account */}
           <button
-            onClick={onOpenAccount || (() => alert("User Account: Sign in or register for quotation and warranty management."))}
+            onClick={onOpenAccount}
             className="flex items-center gap-2 text-left p-1.5 rounded-xl hover:bg-slate-50 transition-colors group"
           >
             <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-slate-100 text-slate-700 group-hover:bg-brand-red/10 group-hover:text-brand-red transition-colors">
@@ -136,10 +137,10 @@ export default function MainHeader({ onOpenAccount }: MainHeaderProps) {
             </div>
             <div className="hidden xl:block">
               <p className="text-[10px] uppercase font-bold text-slate-400 leading-tight">
-                Sign In
+                {t("signIn")}
               </p>
               <p className="text-xs font-bold text-slate-800 leading-tight group-hover:text-brand-red">
-                My Account
+                {t("myAccount")}
               </p>
             </div>
           </button>
@@ -160,10 +161,10 @@ export default function MainHeader({ onOpenAccount }: MainHeaderProps) {
             </div>
             <div className="hidden xl:block text-left">
               <p className="text-[10px] uppercase font-bold text-slate-400 leading-tight">
-                Saved
+                {t("saved")}
               </p>
               <p className="text-xs font-bold text-slate-800 leading-tight group-hover:text-brand-red">
-                Wishlist
+                {t("wishlist")}
               </p>
             </div>
           </button>
@@ -184,7 +185,7 @@ export default function MainHeader({ onOpenAccount }: MainHeaderProps) {
             </div>
             <div className="text-left pr-2">
               <p className="text-[10px] uppercase font-bold text-slate-400 leading-none">
-                My Cart
+                {t("myCart")}
               </p>
               <p className="text-xs font-extrabold text-brand-red leading-tight mt-0.5">
                 {cartTotalFormatted}
