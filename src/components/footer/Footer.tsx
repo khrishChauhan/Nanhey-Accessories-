@@ -13,8 +13,10 @@ import {
   CreditCard,
   CheckCircle2,
   FileText,
+  Package,
 } from "lucide-react";
 import GSTQuotationModal from "@/components/quote/GSTQuotationModal";
+import OrderTrackingModal from "@/components/tracking/OrderTrackingModal";
 
 interface FooterProps {
   onRequestInstallation?: () => void;
@@ -22,6 +24,7 @@ interface FooterProps {
 
 export default function Footer({ onRequestInstallation }: FooterProps) {
   const [isQuoteModalOpen, setIsQuoteModalOpen] = useState(false);
+  const [isTrackingModalOpen, setIsTrackingModalOpen] = useState(false);
 
   const quickLinks = [
     { label: "Home", href: "/" },
@@ -159,10 +162,10 @@ export default function Footer({ onRequestInstallation }: FooterProps) {
             </ul>
           </div>
 
-          {/* Column 4: Customer Support & Policies */}
+          {/* Column 4: Customer Support, Quotations & Tracking */}
           <div className="space-y-3">
             <h4 className="text-xs font-black uppercase tracking-wider text-white border-l-2 border-brand-red pl-2">
-              Trust & Quotations
+              Services & Tools
             </h4>
             <ul className="space-y-2">
               {policies.map((p, idx) => (
@@ -178,26 +181,24 @@ export default function Footer({ onRequestInstallation }: FooterProps) {
               ))}
             </ul>
 
-            {/* Instant Quotation Generator Trigger Button */}
-            <div className="pt-2">
+            {/* Live Order Tracking Trigger */}
+            <div className="pt-2 space-y-2">
+              <button
+                onClick={() => setIsTrackingModalOpen(true)}
+                className="w-full flex items-center justify-center gap-1.5 bg-slate-900 hover:bg-slate-800 text-brand-accent-green font-bold py-2 px-3 rounded-xl border border-slate-700 hover:border-brand-accent-green transition-colors text-[11px]"
+              >
+                <Package className="h-4 w-4" />
+                <span>Track Live Order & Technician</span>
+              </button>
+
+              {/* Instant Quotation Generator Trigger Button */}
               <button
                 onClick={() => setIsQuoteModalOpen(true)}
-                className="w-full flex items-center justify-center gap-1.5 bg-slate-900 hover:bg-slate-800 text-white font-bold py-2.5 px-3 rounded-xl border border-slate-700 hover:border-brand-red transition-colors text-[11px]"
+                className="w-full flex items-center justify-center gap-1.5 bg-slate-900 hover:bg-slate-800 text-white font-bold py-2 px-3 rounded-xl border border-slate-700 hover:border-brand-red transition-colors text-[11px]"
               >
                 <FileText className="h-4 w-4 text-brand-red" />
                 <span>Instant Proforma Quotation</span>
               </button>
-            </div>
-
-            {/* GST / Assurance Card */}
-            <div className="mt-3 p-3 rounded-xl bg-slate-900 border border-slate-800 text-[11px] text-slate-300 space-y-1">
-              <span className="font-bold text-white flex items-center gap-1">
-                <CheckCircle2 className="h-3.5 w-3.5 text-brand-accent-green" />
-                GST Registered Store
-              </span>
-              <p className="text-[10px] text-slate-400">
-                Official invoices with Input Tax Credit (ITC) for business customers.
-              </p>
             </div>
           </div>
         </div>
@@ -237,6 +238,12 @@ export default function Footer({ onRequestInstallation }: FooterProps) {
       <GSTQuotationModal
         isOpen={isQuoteModalOpen}
         onClose={() => setIsQuoteModalOpen(false)}
+      />
+
+      {/* Embedded Live Order Tracking Modal */}
+      <OrderTrackingModal
+        isOpen={isTrackingModalOpen}
+        onClose={() => setIsTrackingModalOpen(false)}
       />
     </footer>
   );
