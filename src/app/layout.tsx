@@ -21,7 +21,7 @@ export const viewport: Viewport = {
   width: "device-width",
   initialScale: 1,
   maximumScale: 5,
-  themeColor: "#D9222A",
+  themeColor: "#09090B",
 };
 
 export const metadata: Metadata = {
@@ -146,7 +146,7 @@ export default function RootLayout({
           dangerouslySetInnerHTML={{ __html: JSON.stringify(localBusinessSchema) }}
         />
       </head>
-      <body className="min-h-screen bg-slate-50 text-slate-900 font-sans antialiased selection:bg-brand-ruby selection:text-white">
+      <body className="min-h-screen bg-white text-zinc-900 font-sans antialiased selection:bg-zinc-900 selection:text-white">
         <AppProviders>{children}</AppProviders>
       </body>
     </html>
