@@ -8,19 +8,18 @@ import {
   Percent,
   FileCheck,
   ShieldCheck,
-  BadgeCheck,
 } from "lucide-react";
 
 export default function TrustBadgesBar() {
   const trustItems = [
     {
-      title: "10+ Years Experience",
-      desc: "Begusarai's Pioneer",
+      title: "10+ Years Heritage",
+      desc: "Begusarai's Security Leader",
       icon: Award,
     },
     {
-      title: "5000+ Happy Clients",
-      desc: "Homes, Shops & Offices",
+      title: "5000+ Installations",
+      desc: "Homes, Shops & Factories",
       icon: Users,
     },
     {
@@ -29,42 +28,44 @@ export default function TrustBadgesBar() {
       icon: HeartHandshake,
     },
     {
-      title: "Bulk Discounts",
-      desc: "Contractors & Dealers",
+      title: "B2B Wholesale Margins",
+      desc: "Contractors & Integrators",
       icon: Percent,
     },
     {
-      title: "GST Invoice Available",
-      desc: "100% Tax Compliant",
+      title: "GST ITC Compliant",
+      desc: "100% Tax Invoices",
       icon: FileCheck,
     },
     {
-      title: "AMC Services",
-      desc: "Annual Maintenance",
+      title: "Doorstep AMC & Care",
+      desc: "Begusarai Rapid Support",
       icon: ShieldCheck,
     },
   ];
 
   return (
-    <section className="bg-slate-900 border-t border-b border-slate-800 py-8 px-4 text-white relative overflow-hidden">
-      <div className="absolute inset-0 bg-gradient-to-r from-red-600/5 via-transparent to-red-600/5 pointer-events-none"></div>
+    <section className="bg-[#090D14] border-t border-b border-white/10 py-10 px-4 text-white relative overflow-hidden">
+      {/* Ambient Ruby Beams */}
+      <div className="absolute top-1/2 left-0 -translate-y-1/2 w-72 h-72 bg-brand-ruby/10 rounded-full blur-3xl pointer-events-none"></div>
+      <div className="absolute top-1/2 right-0 -translate-y-1/2 w-72 h-72 bg-brand-ruby/10 rounded-full blur-3xl pointer-events-none"></div>
 
-      <div className="max-w-7xl mx-auto">
-        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
+      <div className="max-w-7xl mx-auto relative z-10">
+        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-3.5 sm:gap-4">
           {trustItems.map((item, idx) => {
             const Icon = item.icon;
             return (
               <div
                 key={idx}
-                className="flex flex-col items-center text-center p-3.5 rounded-xl bg-slate-800/40 border border-slate-700/60 hover:border-brand-red/60 hover:bg-slate-800/80 transition-all duration-200 group"
+                className="flex flex-col items-center text-center p-4 rounded-2xl bg-white/5 border border-white/10 hover:border-brand-ruby/50 hover:bg-white/10 hover:shadow-ruby hover:-translate-y-1 transition-all duration-300 group cursor-default"
               >
-                <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-brand-red/10 text-brand-red group-hover:bg-brand-red group-hover:text-white transition-all mb-2.5 shadow-sm">
-                  <Icon className="h-5 w-5" />
+                <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-brand-ruby/15 text-brand-ruby-glow group-hover:bg-brand-ruby group-hover:text-white group-hover:shadow-ruby transition-all duration-300 mb-3 shadow-inner">
+                  <Icon className="h-5 w-5 stroke-[2]" />
                 </div>
-                <h4 className="text-xs font-black text-white group-hover:text-brand-red transition-colors leading-tight">
+                <h4 className="text-xs font-black text-white group-hover:text-brand-ruby-glow transition-colors leading-tight">
                   {item.title}
                 </h4>
-                <p className="text-[10px] text-slate-400 mt-0.5 leading-tight font-medium">
+                <p className="text-[10px] text-slate-400 mt-1 leading-tight font-medium">
                   {item.desc}
                 </p>
               </div>

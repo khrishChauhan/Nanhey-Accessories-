@@ -125,10 +125,10 @@ export default function GSTQuotationModal({
   };
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/70 p-2 sm:p-4 backdrop-blur-sm overflow-y-auto print:p-0 print:bg-white print:static">
-      <div className="relative w-full max-w-4xl rounded-2xl bg-white shadow-2xl overflow-hidden border border-slate-200 my-auto print:border-none print:shadow-none print:max-w-full">
+    <div className="fixed inset-0 z-50 flex items-center justify-center bg-[#090D14]/75 p-2 sm:p-4 backdrop-blur-md overflow-y-auto print:p-0 print:bg-white print:static">
+      <div className="relative w-full max-w-4xl rounded-3xl bg-white shadow-2xl overflow-hidden border border-slate-200 my-auto print:border-none print:shadow-none print:max-w-full">
         {/* Top Control Header (Hidden when printing) */}
-        <div className="bg-slate-900 text-white px-6 py-4 flex items-center justify-between print:hidden">
+        <div className="bg-[#090D14] text-white px-6 py-4 flex items-center justify-between border-b border-white/10 print:hidden">
           <div className="flex items-center gap-2">
             <FileText className="h-5 w-5 text-brand-red" />
             <h3 className="font-bold text-sm sm:text-base">

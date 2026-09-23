@@ -90,10 +90,10 @@ export default function OrderTrackingModal({
   ];
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 p-4 backdrop-blur-sm animate-in fade-in overflow-y-auto">
-      <div className="relative w-full max-w-xl rounded-2xl bg-white shadow-2xl overflow-hidden border border-slate-100 my-auto">
+    <div className="fixed inset-0 z-50 flex items-center justify-center bg-[#090D14]/75 p-4 backdrop-blur-md animate-in fade-in overflow-y-auto">
+      <div className="relative w-full max-w-xl rounded-3xl bg-white shadow-2xl overflow-hidden border border-slate-200 my-auto">
         {/* Header */}
-        <div className="bg-slate-900 px-6 py-4 text-white flex items-center justify-between">
+        <div className="bg-[#090D14] px-6 py-4 text-white flex items-center justify-between border-b border-white/10">
           <div className="flex items-center gap-2.5">
             <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-brand-red text-white shadow-md">
               <Package className="h-5 w-5" />
