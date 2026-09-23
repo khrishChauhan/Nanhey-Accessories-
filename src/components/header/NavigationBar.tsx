@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
+import Link from "next/link";
 import {
   Menu,
   ChevronDown,
@@ -29,28 +30,28 @@ export default function NavigationBar({
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   const categories = [
-    { name: "HD CCTV Cameras (Analog)", count: "48+ Products", icon: Video },
-    { name: "IP & Network Cameras", count: "36+ Products", icon: Shield },
-    { name: "WiFi & Smart Wireless Cameras", count: "24+ Products", icon: Wifi },
-    { name: "PTZ & Speed Dome Cameras", count: "12+ Products", icon: Video },
-    { name: "DVR (Digital Video Recorders)", count: "18+ Products", icon: HardDrive },
-    { name: "NVR (Network Video Recorders)", count: "16+ Products", icon: HardDrive },
-    { name: "Surveillance Hard Disks (1TB - 8TB)", count: "14+ Products", icon: HardDrive },
-    { name: "CCTV Cables & Connectors (3+1, RG59)", count: "30+ Products", icon: Cable },
-    { name: "Power Supplies & SMPS Adapters", count: "22+ Products", icon: Zap },
-    { name: "Special Combo Packages", count: "10+ Packages", icon: Flame, isHot: true },
+    { name: "HD CCTV Cameras (Analog)", count: "48+ Products", icon: Video, href: "/#catalog" },
+    { name: "IP & Network Cameras", count: "36+ Products", icon: Shield, href: "/#catalog" },
+    { name: "WiFi & Smart Wireless Cameras", count: "24+ Products", icon: Wifi, href: "/#catalog" },
+    { name: "PTZ & Speed Dome Cameras", count: "12+ Products", icon: Video, href: "/#catalog" },
+    { name: "DVR (Digital Video Recorders)", count: "20+ Products", icon: HardDrive, href: "/#catalog" },
+    { name: "NVR (Network Video Recorders)", count: "18+ Products", icon: HardDrive, href: "/#catalog" },
+    { name: "Surveillance Hard Disks (1TB - 8TB)", count: "14+ Products", icon: HardDrive, href: "/#catalog" },
+    { name: "CCTV Cables & Connectors", count: "30+ Products", icon: Cable, href: "/#catalog" },
+    { name: "Power Supplies & SMPS Adapters", count: "22+ Products", icon: Zap, href: "/#catalog" },
+    { name: "Special Combo Packages", count: "10+ Packages", icon: Flame, isHot: true, href: "/#builder" },
   ];
 
   const navLinks = [
-    { label: "HOME", href: "#" },
-    { label: "CCTV CAMERAS", href: "#categories" },
-    { label: "DVR / NVR", href: "#categories" },
-    { label: "WIFI CAMERAS", href: "#categories" },
-    { label: "ACCESSORIES", href: "#categories" },
-    { label: "OFFERS", href: "#bestsellers", isBadge: "HOT" },
-    { label: "INSTALLATION", href: "#installation" },
-    { label: "ABOUT US", href: "#about" },
-    { label: "CONTACT US", href: "#contact" },
+    { label: "HOME", href: "/" },
+    { label: "CCTV CAMERAS", href: "/#catalog" },
+    { label: "DVR / NVR", href: "/#catalog" },
+    { label: "WIFI CAMERAS", href: "/#catalog" },
+    { label: "INSTALLATION", href: "/installation" },
+    { label: "AMC SERVICES", href: "/amc" },
+    { label: "DEALER B2B", href: "/dealer" },
+    { label: "ABOUT US", href: "/about" },
+    { label: "CONTACT US", href: "/contact" },
   ];
 
   return (
@@ -85,9 +86,9 @@ export default function NavigationBar({
                 {categories.map((cat, idx) => {
                   const Icon = cat.icon;
                   return (
-                    <a
+                    <Link
                       key={idx}
-                      href="#categories"
+                      href={cat.href}
                       onClick={() => setIsCategoryMenuOpen(false)}
                       className="flex items-center justify-between px-4 py-2.5 hover:bg-red-50/60 hover:text-brand-red transition-colors group"
                     >
@@ -108,7 +109,7 @@ export default function NavigationBar({
                           {cat.count}
                         </span>
                       )}
-                    </a>
+                    </Link>
                   );
                 })}
               </div>
@@ -118,31 +119,26 @@ export default function NavigationBar({
           {/* Desktop Nav Links */}
           <div className="hidden lg:flex items-center space-x-1 xl:space-x-2 text-xs font-bold tracking-wide">
             {navLinks.map((link, idx) => (
-              <a
+              <Link
                 key={idx}
                 href={link.href}
                 className="px-2.5 py-2 rounded-lg text-slate-200 hover:text-white hover:bg-slate-800 transition-colors relative flex items-center gap-1 group"
               >
                 <span>{link.label}</span>
-                {link.isBadge && (
-                  <span className="bg-brand-red text-white text-[9px] font-black px-1.5 py-0.2 rounded-full uppercase leading-none shadow-sm animate-pulse">
-                    {link.isBadge}
-                  </span>
-                )}
                 <span className="absolute bottom-0 left-2.5 right-2.5 h-0.5 bg-brand-red scale-x-0 group-hover:scale-x-100 transition-transform origin-left"></span>
-              </a>
+              </Link>
             ))}
           </div>
 
           {/* Right Action: Request Installation Button & Mobile Menu Trigger */}
           <div className="flex items-center gap-2">
-            <button
-              onClick={onRequestInstallation}
+            <Link
+              href="/installation"
               className="flex items-center gap-2 bg-gradient-to-r from-brand-red to-red-600 hover:from-brand-red-600 hover:to-red-700 text-white font-extrabold text-xs uppercase tracking-wider px-3.5 sm:px-4 py-2 rounded-lg shadow-md shadow-brand-red/20 hover:shadow-brand-red/40 transition-all active:scale-95"
             >
               <Wrench className="h-4 w-4 animate-bounce" />
               <span>REQUEST INSTALLATION</span>
-            </button>
+            </Link>
 
             {/* Mobile Menu Toggle Button */}
             <button
@@ -165,33 +161,26 @@ export default function NavigationBar({
         <div className="lg:hidden bg-slate-950 border-t border-slate-800 px-4 py-4 space-y-2 animate-in slide-in-from-top">
           <div className="grid grid-cols-2 gap-2 pb-3 border-b border-slate-800">
             {navLinks.map((link, idx) => (
-              <a
+              <Link
                 key={idx}
                 href={link.href}
                 onClick={() => setMobileMenuOpen(false)}
                 className="flex items-center justify-between p-2 rounded-lg bg-slate-900 text-xs font-semibold text-slate-200 hover:bg-brand-red hover:text-white transition-colors"
               >
                 <span>{link.label}</span>
-                {link.isBadge && (
-                  <span className="bg-brand-red text-white text-[9px] px-1.5 py-0.5 rounded">
-                    {link.isBadge}
-                  </span>
-                )}
-              </a>
+              </Link>
             ))}
           </div>
 
           <div className="pt-2">
-            <button
-              onClick={() => {
-                setMobileMenuOpen(false);
-                onRequestInstallation();
-              }}
+            <Link
+              href="/installation"
+              onClick={() => setMobileMenuOpen(false)}
               className="w-full flex items-center justify-center gap-2 bg-brand-red text-white py-2.5 rounded-lg text-xs font-bold uppercase tracking-wider shadow-lg"
             >
               <Wrench className="h-4 w-4" />
               Book Installation Technician
-            </button>
+            </Link>
           </div>
         </div>
       )}

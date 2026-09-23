@@ -13,9 +13,11 @@ import MobileBottomBar from "@/components/mobile/MobileBottomBar";
 import InstallationModal from "@/components/modal/InstallationModal";
 import CartDrawer from "@/components/cart/CartDrawer";
 import ProductQuickViewModal from "@/components/product/ProductQuickViewModal";
+import GSTQuotationModal from "@/components/quote/GSTQuotationModal";
 
 export default function HomePage() {
   const [isInstallationModalOpen, setIsInstallationModalOpen] = useState(false);
+  const [isGSTModalOpen, setIsGSTModalOpen] = useState(false);
   const [selectedPackageText, setSelectedPackageText] = useState<string>("");
   const [activeCatalogCategory, setActiveCatalogCategory] = useState<string>("all");
 
@@ -33,11 +35,6 @@ export default function HomePage() {
 
   const handleOpenGeneralInstallation = () => {
     setSelectedPackageText("Standard CCTV Installation Service");
-    setIsInstallationModalOpen(true);
-  };
-
-  const handleOpenGSTQuotation = () => {
-    setSelectedPackageText("Official GST Tax Invoice & Quotation Request");
     setIsInstallationModalOpen(true);
   };
 
@@ -86,12 +83,18 @@ export default function HomePage() {
       <MobileBottomBar onRequestInstallation={handleOpenGeneralInstallation} />
 
       {/* 10. Slide-Over Cart Drawer with GST & WhatsApp Order Generator */}
-      <CartDrawer onRequestGSTQuotation={handleOpenGSTQuotation} />
+      <CartDrawer onRequestGSTQuotation={() => setIsGSTModalOpen(true)} />
 
       {/* 11. Product Quick View Specifications Modal */}
       <ProductQuickViewModal />
 
-      {/* 12. Interactive Technician & Lead Capture Modal */}
+      {/* 12. Instant Proforma GST Quotation Generator Modal */}
+      <GSTQuotationModal
+        isOpen={isGSTModalOpen}
+        onClose={() => setIsGSTModalOpen(false)}
+      />
+
+      {/* 13. Interactive Technician & Lead Capture Modal */}
       <InstallationModal
         isOpen={isInstallationModalOpen}
         onClose={() => setIsInstallationModalOpen(false)}

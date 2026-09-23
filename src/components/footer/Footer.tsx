@@ -1,6 +1,7 @@
 "use client";
 
-import React from "react";
+import React, { useState } from "react";
+import Link from "next/link";
 import {
   ShieldCheck,
   MapPin,
@@ -11,30 +12,36 @@ import {
   Cctv,
   CreditCard,
   CheckCircle2,
+  FileText,
 } from "lucide-react";
+import GSTQuotationModal from "@/components/quote/GSTQuotationModal";
 
 interface FooterProps {
   onRequestInstallation?: () => void;
 }
 
 export default function Footer({ onRequestInstallation }: FooterProps) {
+  const [isQuoteModalOpen, setIsQuoteModalOpen] = useState(false);
+
   const quickLinks = [
-    { label: "Home", href: "#" },
-    { label: "About Us", href: "#about" },
-    { label: "CCTV Package Builder", href: "#builder" },
-    { label: "Best Selling Cameras", href: "#bestsellers" },
-    { label: "Request Installation", href: "#installation" },
-    { label: "AMC & Maintenance Contracts", href: "#installation" },
+    { label: "Home", href: "/" },
+    { label: "About Us", href: "/about" },
+    { label: "CCTV Package Builder", href: "/#builder" },
+    { label: "Best Selling Cameras", href: "/#bestsellers" },
+    { label: "Request Installation", href: "/installation" },
+    { label: "AMC & Maintenance Contracts", href: "/amc" },
+    { label: "Dealer & Bulk Trade Desk", href: "/dealer" },
+    { label: "Contact & Showroom Map", href: "/contact" },
   ];
 
   const categories = [
-    { label: "HD Analog Cameras", href: "#categories" },
-    { label: "IP Network Cameras", href: "#categories" },
-    { label: "Wireless WiFi Cameras", href: "#categories" },
-    { label: "PTZ 360° Speed Domes", href: "#categories" },
-    { label: "DVR & NVR Recorders", href: "#categories" },
-    { label: "Surveillance Hard Disks", href: "#categories" },
-    { label: "CCTV Cables & Connectors", href: "#categories" },
+    { label: "HD Analog Cameras", href: "/#catalog" },
+    { label: "IP Network Cameras", href: "/#catalog" },
+    { label: "Wireless WiFi Cameras", href: "/#catalog" },
+    { label: "PTZ 360° Speed Domes", href: "/#catalog" },
+    { label: "DVR & NVR Recorders", href: "/#catalog" },
+    { label: "Surveillance Hard Disks", href: "/#catalog" },
+    { label: "CCTV Cables & Connectors", href: "/#catalog" },
   ];
 
   const policies = [
@@ -53,7 +60,7 @@ export default function Footer({ onRequestInstallation }: FooterProps) {
           {/* Column 1: Company Profile (lg:col-span-2) */}
           <div className="lg:col-span-2 space-y-4">
             {/* Logo */}
-            <div className="flex items-center gap-3">
+            <Link href="/" className="flex items-center gap-3">
               <div className="relative flex h-11 w-11 items-center justify-center rounded-xl bg-gradient-to-br from-brand-red to-red-700 text-white shadow-lg shadow-brand-red/30">
                 <ShieldCheck className="h-6 w-6" />
                 <div className="absolute -bottom-1 -right-1 bg-slate-950 rounded-full p-0.5 border border-white">
@@ -73,7 +80,7 @@ export default function Footer({ onRequestInstallation }: FooterProps) {
                   Your Trusted Security Partner
                 </p>
               </div>
-            </div>
+            </Link>
 
             <p className="text-slate-300 leading-relaxed text-xs max-w-sm">
               Nanhey Accessories is Begusarai's premier CCTV surveillance, biometric security, and IT solutions destination. We deliver authentic equipment, transparent pricing, and meticulous turnkey installation for homes, retail, institutions, and industrial sites.
@@ -120,13 +127,13 @@ export default function Footer({ onRequestInstallation }: FooterProps) {
             <ul className="space-y-2">
               {quickLinks.map((link, idx) => (
                 <li key={idx}>
-                  <a
+                  <Link
                     href={link.href}
                     className="hover:text-brand-red transition-colors flex items-center gap-1.5 group"
                   >
                     <ArrowRight className="h-3 w-3 text-slate-600 group-hover:text-brand-red group-hover:translate-x-0.5 transition-all" />
                     <span>{link.label}</span>
-                  </a>
+                  </Link>
                 </li>
               ))}
             </ul>
@@ -140,13 +147,13 @@ export default function Footer({ onRequestInstallation }: FooterProps) {
             <ul className="space-y-2">
               {categories.map((cat, idx) => (
                 <li key={idx}>
-                  <a
+                  <Link
                     href={cat.href}
                     className="hover:text-brand-red transition-colors flex items-center gap-1.5 group"
                   >
                     <ArrowRight className="h-3 w-3 text-slate-600 group-hover:text-brand-red group-hover:translate-x-0.5 transition-all" />
                     <span>{cat.label}</span>
-                  </a>
+                  </Link>
                 </li>
               ))}
             </ul>
@@ -155,7 +162,7 @@ export default function Footer({ onRequestInstallation }: FooterProps) {
           {/* Column 4: Customer Support & Policies */}
           <div className="space-y-3">
             <h4 className="text-xs font-black uppercase tracking-wider text-white border-l-2 border-brand-red pl-2">
-              Trust & Policies
+              Trust & Quotations
             </h4>
             <ul className="space-y-2">
               {policies.map((p, idx) => (
@@ -171,8 +178,19 @@ export default function Footer({ onRequestInstallation }: FooterProps) {
               ))}
             </ul>
 
+            {/* Instant Quotation Generator Trigger Button */}
+            <div className="pt-2">
+              <button
+                onClick={() => setIsQuoteModalOpen(true)}
+                className="w-full flex items-center justify-center gap-1.5 bg-slate-900 hover:bg-slate-800 text-white font-bold py-2.5 px-3 rounded-xl border border-slate-700 hover:border-brand-red transition-colors text-[11px]"
+              >
+                <FileText className="h-4 w-4 text-brand-red" />
+                <span>Instant Proforma Quotation</span>
+              </button>
+            </div>
+
             {/* GST / Assurance Card */}
-            <div className="mt-4 p-3 rounded-xl bg-slate-900 border border-slate-800 text-[11px] text-slate-300 space-y-1">
+            <div className="mt-3 p-3 rounded-xl bg-slate-900 border border-slate-800 text-[11px] text-slate-300 space-y-1">
               <span className="font-bold text-white flex items-center gap-1">
                 <CheckCircle2 className="h-3.5 w-3.5 text-brand-accent-green" />
                 GST Registered Store
@@ -214,6 +232,12 @@ export default function Footer({ onRequestInstallation }: FooterProps) {
           </div>
         </div>
       </div>
+
+      {/* Embedded Quotation Modal */}
+      <GSTQuotationModal
+        isOpen={isQuoteModalOpen}
+        onClose={() => setIsQuoteModalOpen(false)}
+      />
     </footer>
   );
 }
