@@ -1,18 +1,14 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
+import { createPortal } from "react-dom";
 import {
   X,
   User,
   Building2,
-  Phone,
-  ShieldCheck,
   CheckCircle2,
   ArrowRight,
-  Package,
-  Clock,
   LogOut,
-  Sparkles,
   Lock,
 } from "lucide-react";
 
@@ -27,6 +23,7 @@ export default function AuthModal({
   onClose,
   onOpenTracking,
 }: AuthModalProps) {
+  const [mounted, setMounted] = useState(false);
   const [activeTab, setActiveTab] = useState<"customer" | "dealer">("customer");
 
   // Customer Auth State
@@ -42,6 +39,10 @@ export default function AuthModal({
   const [isDealerLoggedIn, setIsDealerLoggedIn] = useState(false);
 
   useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  useEffect(() => {
     let interval: NodeJS.Timeout;
     if (otpStep && otpTimer > 0) {
       interval = setInterval(() => setOtpTimer((prev) => prev - 1), 1000);
@@ -49,7 +50,7 @@ export default function AuthModal({
     return () => clearInterval(interval);
   }, [otpStep, otpTimer]);
 
-  if (!isOpen) return null;
+  if (!isOpen || !mounted) return null;
 
   const handleSendOTP = (e: React.FormEvent) => {
     e.preventDefault();
@@ -80,13 +81,21 @@ export default function AuthModal({
     setDealerCode("");
   };
 
-  return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center bg-[#090D14]/75 p-4 backdrop-blur-md animate-in fade-in">
-      <div className="relative w-full max-w-md rounded-3xl bg-white shadow-2xl overflow-hidden border border-slate-200">
-        {/* Header */}
-        <div className="bg-[#090D14] px-6 py-4 text-white flex items-center justify-between border-b border-white/10">
+  const modalContent = (
+    <div
+      className="fixed inset-0 z-[100] flex items-center justify-center bg-black/75 p-4 backdrop-blur-sm overflow-y-auto animate-in fade-in"
+      onClick={(e) => {
+        if (e.target === e.currentTarget) onClose();
+      }}
+    >
+      <div
+        className="relative w-full max-w-md rounded-2xl bg-white shadow-2xl overflow-hidden border border-zinc-200 my-auto"
+        onClick={(e) => e.stopPropagation()}
+      >
+        {/* Header - Obsidian Styling */}
+        <div className="bg-zinc-950 px-6 py-4 text-white flex items-center justify-between border-b border-zinc-800">
           <div className="flex items-center gap-2.5">
-            <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-brand-red text-white shadow-md">
+            <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-red-600 text-white shadow-xs">
               <User className="h-5 w-5" />
             </div>
             <div>
@@ -97,7 +106,7 @@ export default function AuthModal({
                   ? "Dealer Partner Portal"
                   : "Sign In / Register"}
               </h3>
-              <p className="text-xs text-slate-400">
+              <p className="text-xs text-zinc-400">
                 Nanhey Accessories • Begusarai Showroom
               </p>
             </div>
@@ -105,7 +114,7 @@ export default function AuthModal({
 
           <button
             onClick={onClose}
-            className="rounded-lg p-1.5 text-slate-400 hover:bg-slate-800 hover:text-white transition-colors"
+            className="rounded-lg p-1.5 text-zinc-400 hover:bg-zinc-800 hover:text-white transition-colors"
             aria-label="Close"
           >
             <X className="h-5 w-5" />
@@ -114,7 +123,7 @@ export default function AuthModal({
 
         {/* Tab Switcher (if not logged in) */}
         {!isCustomerLoggedIn && !isDealerLoggedIn && (
-          <div className="grid grid-cols-2 border-b border-slate-200 bg-slate-50 text-xs font-bold text-center">
+          <div className="grid grid-cols-2 border-b border-zinc-200 bg-zinc-50 text-xs font-bold text-center">
             <button
               onClick={() => {
                 setActiveTab("customer");
@@ -122,8 +131,8 @@ export default function AuthModal({
               }}
               className={`py-3 flex items-center justify-center gap-2 border-b-2 transition-colors ${
                 activeTab === "customer"
-                  ? "border-brand-red text-brand-red bg-white"
-                  : "border-transparent text-slate-600 hover:text-slate-900"
+                  ? "border-red-600 text-red-600 bg-white"
+                  : "border-transparent text-zinc-600 hover:text-zinc-900"
               }`}
             >
               <User className="h-4 w-4" />
@@ -137,8 +146,8 @@ export default function AuthModal({
               }}
               className={`py-3 flex items-center justify-center gap-2 border-b-2 transition-colors ${
                 activeTab === "dealer"
-                  ? "border-brand-red text-brand-red bg-white"
-                  : "border-transparent text-slate-600 hover:text-slate-900"
+                  ? "border-red-600 text-red-600 bg-white"
+                  : "border-transparent text-zinc-600 hover:text-zinc-900"
               }`}
             >
               <Building2 className="h-4 w-4" />
@@ -152,24 +161,24 @@ export default function AuthModal({
           {/* ================= STATE 1: CUSTOMER LOGGED IN ================= */}
           {isCustomerLoggedIn && (
             <div className="space-y-4">
-              <div className="flex items-center justify-between p-3.5 rounded-xl bg-slate-50 border border-slate-200">
+              <div className="flex items-center justify-between p-3.5 rounded-xl bg-zinc-50 border border-zinc-200">
                 <div className="flex items-center gap-3">
-                  <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-brand-red text-white font-black text-sm">
+                  <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-red-600 text-white font-black text-sm">
                     RK
                   </div>
                   <div>
-                    <h4 className="font-extrabold text-sm text-slate-900">
+                    <h4 className="font-extrabold text-sm text-zinc-900">
                       Ramesh Kumar
                     </h4>
-                    <p className="text-xs text-slate-500">+91 {mobileNumber || "9065224224"}</p>
-                    <span className="text-[10px] text-brand-accent-green font-bold">
+                    <p className="text-xs text-zinc-500">+91 {mobileNumber || "9065224224"}</p>
+                    <span className="text-[10px] text-emerald-600 font-bold">
                       ● Begusarai Verified Customer
                     </span>
                   </div>
                 </div>
                 <button
                   onClick={handleLogout}
-                  className="text-xs text-slate-400 hover:text-brand-red p-1.5 rounded-lg border border-slate-200 hover:border-brand-red transition-colors"
+                  className="text-xs text-zinc-400 hover:text-red-600 p-1.5 rounded-lg border border-zinc-200 hover:border-red-600 transition-colors"
                   title="Sign out"
                 >
                   <LogOut className="h-4 w-4" />
@@ -178,14 +187,14 @@ export default function AuthModal({
 
               {/* Order History Preview */}
               <div className="space-y-2">
-                <div className="flex items-center justify-between text-xs font-bold text-slate-700">
+                <div className="flex items-center justify-between text-xs font-bold text-zinc-700">
                   <span>Recent Order History</span>
-                  <span className="text-slate-400 text-[11px]">1 Active Order</span>
+                  <span className="text-zinc-400 text-[11px]">1 Active Order</span>
                 </div>
 
-                <div className="p-3.5 rounded-xl bg-slate-50 border border-slate-200 space-y-2 text-xs">
+                <div className="p-3.5 rounded-xl bg-zinc-50 border border-zinc-200 space-y-2 text-xs">
                   <div className="flex items-center justify-between">
-                    <span className="font-mono font-bold text-brand-red">
+                    <span className="font-mono font-bold text-red-600">
                       #NA-85421
                     </span>
                     <span className="text-[10px] font-bold uppercase bg-amber-50 text-amber-700 px-2 py-0.5 rounded border border-amber-200">
@@ -193,34 +202,22 @@ export default function AuthModal({
                     </span>
                   </div>
 
-                  <p className="font-semibold text-slate-800 text-[11px]">
+                  <p className="font-semibold text-zinc-800 text-[11px]">
                     4 Camera Full HD CCTV Kit + 1TB HDD
                   </p>
 
-                  <div className="flex items-center justify-between text-slate-500 text-[10px] pt-1 border-t border-slate-200">
-                    <span>Ordered: 23 Sep 2026</span>
-                    <span>Total: ₹14,999</span>
+                  <div className="flex items-center justify-between text-zinc-500 text-[10px] pt-1 border-t border-zinc-200">
+                    <span>Placed: 23 Sept 2026</span>
+                    <span className="font-bold text-zinc-900">₹14,999</span>
                   </div>
-
-                  <button
-                    onClick={() => {
-                      onClose();
-                      if (onOpenTracking) onOpenTracking("NA-85421");
-                    }}
-                    className="w-full flex items-center justify-center gap-1.5 py-1.5 rounded-lg bg-slate-900 text-white font-bold text-[11px] hover:bg-slate-800 transition-colors"
-                  >
-                    <Package className="h-3.5 w-3.5" />
-                    <span>Track Installation Status</span>
-                  </button>
                 </div>
               </div>
 
-              {/* Default Address */}
-              <div className="p-3 rounded-xl bg-slate-50 border border-slate-200 text-xs space-y-1">
-                <span className="font-bold text-slate-700 uppercase tracking-wider text-[10px]">
+              <div className="p-3 rounded-lg bg-zinc-50 border border-zinc-200 text-xs space-y-1">
+                <span className="font-bold text-zinc-700 uppercase tracking-wider text-[10px]">
                   Saved Installation Address:
                 </span>
-                <p className="text-slate-800 font-medium">
+                <p className="text-zinc-800 font-medium">
                   Ambedkar Chowk, Near Kali Mandir, Begusarai, Bihar – 851101
                 </p>
               </div>
@@ -230,31 +227,31 @@ export default function AuthModal({
           {/* ================= STATE 2: DEALER LOGGED IN ================= */}
           {isDealerLoggedIn && (
             <div className="space-y-4">
-              <div className="flex items-center justify-between p-3.5 rounded-xl bg-slate-900 text-white border border-slate-800">
+              <div className="flex items-center justify-between p-3.5 rounded-xl bg-zinc-950 text-white border border-zinc-800">
                 <div className="flex items-center gap-3">
-                  <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-brand-accent-green text-slate-950 font-black text-sm">
+                  <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-emerald-500 text-zinc-950 font-black text-sm">
                     <Building2 className="h-6 w-6" />
                   </div>
                   <div>
                     <h4 className="font-extrabold text-sm text-white">
                       Mithila Security Solutions
                     </h4>
-                    <p className="text-xs text-slate-300">GSTIN: 10AAGFN4224J1ZV</p>
-                    <span className="text-[10px] text-brand-accent-green font-bold uppercase">
+                    <p className="text-xs text-zinc-300">GSTIN: 10AAGFN4224J1ZV</p>
+                    <span className="text-[10px] text-emerald-400 font-bold uppercase">
                       ★ Gold Wholesale Dealer
                     </span>
                   </div>
                 </div>
                 <button
                   onClick={handleLogout}
-                  className="text-xs text-slate-400 hover:text-white p-1.5 rounded-lg border border-slate-700 hover:border-slate-500 transition-colors"
+                  className="text-xs text-zinc-400 hover:text-white p-1.5 rounded-lg border border-zinc-700 hover:border-zinc-500 transition-colors"
                   title="Sign out"
                 >
                   <LogOut className="h-4 w-4" />
                 </button>
               </div>
 
-              <div className="p-3.5 rounded-xl bg-green-50 border border-green-200 text-xs text-emerald-900 space-y-1.5">
+              <div className="p-3.5 rounded-xl bg-emerald-50 border border-emerald-200 text-xs text-emerald-900 space-y-1.5">
                 <p className="font-bold flex items-center gap-1.5">
                   <CheckCircle2 className="h-4 w-4 text-emerald-600" />
                   <span>Wholesale Dealer Margins Active (28% Trade Discount)</span>
@@ -268,7 +265,7 @@ export default function AuthModal({
                 <a
                   href="/dealer"
                   onClick={onClose}
-                  className="w-full flex items-center justify-center gap-2 bg-brand-red text-white py-2.5 rounded-xl text-xs font-bold uppercase tracking-wider hover:bg-brand-red-600 shadow-md transition-colors"
+                  className="w-full flex items-center justify-center gap-2 bg-red-600 hover:bg-red-700 text-white py-2.5 rounded-xl text-xs font-bold uppercase tracking-wider shadow-md transition-colors"
                 >
                   <span>Go to B2B Bulk Order Desk</span>
                   <ArrowRight className="h-4 w-4" />
@@ -283,20 +280,20 @@ export default function AuthModal({
               {!otpStep ? (
                 <form onSubmit={handleSendOTP} className="space-y-4">
                   <div className="text-center pb-2">
-                    <h4 className="text-base font-black text-slate-900">
+                    <h4 className="text-base font-black text-zinc-900">
                       Login with Mobile Number
                     </h4>
-                    <p className="text-xs text-slate-500 mt-0.5">
+                    <p className="text-xs text-zinc-500 mt-0.5">
                       We'll send a 4-digit verification code to your phone.
                     </p>
                   </div>
 
                   <div>
-                    <label className="block text-xs font-black uppercase text-slate-700 tracking-wider mb-1">
+                    <label className="block text-xs font-bold uppercase text-zinc-700 tracking-wider mb-1">
                       Mobile Number *
                     </label>
                     <div className="relative">
-                      <span className="absolute left-3.5 top-2.5 text-xs font-bold text-slate-500">
+                      <span className="absolute left-3.5 top-2.5 text-xs font-bold text-zinc-500">
                         +91
                       </span>
                       <input
@@ -306,34 +303,34 @@ export default function AuthModal({
                         placeholder="9065224224"
                         value={mobileNumber}
                         onChange={(e) => setMobileNumber(e.target.value.replace(/\D/g, ""))}
-                        className="w-full rounded-xl border border-slate-200 pl-12 pr-3.5 py-2.5 text-sm font-semibold tracking-wide focus:border-brand-red focus:outline-none focus:ring-2 focus:ring-brand-red/20"
+                        className="w-full rounded-xl border border-zinc-200 pl-12 pr-3.5 py-2.5 text-sm font-semibold tracking-wide focus:border-red-600 focus:outline-none focus:ring-2 focus:ring-red-600/20"
                       />
                     </div>
                   </div>
 
                   <button
                     type="submit"
-                    className="w-full flex items-center justify-center gap-2 bg-brand-red hover:bg-brand-red-600 text-white font-black text-xs uppercase tracking-wider py-3 rounded-xl shadow-lg shadow-brand-red/30 transition-all active:scale-[0.99]"
+                    className="w-full flex items-center justify-center gap-2 bg-red-600 hover:bg-red-700 text-white font-bold text-xs uppercase tracking-wider py-3 rounded-xl shadow-md shadow-red-600/25 transition-all active:scale-[0.99]"
                   >
                     <span>Send Verification Code</span>
                     <ArrowRight className="h-4 w-4" />
                   </button>
 
-                  <p className="text-[11px] text-center text-slate-400">
+                  <p className="text-[11px] text-center text-zinc-400">
                     By signing in, you agree to Nanhey Accessories Terms of Service and Privacy Policy.
                   </p>
                 </form>
               ) : (
                 <form onSubmit={handleVerifyOTP} className="space-y-4">
                   <div className="text-center pb-1">
-                    <h4 className="text-base font-black text-slate-900">
+                    <h4 className="text-base font-black text-zinc-900">
                       Enter 4-Digit Code
                     </h4>
-                    <p className="text-xs text-slate-500 mt-0.5">
+                    <p className="text-xs text-zinc-500 mt-0.5">
                       Sent to <strong>+91 {mobileNumber}</strong>
                     </p>
                     <div className="mt-2 inline-block px-2.5 py-1 rounded-md bg-amber-50 border border-amber-200 text-[11px] text-amber-800 font-bold">
-                      💡 Demo Simulation OTP: <span className="font-mono font-black text-brand-red">4224</span>
+                      💡 Demo Simulation OTP: <span className="font-mono font-black text-red-600">4224</span>
                     </div>
                   </div>
 
@@ -350,24 +347,24 @@ export default function AuthModal({
                           newOtp[i] = e.target.value;
                           setOtp(newOtp);
                         }}
-                        className="w-12 h-12 text-center text-xl font-black rounded-xl border border-slate-300 focus:border-brand-red focus:ring-2 focus:ring-brand-red/20 focus:outline-none"
+                        className="w-12 h-12 text-center text-xl font-black rounded-xl border border-zinc-300 focus:border-red-600 focus:ring-2 focus:ring-red-600/20 focus:outline-none"
                       />
                     ))}
                   </div>
 
                   <button
                     type="submit"
-                    className="w-full flex items-center justify-center gap-2 bg-brand-red hover:bg-brand-red-600 text-white font-black text-xs uppercase tracking-wider py-3 rounded-xl shadow-lg shadow-brand-red/30 transition-all active:scale-[0.99]"
+                    className="w-full flex items-center justify-center gap-2 bg-red-600 hover:bg-red-700 text-white font-bold text-xs uppercase tracking-wider py-3 rounded-xl shadow-md shadow-red-600/25 transition-all active:scale-[0.99]"
                   >
                     <CheckCircle2 className="h-4 w-4" />
                     <span>Verify Code & Login</span>
                   </button>
 
-                  <div className="flex items-center justify-between text-xs text-slate-500 pt-1">
+                  <div className="flex items-center justify-between text-xs text-zinc-500 pt-1">
                     <button
                       type="button"
                       onClick={() => setOtpStep(false)}
-                      className="hover:text-brand-red underline"
+                      className="hover:text-red-600 underline"
                     >
                       Change Phone Number
                     </button>
@@ -378,7 +375,7 @@ export default function AuthModal({
                         <button
                           type="button"
                           onClick={() => setOtpTimer(30)}
-                          className="text-brand-red font-bold hover:underline"
+                          className="text-red-600 font-bold hover:underline"
                         >
                           Resend OTP
                         </button>
@@ -394,62 +391,62 @@ export default function AuthModal({
           {!isCustomerLoggedIn && !isDealerLoggedIn && activeTab === "dealer" && (
             <form onSubmit={handleDealerLogin} className="space-y-4">
               <div className="text-center pb-2">
-                <h4 className="text-base font-black text-slate-900">
+                <h4 className="text-base font-black text-zinc-900">
                   Dealer & Installer Login
                 </h4>
-                <p className="text-xs text-slate-500 mt-0.5">
+                <p className="text-xs text-zinc-500 mt-0.5">
                   Access wholesale price catalogues and credit billing.
                 </p>
               </div>
 
               <div>
-                <label className="block text-xs font-black uppercase text-slate-700 tracking-wider mb-1">
+                <label className="block text-xs font-bold uppercase text-zinc-700 tracking-wider mb-1">
                   GSTIN or Registered Dealer ID *
                 </label>
                 <div className="relative">
-                  <Building2 className="absolute left-3.5 top-3 h-4 w-4 text-slate-400" />
+                  <Building2 className="absolute left-3.5 top-3 h-4 w-4 text-zinc-400" />
                   <input
                     type="text"
                     required
                     placeholder="e.g. 10AAGFN4224J1ZV or NA-DLR-48"
                     value={dealerCode}
                     onChange={(e) => setDealerCode(e.target.value.toUpperCase())}
-                    className="w-full rounded-xl border border-slate-200 pl-10 pr-3.5 py-2.5 text-xs sm:text-sm font-mono uppercase focus:border-brand-red focus:outline-none focus:ring-2 focus:ring-brand-red/20"
+                    className="w-full rounded-xl border border-zinc-200 pl-10 pr-3.5 py-2.5 text-xs sm:text-sm font-mono uppercase focus:border-red-600 focus:outline-none focus:ring-2 focus:ring-red-600/20"
                   />
                 </div>
               </div>
 
               <div>
-                <label className="block text-xs font-black uppercase text-slate-700 tracking-wider mb-1">
+                <label className="block text-xs font-bold uppercase text-zinc-700 tracking-wider mb-1">
                   Account PIN / Password *
                 </label>
                 <div className="relative">
-                  <Lock className="absolute left-3.5 top-3 h-4 w-4 text-slate-400" />
+                  <Lock className="absolute left-3.5 top-3 h-4 w-4 text-zinc-400" />
                   <input
                     type="password"
                     required
                     placeholder="••••••••"
                     value={dealerPassword}
                     onChange={(e) => setDealerPassword(e.target.value)}
-                    className="w-full rounded-xl border border-slate-200 pl-10 pr-3.5 py-2.5 text-xs sm:text-sm focus:border-brand-red focus:outline-none focus:ring-2 focus:ring-brand-red/20"
+                    className="w-full rounded-xl border border-zinc-200 pl-10 pr-3.5 py-2.5 text-xs sm:text-sm focus:border-red-600 focus:outline-none focus:ring-2 focus:ring-red-600/20"
                   />
                 </div>
               </div>
 
               <button
                 type="submit"
-                className="w-full flex items-center justify-center gap-2 bg-slate-900 hover:bg-slate-800 text-white font-black text-xs uppercase tracking-wider py-3 rounded-xl shadow-lg transition-all active:scale-[0.99]"
+                className="w-full flex items-center justify-center gap-2 bg-zinc-900 hover:bg-zinc-800 text-white font-bold text-xs uppercase tracking-wider py-3 rounded-xl shadow-md transition-all active:scale-[0.99]"
               >
                 <span>Access Dealer Portal</span>
                 <ArrowRight className="h-4 w-4" />
               </button>
 
-              <div className="text-center pt-2 text-xs text-slate-500">
+              <div className="text-center pt-2 text-xs text-zinc-500">
                 <span>Not registered as a dealer yet? </span>
                 <a
                   href="/dealer"
                   onClick={onClose}
-                  className="text-brand-red font-bold hover:underline"
+                  className="text-red-600 font-bold hover:underline"
                 >
                   Register Here
                 </a>
@@ -460,4 +457,6 @@ export default function AuthModal({
       </div>
     </div>
   );
+
+  return typeof document !== "undefined" ? createPortal(modalContent, document.body) : null;
 }

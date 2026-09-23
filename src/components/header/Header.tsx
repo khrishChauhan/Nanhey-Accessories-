@@ -11,27 +11,28 @@ export default function Header() {
   const [isAuthModalOpen, setIsAuthModalOpen] = useState(false);
 
   return (
-    <header className="w-full sticky top-0 z-50 backdrop-blur-md bg-white/95 border-b border-zinc-200/80 shadow-xs">
-      {/* Row 1: Micro Utility Bar (30px) */}
-      <TopBar />
+    <>
+      <header className="w-full sticky top-0 z-40 backdrop-blur-md bg-white/95 border-b border-zinc-200/80 shadow-xs">
+        {/* Row 1: Micro Utility Bar (30px) */}
+        <TopBar />
 
-      {/* Row 2: Consolidated 72px Main Navigation Bar */}
-      <MainHeader
-        onOpenAccount={() => setIsAuthModalOpen(true)}
-        onRequestInstallation={() => setIsInstallationModalOpen(true)}
-      />
+        {/* Row 2: Consolidated 72px Main Navigation Bar */}
+        <MainHeader
+          onOpenAccount={() => setIsAuthModalOpen(true)}
+          onRequestInstallation={() => setIsInstallationModalOpen(true)}
+        />
+      </header>
 
-      {/* Installation Request Modal */}
+      {/* Modals rendered OUTSIDE <header> to avoid backdrop-blur containing-block clipping */}
       <InstallationModal
         isOpen={isInstallationModalOpen}
         onClose={() => setIsInstallationModalOpen(false)}
       />
 
-      {/* Customer & Dealer Auth Modal */}
       <AuthModal
         isOpen={isAuthModalOpen}
         onClose={() => setIsAuthModalOpen(false)}
       />
-    </header>
+    </>
   );
 }
