@@ -7,8 +7,9 @@ import {
   Cctv,
   Phone,
   MessageCircle,
-  Wrench,
+  ShoppingCart,
 } from "lucide-react";
+import { useShop } from "@/context/ShopContext";
 
 interface MobileBottomBarProps {
   onRequestInstallation: () => void;
@@ -17,6 +18,8 @@ interface MobileBottomBarProps {
 export default function MobileBottomBar({
   onRequestInstallation,
 }: MobileBottomBarProps) {
+  const { cartCount, openCart } = useShop();
+
   return (
     <div className="fixed bottom-0 left-0 right-0 z-40 bg-white/95 backdrop-blur-md border-t border-slate-200 py-1.5 px-3 md:hidden shadow-[0_-4px_12px_rgba(0,0,0,0.08)]">
       <div className="grid grid-cols-5 gap-1 items-center text-center">
@@ -51,16 +54,23 @@ export default function MobileBottomBar({
           </span>
         </a>
 
-        {/* Call Now */}
-        <a
-          href="tel:+919065224224"
-          className="flex flex-col items-center justify-center py-1 text-slate-600 hover:text-brand-red transition-colors"
+        {/* Cart Trigger */}
+        <button
+          onClick={openCart}
+          className="relative flex flex-col items-center justify-center py-1 text-slate-600 hover:text-brand-red transition-colors"
         >
-          <Phone className="h-5 w-5 text-brand-red" />
-          <span className="text-[10px] font-semibold mt-0.5">Call</span>
-        </a>
+          <div className="relative">
+            <ShoppingCart className="h-5 w-5 text-slate-700" />
+            {cartCount > 0 && (
+              <span className="absolute -top-1 -right-2 flex h-4 w-4 items-center justify-center rounded-full bg-brand-red text-[9px] font-bold text-white">
+                {cartCount}
+              </span>
+            )}
+          </div>
+          <span className="text-[10px] font-semibold mt-0.5">Cart</span>
+        </button>
 
-        {/* WhatsApp */}
+        {/* WhatsApp Trigger */}
         <a
           href="https://wa.me/919065224224?text=Hi%20Nanhey%20Accessories,%20I%20am%20interested%20in%20CCTV%20cameras."
           target="_blank"

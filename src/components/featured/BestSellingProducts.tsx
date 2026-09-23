@@ -6,122 +6,45 @@ import {
   ShoppingCart,
   Check,
   Eye,
-  ShieldCheck,
+  Heart,
   Video,
   HardDrive,
   Wifi,
   Cable,
   Cpu,
+  Cctv,
 } from "lucide-react";
+import { PRODUCTS, Product } from "@/data/products";
+import { useShop } from "@/context/ShopContext";
 
-export interface ProductItem {
-  id: string;
-  name: string;
-  category: string;
-  price: number;
-  mrp: number;
-  discount: string;
-  rating: number;
-  reviewsCount: number;
-  inStock: boolean;
-  warranty: string;
-  icon: React.ElementType;
-  badge?: string;
-  specs: string[];
-}
-
-interface BestSellingProductsProps {
-  onAddToCart?: (product: ProductItem) => void;
-}
-
-export default function BestSellingProducts({
-  onAddToCart,
-}: BestSellingProductsProps) {
+export default function BestSellingProducts() {
+  const { addToCart, toggleWishlist, isWishlisted, openQuickView } = useShop();
   const [addedId, setAddedId] = useState<string | null>(null);
 
-  const products: ProductItem[] = [
-    {
-      id: "prod-1",
-      name: "CP Plus 2.4MP Full Color Camera",
-      category: "HD CCTV Camera",
-      price: 1499,
-      mrp: 1999,
-      discount: "25% OFF",
-      rating: 4.9,
-      reviewsCount: 142,
-      inStock: true,
-      warranty: "2 Yrs Warranty",
-      icon: Video,
-      badge: "Best Seller",
-      specs: ["20M Warm LED", "Full Color Night", "Weatherproof IP67"],
-    },
-    {
-      id: "prod-2",
-      name: "CP Plus 4 Channel DVR",
-      category: "Digital Recorders",
-      price: 2999,
-      mrp: 3999,
-      discount: "25% OFF",
-      rating: 4.8,
-      reviewsCount: 98,
-      inStock: true,
-      warranty: "2 Yrs Warranty",
-      icon: Cpu,
-      badge: "Top Choice",
-      specs: ["1080P Full HD", "H.265+ Compression", "Mobile View App"],
-    },
-    {
-      id: "prod-3",
-      name: "WiFi Smart Camera 2MP",
-      category: "Wireless Smart Cam",
-      price: 2499,
-      mrp: 3299,
-      discount: "24% OFF",
-      rating: 4.9,
-      reviewsCount: 210,
-      inStock: true,
-      warranty: "1 Yr Replacement",
-      icon: Wifi,
-      badge: "Smart Home",
-      specs: ["360° Pan & Tilt", "Two-Way Audio", "MicroSD Slot"],
-    },
-    {
-      id: "prod-4",
-      name: "1TB Hard Disk Surveillance",
-      category: "Surveillance Storage",
-      price: 4500,
-      mrp: 5500,
-      discount: "18% OFF",
-      rating: 4.9,
-      reviewsCount: 312,
-      inStock: true,
-      warranty: "3 Yrs Brand Warranty",
-      icon: HardDrive,
-      badge: "24x7 Record",
-      specs: ["Seagate / WD Purple", "SATA 6Gb/s", "Low Power Draw"],
-    },
-    {
-      id: "prod-5",
-      name: "90 Meter CCTV Cable High Quality",
-      category: "Wiring & Cables",
-      price: 1800,
-      mrp: 2200,
-      discount: "18% OFF",
-      rating: 4.7,
-      reviewsCount: 84,
-      inStock: true,
-      warranty: "Pure Copper",
-      icon: Cable,
-      badge: "High Grade",
-      specs: ["3+1 Coaxial", "Flame Retardant", "Pure Copper Core"],
-    },
-  ];
+  // Pick the top 5 flagship best-sellers across diverse categories
+  const bestSellers = PRODUCTS.filter((p) => p.isBestSeller).slice(0, 5);
 
-  const handleAddToCart = (product: ProductItem) => {
-    setAddedId(product.id);
-    if (onAddToCart) {
-      onAddToCart(product);
+  const getProductIcon = (category: string) => {
+    switch (category) {
+      case "hd-camera":
+        return Video;
+      case "wifi-camera":
+        return Wifi;
+      case "dvr":
+      case "nvr":
+        return Cpu;
+      case "hard-disk":
+        return HardDrive;
+      case "accessories":
+        return Cable;
+      default:
+        return Cctv;
     }
+  };
+
+  const handleAddToCart = (product: Product) => {
+    addToCart(product, 1);
+    setAddedId(product.id);
     setTimeout(() => {
       setAddedId(null);
     }, 1500);
@@ -149,9 +72,10 @@ export default function BestSellingProducts({
 
       {/* Product List */}
       <div className="space-y-3 flex-1 overflow-y-auto pr-1 max-h-[580px]">
-        {products.map((product) => {
-          const Icon = product.icon;
+        {bestSellers.map((product) => {
+          const Icon = getProductIcon(product.category);
           const isAdded = addedId === product.id;
+          const wishlisted = isWishlisted(product.id);
 
           return (
             <div
@@ -161,18 +85,16 @@ export default function BestSellingProducts({
               {/* Product Thumbnail / Icon */}
               <div className="relative flex-shrink-0 flex h-20 w-20 items-center justify-center rounded-xl bg-slate-100 text-slate-700 group-hover:bg-red-50 group-hover:text-brand-red transition-colors border border-slate-200">
                 <Icon className="h-9 w-9" />
-                {product.badge && (
-                  <span className="absolute -top-1.5 -left-1.5 bg-brand-red text-white text-[9px] font-black px-1.5 py-0.5 rounded shadow-sm uppercase">
-                    {product.badge}
-                  </span>
-                )}
+                <span className="absolute -top-1.5 -left-1.5 bg-brand-red text-white text-[9px] font-black px-1.5 py-0.5 rounded shadow-sm uppercase">
+                  Best Seller
+                </span>
               </div>
 
               {/* Product Details */}
               <div className="flex-1 text-center sm:text-left min-w-0">
                 <div className="flex flex-wrap items-center justify-center sm:justify-start gap-2 mb-1">
                   <span className="text-[10px] font-bold text-slate-400 uppercase">
-                    {product.category}
+                    {product.brand} • {product.categoryName}
                   </span>
                   <span className="text-slate-300 hidden sm:inline">•</span>
                   {/* Star Rating */}
@@ -180,21 +102,25 @@ export default function BestSellingProducts({
                     <Star className="h-3 w-3 fill-amber-400 text-amber-400" />
                     <span>{product.rating}</span>
                     <span className="text-slate-400 font-normal">
-                      ({product.reviewsCount})
+                      ({product.reviewCount})
                     </span>
                   </div>
                 </div>
 
-                <h4 className="font-extrabold text-sm text-slate-900 group-hover:text-brand-red transition-colors truncate">
+                <h4
+                  onClick={() => openQuickView(product)}
+                  className="font-extrabold text-sm text-slate-900 hover:text-brand-red cursor-pointer transition-colors truncate"
+                  title={product.name}
+                >
                   {product.name}
                 </h4>
 
                 {/* Specs Chips */}
                 <div className="flex flex-wrap items-center justify-center sm:justify-start gap-1.5 mt-1.5">
-                  {product.specs.map((spec, i) => (
+                  {product.features.slice(0, 3).map((spec, i) => (
                     <span
                       key={i}
-                      className="text-[9px] font-semibold bg-slate-100 text-slate-600 px-1.5 py-0.5 rounded"
+                      className="text-[9px] font-semibold bg-slate-100 text-slate-600 px-1.5 py-0.5 rounded truncate max-w-[140px]"
                     >
                       {spec}
                     </span>
@@ -210,7 +136,7 @@ export default function BestSellingProducts({
                       ₹{product.price.toLocaleString("en-IN")}
                     </span>
                     <span className="text-xs text-slate-400 line-through">
-                      ₹{product.mrp.toLocaleString("en-IN")}
+                      ₹{product.originalPrice.toLocaleString("en-IN")}
                     </span>
                   </div>
                   <div className="flex items-center gap-1">
@@ -218,32 +144,59 @@ export default function BestSellingProducts({
                       {product.discount}
                     </span>
                     <span className="text-[9px] text-slate-400">
-                      ({product.warranty})
+                      ({product.warranty.split(" ")[0]} {product.warranty.split(" ")[1]})
                     </span>
                   </div>
                 </div>
 
-                <button
-                  onClick={() => handleAddToCart(product)}
-                  className={`flex items-center justify-center gap-1.5 px-3 py-2 rounded-xl text-xs font-bold transition-all shadow-sm ${
-                    isAdded
-                      ? "bg-brand-accent-green text-white"
-                      : "bg-brand-red text-white hover:bg-brand-red-600 active:scale-95 shadow-brand-red/20"
-                  }`}
-                  aria-label={`Add ${product.name} to cart`}
-                >
-                  {isAdded ? (
-                    <>
-                      <Check className="h-3.5 w-3.5" />
-                      <span>Added</span>
-                    </>
-                  ) : (
-                    <>
-                      <ShoppingCart className="h-3.5 w-3.5" />
-                      <span>Add to Cart</span>
-                    </>
-                  )}
-                </button>
+                {/* Actions: Quick View, Wishlist & Add to Cart */}
+                <div className="flex items-center gap-1.5">
+                  <button
+                    onClick={() => openQuickView(product)}
+                    className="p-2 rounded-xl border border-slate-200 hover:border-slate-300 text-slate-600 hover:text-brand-red bg-slate-50 hover:bg-white transition-colors"
+                    title="Quick View specifications"
+                    aria-label="Quick View"
+                  >
+                    <Eye className="h-3.5 w-3.5" />
+                  </button>
+
+                  <button
+                    onClick={() => toggleWishlist(product)}
+                    className={`p-2 rounded-xl border transition-colors ${
+                      wishlisted
+                        ? "bg-red-50 border-brand-red text-brand-red"
+                        : "border-slate-200 text-slate-600 hover:text-brand-red bg-slate-50 hover:bg-white"
+                    }`}
+                    title={wishlisted ? "Remove from wishlist" : "Add to wishlist"}
+                    aria-label="Toggle Wishlist"
+                  >
+                    <Heart
+                      className={`h-3.5 w-3.5 ${wishlisted ? "fill-brand-red" : ""}`}
+                    />
+                  </button>
+
+                  <button
+                    onClick={() => handleAddToCart(product)}
+                    className={`flex items-center justify-center gap-1.5 px-3 py-2 rounded-xl text-xs font-bold transition-all shadow-sm ${
+                      isAdded
+                        ? "bg-brand-accent-green text-white"
+                        : "bg-brand-red text-white hover:bg-brand-red-600 active:scale-95 shadow-brand-red/20"
+                    }`}
+                    aria-label={`Add ${product.name} to cart`}
+                  >
+                    {isAdded ? (
+                      <>
+                        <Check className="h-3.5 w-3.5" />
+                        <span>Added</span>
+                      </>
+                    ) : (
+                      <>
+                        <ShoppingCart className="h-3.5 w-3.5" />
+                        <span>Add</span>
+                      </>
+                    )}
+                  </button>
+                </div>
               </div>
             </div>
           );

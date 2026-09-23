@@ -7,26 +7,16 @@ import NavigationBar from "./NavigationBar";
 import InstallationModal from "../modal/InstallationModal";
 
 interface HeaderProps {
-  cartCount?: number;
-  cartTotal?: string;
-  wishlistCount?: number;
+  onOpenAccount?: () => void;
 }
 
-export default function Header({
-  cartCount = 2,
-  cartTotal = "₹4,498",
-  wishlistCount = 3,
-}: HeaderProps) {
+export default function Header({ onOpenAccount }: HeaderProps) {
   const [isInstallationModalOpen, setIsInstallationModalOpen] = useState(false);
 
   return (
     <header className="w-full sticky top-0 z-40 bg-white shadow-sm">
       <TopBar />
-      <MainHeader
-        cartCount={cartCount}
-        cartTotal={cartTotal}
-        wishlistCount={wishlistCount}
-      />
+      <MainHeader onOpenAccount={onOpenAccount} />
       <NavigationBar
         onRequestInstallation={() => setIsInstallationModalOpen(true)}
       />

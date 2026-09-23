@@ -6,21 +6,16 @@ import HeroSection from "@/components/hero/HeroSection";
 import ValuePropositionStrip from "@/components/hero/ValuePropositionStrip";
 import CategoryGrid from "@/components/category/CategoryGrid";
 import FeaturedSection from "@/components/featured/FeaturedSection";
-import { ProductItem } from "@/components/featured/BestSellingProducts";
 import TrustBadgesBar from "@/components/trust/TrustBadgesBar";
 import Footer from "@/components/footer/Footer";
 import MobileBottomBar from "@/components/mobile/MobileBottomBar";
 import InstallationModal from "@/components/modal/InstallationModal";
+import CartDrawer from "@/components/cart/CartDrawer";
+import ProductQuickViewModal from "@/components/product/ProductQuickViewModal";
 
 export default function HomePage() {
   const [isInstallationModalOpen, setIsInstallationModalOpen] = useState(false);
   const [selectedPackageText, setSelectedPackageText] = useState<string>("");
-  const [cartCount, setCartCount] = useState<number>(2);
-  const [cartTotal, setCartTotal] = useState<string>("₹4,498");
-
-  const handleAddToCart = (product: ProductItem) => {
-    setCartCount((prev) => prev + 1);
-  };
 
   const handleBuildPackage = (pkg: {
     cameras: number;
@@ -39,14 +34,15 @@ export default function HomePage() {
     setIsInstallationModalOpen(true);
   };
 
+  const handleOpenGSTQuotation = () => {
+    setSelectedPackageText("Official GST Tax Invoice & Quotation Request");
+    setIsInstallationModalOpen(true);
+  };
+
   return (
     <main className="min-h-screen bg-slate-50 flex flex-col antialiased">
-      {/* 1. Global Navigation Header */}
-      <Header
-        cartCount={cartCount}
-        cartTotal={cartTotal}
-        wishlistCount={3}
-      />
+      {/* 1. Global Navigation Header (Dynamic Cart & Wishlist via ShopContext) */}
+      <Header />
 
       {/* 2. Hero Security Banner */}
       <HeroSection
@@ -65,20 +61,25 @@ export default function HomePage() {
       {/* 5. 3-Column Featured Section (Builder + Best Sellers + Installation) */}
       <FeaturedSection
         onBookInstallation={handleOpenGeneralInstallation}
-        onAddToCart={handleAddToCart}
         onBuildPackage={handleBuildPackage}
       />
 
       {/* 6. Trust Badges Section */}
       <TrustBadgesBar />
 
-      {/* 7. Comprehensive Footer */}
+      {/* 7. Comprehensive Showroom Footer */}
       <Footer onRequestInstallation={handleOpenGeneralInstallation} />
 
       {/* 8. Fixed Mobile Quick Bottom Bar */}
       <MobileBottomBar onRequestInstallation={handleOpenGeneralInstallation} />
 
-      {/* 9. Interactive Technician Booking Modal */}
+      {/* 9. Slide-Over Cart Drawer with GST & WhatsApp Order Generator */}
+      <CartDrawer onRequestGSTQuotation={handleOpenGSTQuotation} />
+
+      {/* 10. Product Quick View Specifications Modal */}
+      <ProductQuickViewModal />
+
+      {/* 11. Interactive Technician & Lead Capture Modal */}
       <InstallationModal
         isOpen={isInstallationModalOpen}
         onClose={() => setIsInstallationModalOpen(false)}

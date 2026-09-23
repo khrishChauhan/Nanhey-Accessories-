@@ -2,12 +2,11 @@
 
 import React from "react";
 import PackageBuilder from "./PackageBuilder";
-import BestSellingProducts, { ProductItem } from "./BestSellingProducts";
+import BestSellingProducts from "./BestSellingProducts";
 import InstallationBanner from "./InstallationBanner";
 
 interface FeaturedSectionProps {
   onBookInstallation: () => void;
-  onAddToCart?: (product: ProductItem) => void;
   onBuildPackage?: (pkg: {
     cameras: number;
     storage: string;
@@ -18,7 +17,6 @@ interface FeaturedSectionProps {
 
 export default function FeaturedSection({
   onBookInstallation,
-  onAddToCart,
   onBuildPackage,
 }: FeaturedSectionProps) {
   return (
@@ -46,7 +44,7 @@ export default function FeaturedSection({
 
           {/* Column 2: BEST SELLING PRODUCTS (5 cols) */}
           <div className="lg:col-span-5 flex">
-            <BestSellingProducts onAddToCart={onAddToCart} />
+            <BestSellingProducts />
           </div>
 
           {/* Column 3: PROFESSIONAL INSTALLATION SERVICE (3 cols) */}

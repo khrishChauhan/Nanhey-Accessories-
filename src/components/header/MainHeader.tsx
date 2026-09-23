@@ -8,27 +8,22 @@ import {
   Heart,
   ShoppingCart,
   ChevronDown,
-  Camera,
   Cctv,
 } from "lucide-react";
+import { useShop } from "@/context/ShopContext";
 
 interface MainHeaderProps {
-  cartCount?: number;
-  cartTotal?: string;
-  wishlistCount?: number;
-  onOpenCart?: () => void;
-  onOpenWishlist?: () => void;
   onOpenAccount?: () => void;
 }
 
-export default function MainHeader({
-  cartCount = 2,
-  cartTotal = "₹4,498",
-  wishlistCount = 3,
-  onOpenCart,
-  onOpenWishlist,
-  onOpenAccount,
-}: MainHeaderProps) {
+export default function MainHeader({ onOpenAccount }: MainHeaderProps) {
+  const {
+    cartCount,
+    cartTotalFormatted,
+    wishlistCount,
+    openCart,
+  } = useShop();
+
   const [selectedCategory, setSelectedCategory] = useState("All Categories");
   const [searchQuery, setSearchQuery] = useState("");
 
@@ -36,6 +31,14 @@ export default function MainHeader({
     e.preventDefault();
     if (!searchQuery.trim()) return;
     alert(`Searching for "${searchQuery}" in "${selectedCategory}"`);
+  };
+
+  const handleOpenWishlist = () => {
+    if (wishlistCount === 0) {
+      alert("Your wishlist is empty. Browse products and tap the heart icon to save them!");
+    } else {
+      alert(`You have ${wishlistCount} saved item(s) in your Wishlist.`);
+    }
   };
 
   return (
@@ -125,7 +128,7 @@ export default function MainHeader({
         <div className="flex items-center justify-between sm:justify-end gap-3 sm:gap-6 w-full lg:w-auto pt-1 lg:pt-0 border-t lg:border-t-0 border-slate-100">
           {/* User Account */}
           <button
-            onClick={onOpenAccount || (() => alert("User Account Modal: Sign in or register for quotation and warranty management."))}
+            onClick={onOpenAccount || (() => alert("User Account: Sign in or register for quotation and warranty management."))}
             className="flex items-center gap-2 text-left p-1.5 rounded-xl hover:bg-slate-50 transition-colors group"
           >
             <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-slate-100 text-slate-700 group-hover:bg-brand-red/10 group-hover:text-brand-red transition-colors">
@@ -143,7 +146,7 @@ export default function MainHeader({
 
           {/* Wishlist */}
           <button
-            onClick={onOpenWishlist || (() => alert("Wishlist: 3 items saved"))}
+            onClick={handleOpenWishlist}
             className="relative flex items-center gap-2 p-1.5 rounded-xl hover:bg-slate-50 transition-colors group"
             aria-label="Wishlist"
           >
@@ -165,16 +168,16 @@ export default function MainHeader({
             </div>
           </button>
 
-          {/* Cart */}
+          {/* Cart with Drawer Trigger */}
           <button
-            onClick={onOpenCart || (() => alert(`Cart: ${cartCount} items totaling ${cartTotal}`))}
+            onClick={openCart}
             className="flex items-center gap-2.5 p-1.5 rounded-xl bg-slate-50 hover:bg-red-50/50 border border-slate-200/80 hover:border-brand-red/30 transition-all group"
             aria-label="Shopping Cart"
           >
             <div className="relative flex h-10 w-10 items-center justify-center rounded-xl bg-brand-red text-white shadow-md shadow-brand-red/25 group-hover:scale-105 transition-transform">
               <ShoppingCart className="h-5 w-5" />
               {cartCount > 0 && (
-                <span className="absolute -top-1.5 -right-1.5 flex h-5 w-5 items-center justify-center rounded-full bg-slate-900 text-[10px] font-extrabold text-white ring-2 ring-white">
+                <span className="absolute -top-1.5 -right-1.5 flex h-5 w-5 items-center justify-center rounded-full bg-slate-900 text-[10px] font-extrabold text-white ring-2 ring-white animate-in zoom-in">
                   {cartCount}
                 </span>
               )}
@@ -184,7 +187,7 @@ export default function MainHeader({
                 My Cart
               </p>
               <p className="text-xs font-extrabold text-brand-red leading-tight mt-0.5">
-                {cartTotal}
+                {cartTotalFormatted}
               </p>
             </div>
           </button>
