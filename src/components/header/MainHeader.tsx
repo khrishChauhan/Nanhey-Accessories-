@@ -11,6 +11,7 @@ import {
   Menu,
   X,
   Wrench,
+  ArrowRight,
 } from "lucide-react";
 import { useShop } from "@/context/ShopContext";
 import { useLanguage } from "@/context/LanguageContext";
@@ -30,6 +31,7 @@ export default function MainHeader({
   const [selectedCategory, setSelectedCategory] = useState("All");
   const [searchQuery, setSearchQuery] = useState("");
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [mobileSearchOpen, setMobileSearchOpen] = useState(false);
 
   const handleSearch = (e: React.FormEvent) => {
     e.preventDefault();
@@ -58,161 +60,330 @@ export default function MainHeader({
   ];
 
   return (
-    <div className="h-[68px] sm:h-[72px] flex items-center px-4 sm:px-6 relative z-30 transition-all bg-white/95">
-      <div className="max-w-7xl mx-auto w-full flex items-center justify-between gap-3 sm:gap-6">
-        {/* 1. Sharp Minimalist Logo */}
-        <Link href="/" className="flex items-center gap-3 group shrink-0">
-          <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-zinc-950 text-white shadow-xs ring-1 ring-zinc-800 transition-transform group-hover:scale-105 shrink-0">
-            <svg
-              className="w-5 h-5 text-red-500"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="2"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-            >
-              <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
-              <circle cx="12" cy="11" r="3" className="stroke-white" />
-              <circle cx="12" cy="11" r="1" className="fill-red-500" />
-            </svg>
-          </div>
-
-          <div className="flex flex-col">
-            <div className="flex items-baseline gap-1 leading-none">
-              <span className="font-black text-base sm:text-lg tracking-tight text-zinc-950">
-                NANHEY
-              </span>
-              <span className="font-extrabold text-base sm:text-lg tracking-tight text-red-600">
-                SECURITY
-              </span>
-            </div>
-            <span className="text-[9px] tracking-[0.22em] font-medium text-zinc-400 uppercase mt-0.5">
-              Begusarai
-            </span>
-          </div>
-        </Link>
-
-        {/* 2. Refined Navigation Links (Desktop) */}
-        <nav className="hidden xl:flex items-center gap-5 2xl:gap-6">
-          {navLinks.map((link, idx) => (
-            <Link
-              key={idx}
-              href={link.href}
-              className="text-xs font-semibold text-zinc-600 hover:text-zinc-950 transition-colors tracking-wide relative py-1 after:absolute after:bottom-0 after:left-0 after:w-0 after:h-[2px] after:bg-zinc-950 hover:after:w-full after:transition-all"
-            >
-              {link.label}
-            </Link>
-          ))}
-        </nav>
-
-        {/* 3. Modern Streamlined Pill Search Bar */}
-        <div className="hidden md:flex flex-1 max-w-xs lg:max-w-sm xl:max-w-md">
-          <form
-            onSubmit={handleSearch}
-            className="w-full flex items-center bg-zinc-100/90 hover:bg-zinc-100 border border-zinc-200/80 focus-within:border-zinc-400 focus-within:bg-white rounded-full px-3 py-1.5 transition-all text-xs"
-          >
-            {/* Category Dropdown */}
-            <div className="relative flex items-center pr-2 border-r border-zinc-200 shrink-0">
-              <select
-                value={selectedCategory}
-                onChange={(e) => setSelectedCategory(e.target.value)}
-                className="appearance-none bg-transparent pr-4 text-[11px] font-medium text-zinc-600 focus:outline-none cursor-pointer hover:text-zinc-950 transition-colors"
+    <div className="relative z-30 transition-all bg-white/95">
+      {/* Main 70px Bar */}
+      <div className="h-[68px] sm:h-[72px] flex items-center px-4 sm:px-6">
+        <div className="max-w-7xl mx-auto w-full flex items-center justify-between gap-3 sm:gap-6">
+          {/* 1. Sharp Minimalist Logo */}
+          <Link href="/" className="flex items-center gap-2.5 sm:gap-3 group shrink-0">
+            <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-zinc-950 text-white shadow-xs ring-1 ring-zinc-800 transition-transform group-hover:scale-105 shrink-0">
+              <svg
+                className="w-5 h-5 text-red-500"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
               >
-                <option value="All">All</option>
-                <option value="HD Cameras">HD Cameras</option>
-                <option value="IP Cameras">IP Cameras</option>
-                <option value="DVR/NVR">DVR/NVR</option>
-                <option value="WiFi">WiFi</option>
-                <option value="Storage">Storage</option>
-                <option value="Accessories">Accessories</option>
-              </select>
-              <ChevronDown className="absolute right-0 h-3 w-3 text-zinc-400 pointer-events-none" />
+                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
+                <circle cx="12" cy="11" r="3" className="stroke-white" />
+                <circle cx="12" cy="11" r="1" className="fill-red-500" />
+              </svg>
             </div>
 
-            {/* Input field */}
+            <div className="flex flex-col">
+              <div className="flex items-baseline gap-1 leading-none">
+                <span className="font-black text-base sm:text-lg tracking-tight text-zinc-950">
+                  NANHEY
+                </span>
+                <span className="font-extrabold text-base sm:text-lg tracking-tight text-red-600">
+                  SECURITY
+                </span>
+              </div>
+              <span className="text-[9px] tracking-[0.22em] font-medium text-zinc-400 uppercase mt-0.5">
+                Begusarai
+              </span>
+            </div>
+          </Link>
+
+          {/* 2. Refined Navigation Links (Desktop) */}
+          <nav className="hidden xl:flex items-center gap-5 2xl:gap-6">
+            {navLinks.map((link, idx) => (
+              <Link
+                key={idx}
+                href={link.href}
+                className="text-xs font-semibold text-zinc-600 hover:text-zinc-950 transition-colors tracking-wide relative py-1 after:absolute after:bottom-0 after:left-0 after:w-0 after:h-[2px] after:bg-zinc-950 hover:after:w-full after:transition-all"
+              >
+                {link.label}
+              </Link>
+            ))}
+          </nav>
+
+          {/* 3. Modern Streamlined Pill Search Bar (Desktop) */}
+          <div className="hidden md:flex flex-1 max-w-xs lg:max-w-sm xl:max-w-md">
+            <form
+              onSubmit={handleSearch}
+              className="w-full flex items-center bg-zinc-100/90 hover:bg-zinc-100 border border-zinc-200/80 focus-within:border-zinc-400 focus-within:bg-white rounded-full px-3 py-1.5 transition-all text-xs"
+            >
+              {/* Category Dropdown */}
+              <div className="relative flex items-center pr-2 border-r border-zinc-200 shrink-0">
+                <select
+                  value={selectedCategory}
+                  onChange={(e) => setSelectedCategory(e.target.value)}
+                  className="appearance-none bg-transparent pr-4 text-[11px] font-medium text-zinc-600 focus:outline-none cursor-pointer hover:text-zinc-950 transition-colors"
+                >
+                  <option value="All">All</option>
+                  <option value="HD Cameras">HD Cameras</option>
+                  <option value="IP Cameras">IP Cameras</option>
+                  <option value="DVR/NVR">DVR/NVR</option>
+                  <option value="WiFi">WiFi</option>
+                  <option value="Storage">Storage</option>
+                  <option value="Accessories">Accessories</option>
+                </select>
+                <ChevronDown className="absolute right-0 h-3 w-3 text-zinc-400 pointer-events-none" />
+              </div>
+
+              {/* Input field */}
+              <input
+                type="text"
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+                placeholder={t("searchPlaceholder") || "Search cameras, DVR..."}
+                className="w-full bg-transparent px-2 text-xs text-zinc-800 placeholder:text-zinc-400 focus:outline-none"
+              />
+
+              {/* Quiet Icon Button */}
+              <button
+                type="submit"
+                className="p-1 text-zinc-400 hover:text-zinc-900 transition-colors shrink-0"
+                aria-label="Search"
+              >
+                <Search className="h-3.5 w-3.5" />
+              </button>
+            </form>
+          </div>
+
+          {/* 4. Elegant Consolidated Action Cluster */}
+          <div className="flex items-center gap-1 sm:gap-2 shrink-0">
+            {/* Mobile Search Toggle */}
+            <button
+              onClick={() => setMobileSearchOpen(!mobileSearchOpen)}
+              className="md:hidden p-2 rounded-full text-zinc-600 hover:text-zinc-950 hover:bg-zinc-100 transition-colors"
+              title="Search"
+              aria-label="Search"
+            >
+              <Search className="h-4 w-4" />
+            </button>
+
+            {/* Account Icon */}
+            <button
+              onClick={onOpenAccount}
+              className="p-2 rounded-full text-zinc-600 hover:text-zinc-950 hover:bg-zinc-100 transition-colors"
+              title="My Account"
+              aria-label="My Account"
+            >
+              <User className="h-4 w-4" />
+            </button>
+
+            {/* Wishlist Icon */}
+            <button
+              onClick={handleOpenWishlist}
+              className="p-2 rounded-full text-zinc-600 hover:text-zinc-950 hover:bg-zinc-100 transition-colors relative"
+              title="Wishlist"
+              aria-label="Wishlist"
+            >
+              <Heart className="h-4 w-4" />
+              {wishlistCount > 0 && (
+                <span className="absolute top-1.5 right-1.5 flex h-2 w-2 items-center justify-center rounded-full bg-red-600 ring-2 ring-white" />
+              )}
+            </button>
+
+            {/* Cart Delicate Bordered Pill */}
+            <button
+              onClick={openCart}
+              className="border border-zinc-200 hover:border-zinc-300 hover:bg-zinc-50 rounded-full px-2.5 sm:px-3 py-1.5 flex items-center gap-1.5 sm:gap-2 transition-all shadow-2xs group"
+              aria-label="Shopping Cart"
+            >
+              <div className="relative flex items-center">
+                <ShoppingCart className="h-3.5 w-3.5 text-zinc-700 group-hover:text-zinc-950 transition-colors" />
+                {cartCount > 0 && (
+                  <span className="absolute -top-1.5 -right-2 flex h-3.5 min-w-3.5 px-1 items-center justify-center rounded-full bg-red-600 text-[8px] font-bold text-white leading-none">
+                    {cartCount}
+                  </span>
+                )}
+              </div>
+              <span className="tabular-nums text-xs font-semibold text-zinc-800">
+                {cartTotalFormatted}
+              </span>
+            </button>
+
+            {/* Single Primary CTA: Request Installation Pill (Desktop) */}
+            <button
+              onClick={onRequestInstallation}
+              className="hidden sm:inline-flex items-center gap-1.5 bg-zinc-900 hover:bg-red-600 text-white text-xs font-semibold px-4 py-2 rounded-full transition-all shadow-xs shrink-0"
+            >
+              <Wrench className="h-3.5 w-3.5" />
+              <span>Request Installation</span>
+            </button>
+
+            {/* Mobile Menu Toggle Button */}
+            <button
+              onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+              className="xl:hidden p-2 rounded-full text-zinc-700 hover:text-zinc-950 hover:bg-zinc-100 transition-colors ml-0.5"
+              aria-label="Toggle navigation menu"
+            >
+              {mobileMenuOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
+            </button>
+          </div>
+        </div>
+      </div>
+
+      {/* Collapsible Mobile Search Row */}
+      {mobileSearchOpen && (
+        <div className="md:hidden border-t border-zinc-100 bg-white/95 px-4 py-2.5 animate-in slide-in-from-top-2 duration-150">
+          <form
+            onSubmit={(e) => {
+              handleSearch(e);
+              setMobileSearchOpen(false);
+            }}
+            className="flex items-center bg-zinc-100/90 border border-zinc-200 focus-within:border-zinc-400 focus-within:bg-white rounded-full px-3 py-1.5 text-xs"
+          >
             <input
               type="text"
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              placeholder={t("searchPlaceholder") || "Search cameras, DVR..."}
+              placeholder="Search cameras, DVR, NVR, WiFi..."
               className="w-full bg-transparent px-2 text-xs text-zinc-800 placeholder:text-zinc-400 focus:outline-none"
+              autoFocus
             />
-
-            {/* Quiet Icon Button */}
             <button
               type="submit"
-              className="p-1 text-zinc-400 hover:text-zinc-900 transition-colors shrink-0"
+              className="p-1 text-zinc-500 hover:text-zinc-900 transition-colors"
               aria-label="Search"
             >
               <Search className="h-3.5 w-3.5" />
             </button>
           </form>
         </div>
+      )}
 
-        {/* 4. Elegant Consolidated Action Cluster */}
-        <div className="flex items-center gap-1.5 sm:gap-2.5 shrink-0">
-          {/* Account Icon */}
-          <button
-            onClick={onOpenAccount}
-            className="p-2 rounded-full text-zinc-600 hover:text-zinc-950 hover:bg-zinc-100 transition-colors"
-            title="My Account"
-            aria-label="My Account"
-          >
-            <User className="h-4 w-4" />
-          </button>
+      {/* Mobile Drawer & Sticky Responsive Overlay */}
+      {mobileMenuOpen && (
+        <div className="fixed inset-0 z-50 xl:hidden">
+          {/* Backdrop Blur Overlay */}
+          <div
+            onClick={() => setMobileMenuOpen(false)}
+            className="fixed inset-0 bg-black/60 backdrop-blur-xs transition-opacity"
+          />
 
-          {/* Wishlist Icon */}
-          <button
-            onClick={handleOpenWishlist}
-            className="p-2 rounded-full text-zinc-600 hover:text-zinc-950 hover:bg-zinc-100 transition-colors relative"
-            title="Wishlist"
-            aria-label="Wishlist"
-          >
-            <Heart className="h-4 w-4" />
-            {wishlistCount > 0 && (
-              <span className="absolute top-1.5 right-1.5 flex h-2 w-2 items-center justify-center rounded-full bg-red-600 ring-2 ring-white" />
-            )}
-          </button>
+          {/* Drawer Panel */}
+          <div className="fixed inset-y-0 right-0 w-full max-w-sm bg-white shadow-2xl flex flex-col justify-between p-5 z-10 overflow-y-auto animate-in slide-in-from-right duration-200">
+            {/* Drawer Top */}
+            <div>
+              <div className="flex items-center justify-between pb-4 border-b border-zinc-100">
+                {/* Logo in Drawer */}
+                <div className="flex items-center gap-2.5">
+                  <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-zinc-950 text-white shadow-xs">
+                    <svg
+                      className="w-4 h-4 text-red-500"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      strokeWidth="2"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    >
+                      <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
+                      <circle cx="12" cy="11" r="3" className="stroke-white" />
+                      <circle cx="12" cy="11" r="1" className="fill-red-500" />
+                    </svg>
+                  </div>
+                  <div className="flex flex-col">
+                    <div className="flex items-baseline gap-1 leading-none">
+                      <span className="font-black text-sm tracking-tight text-zinc-950">
+                        NANHEY
+                      </span>
+                      <span className="font-extrabold text-sm tracking-tight text-red-600">
+                        SECURITY
+                      </span>
+                    </div>
+                    <span className="text-[8px] tracking-[0.2em] font-medium text-zinc-400 uppercase mt-0.5">
+                      Begusarai
+                    </span>
+                  </div>
+                </div>
 
-          {/* Cart Delicate Bordered Pill */}
-          <button
-            onClick={openCart}
-            className="border border-zinc-200 hover:border-zinc-300 hover:bg-zinc-50 rounded-full px-3 py-1.5 flex items-center gap-2 transition-all shadow-2xs group"
-            aria-label="Shopping Cart"
-          >
-            <div className="relative flex items-center">
-              <ShoppingCart className="h-3.5 w-3.5 text-zinc-700 group-hover:text-zinc-950 transition-colors" />
-              {cartCount > 0 && (
-                <span className="absolute -top-1.5 -right-2 flex h-3.5 min-w-3.5 px-1 items-center justify-center rounded-full bg-red-600 text-[8px] font-bold text-white leading-none">
-                  {cartCount}
-                </span>
-              )}
+                {/* Close Button */}
+                <button
+                  onClick={() => setMobileMenuOpen(false)}
+                  className="p-1.5 rounded-full text-zinc-500 hover:text-zinc-900 hover:bg-zinc-100 transition-colors"
+                  aria-label="Close menu"
+                >
+                  <X className="h-5 w-5" />
+                </button>
+              </div>
+
+              {/* Navigation Links in Drawer */}
+              <div className="mt-5 space-y-1">
+                <div className="text-[10px] font-semibold text-zinc-400 uppercase tracking-wider px-3 mb-2">
+                  Navigation
+                </div>
+                {navLinks.map((link, idx) => (
+                  <Link
+                    key={idx}
+                    href={link.href}
+                    onClick={() => setMobileMenuOpen(false)}
+                    className="flex items-center justify-between px-3 py-2.5 rounded-lg text-sm font-medium text-zinc-700 hover:text-zinc-950 hover:bg-zinc-50 transition-colors"
+                  >
+                    <span>{link.label}</span>
+                    <ArrowRight className="h-3.5 w-3.5 text-zinc-400" />
+                  </Link>
+                ))}
+              </div>
+
+              {/* Quick Services Section */}
+              <div className="mt-5 pt-4 border-t border-zinc-100">
+                <div className="text-[10px] font-semibold text-zinc-400 uppercase tracking-wider px-3 mb-2">
+                  Direct Services
+                </div>
+                <div className="grid grid-cols-2 gap-2">
+                  <Link
+                    href="/installation"
+                    onClick={() => setMobileMenuOpen(false)}
+                    className="flex flex-col p-2.5 rounded-lg bg-zinc-50 border border-zinc-200/70 hover:border-zinc-300 transition-colors text-xs"
+                  >
+                    <span className="font-semibold text-zinc-900">Doorstep Setup</span>
+                    <span className="text-[10px] text-zinc-500 mt-0.5">Certified Engineers</span>
+                  </Link>
+                  <Link
+                    href="/amc"
+                    onClick={() => setMobileMenuOpen(false)}
+                    className="flex flex-col p-2.5 rounded-lg bg-zinc-50 border border-zinc-200/70 hover:border-zinc-300 transition-colors text-xs"
+                  >
+                    <span className="font-semibold text-zinc-900">AMC Contracts</span>
+                    <span className="text-[10px] text-zinc-500 mt-0.5">Annual Maintenance</span>
+                  </Link>
+                </div>
+              </div>
             </div>
-            <span className="tabular-nums text-xs font-semibold text-zinc-800">
-              {cartTotalFormatted}
-            </span>
-          </button>
 
-          {/* Single Primary CTA: Request Installation Pill */}
-          <button
-            onClick={onRequestInstallation}
-            className="hidden sm:inline-flex items-center gap-1.5 bg-zinc-900 hover:bg-red-600 text-white text-xs font-semibold px-4 py-2 rounded-full transition-all shadow-xs shrink-0"
-          >
-            <Wrench className="h-3.5 w-3.5" />
-            <span>Request Installation</span>
-          </button>
+            {/* Drawer Bottom Actions & Contacts */}
+            <div className="pt-4 border-t border-zinc-100 space-y-3">
+              <button
+                onClick={() => {
+                  setMobileMenuOpen(false);
+                  if (onRequestInstallation) onRequestInstallation();
+                }}
+                className="w-full bg-zinc-900 hover:bg-red-600 text-white font-semibold py-2.5 rounded-full flex items-center justify-center gap-2 text-xs shadow-xs transition-all"
+              >
+                <Wrench className="h-3.5 w-3.5" />
+                <span>Request Installation</span>
+              </button>
 
-          {/* Mobile Menu Toggle Button */}
-          <button
-            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            className="xl:hidden p-2 rounded-full text-zinc-700 hover:text-zinc-950 hover:bg-zinc-100 transition-colors ml-1"
-            aria-label="Toggle navigation menu"
-          >
-            {mobileMenuOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
-          </button>
+              <div className="flex items-center justify-between text-[11px] text-zinc-500 px-1 pt-1">
+                <a
+                  href="tel:+919065224224"
+                  className="text-zinc-700 hover:text-zinc-950 font-medium"
+                >
+                  +91 9065224224
+                </a>
+                <span>Begusarai, Bihar</span>
+              </div>
+            </div>
+          </div>
         </div>
-      </div>
+      )}
     </div>
   );
 }
