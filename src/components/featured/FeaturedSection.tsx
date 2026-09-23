@@ -20,34 +20,34 @@ export default function FeaturedSection({
   onBuildPackage,
 }: FeaturedSectionProps) {
   return (
-    <section className="py-12 bg-white border-b border-slate-200/80">
+    <section className="py-20 bg-white border-b border-zinc-200/80">
       <div className="max-w-7xl mx-auto px-4">
         {/* Section Header */}
-        <div className="text-center max-w-3xl mx-auto mb-10">
-          <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-red-50 text-brand-red text-xs font-bold uppercase tracking-wider mb-2">
-            <span>Security Engineering & Retail</span>
-          </div>
-          <h2 className="text-2xl sm:text-3xl lg:text-4xl font-black text-slate-900 tracking-tight">
-            CUSTOM PACKAGES, TOP PRODUCTS & EXPERT INSTALLATION
+        <div className="max-w-2xl mb-12">
+          <span className="text-[11px] font-semibold uppercase tracking-wider text-zinc-400 block mb-1">
+            System Solutions
+          </span>
+          <h2 className="text-2xl sm:text-3xl font-bold text-zinc-950 tracking-tight">
+            Configured Packages & Installation
           </h2>
-          <p className="text-xs sm:text-sm text-slate-500 mt-2">
-            Choose a readymade best-seller or use our intelligent estimator to configure a custom surveillance system tailored to your budget and layout.
+          <p className="text-xs sm:text-sm text-zinc-500 mt-1">
+            Choose verified best-sellers or use our estimator to configure a custom system for your property.
           </p>
         </div>
 
         {/* 3-Column Layout Grid */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-stretch">
-          {/* Column 1: BUILD YOUR CCTV PACKAGE (4 cols) */}
+          {/* Column 1: Package Builder (4 cols) */}
           <div className="lg:col-span-4 flex">
             <PackageBuilder onBuildPackage={onBuildPackage} />
           </div>
 
-          {/* Column 2: BEST SELLING PRODUCTS (5 cols) */}
+          {/* Column 2: Best Selling Equipment (5 cols) */}
           <div className="lg:col-span-5 flex">
             <BestSellingProducts />
           </div>
 
-          {/* Column 3: PROFESSIONAL INSTALLATION SERVICE (3 cols) */}
+          {/* Column 3: Installation Services (3 cols) */}
           <div className="lg:col-span-3 flex">
             <InstallationBanner onBookNow={onBookInstallation} />
           </div>
