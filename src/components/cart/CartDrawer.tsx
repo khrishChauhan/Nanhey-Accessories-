@@ -276,13 +276,10 @@ export default function CartDrawer({ onRequestGSTQuotation }: CartDrawerProps) {
                 {/* 1. WhatsApp Order Button */}
                 <button
                   onClick={handleWhatsAppOrder}
-                  className="w-full flex items-center justify-center gap-2 bg-gradient-to-r from-emerald-600 to-green-600 hover:from-emerald-700 hover:to-green-700 text-white font-black text-xs uppercase tracking-wider py-3.5 rounded-xl shadow-lg shadow-emerald-600/25 hover:shadow-emerald-600/40 hover:scale-[1.01] active:scale-[0.98] transition-all group"
+                  className="w-full flex items-center justify-center gap-2 bg-zinc-900 hover:bg-zinc-800 text-white font-semibold text-xs py-3 rounded-lg transition-colors group"
                 >
-                  <svg className="h-4 w-4 fill-current" viewBox="0 0 24 24">
-                    <path d="M12.031 0C5.397 0 0 5.397 0 12.031c0 2.118.552 4.185 1.603 6.007L0 24l6.147-1.579a12.032 12.032 0 0 0 5.884 1.526h.005c6.634 0 12.032-5.397 12.032-12.031 0-3.214-1.252-6.234-3.526-8.508C18.267 1.252 15.246 0 12.031 0zm0 22.029h-.004a9.98 9.98 0 0 1-5.088-1.39l-.365-.216-3.778.971.99-3.68-.237-.378a9.972 9.972 0 0 1-1.53-5.305c0-5.525 4.496-10.021 10.024-10.021 2.678 0 5.195 1.043 7.088 2.936a9.96 9.96 0 0 1 2.935 7.085c0 5.526-4.498 10.022-10.024 10.022zm5.495-7.502c-.301-.151-1.782-.879-2.058-.98-.276-.1-.477-.151-.678.151-.201.301-.778.98-.954 1.181-.176.201-.352.226-.653.075-.301-.151-1.272-.469-2.423-1.496-.895-.798-1.5-1.784-1.676-2.085-.176-.301-.019-.464.132-.614.136-.135.301-.352.452-.527.151-.176.201-.301.301-.502.101-.201.05-.377-.025-.527-.075-.151-.678-1.632-.929-2.235-.245-.588-.494-.508-.678-.517l-.578-.01c-.201 0-.527.075-.803.377-.276.301-1.054 1.03-1.054 2.511 0 1.481 1.079 2.912 1.23 3.113.151.201 2.123 3.242 5.143 4.547.718.311 1.279.497 1.716.636.722.23 1.378.197 1.898.12.579-.086 1.782-.728 2.033-1.431.251-.703.251-1.305.176-1.431-.075-.126-.276-.201-.577-.352z"/>
-                  </svg>
-                  <span>Order via WhatsApp Now</span>
-                  <ArrowRight className="h-4 w-4 group-hover:translate-x-1 transition-transform" />
+                  <span>Order via WhatsApp</span>
+                  <ArrowRight className="h-3.5 w-3.5 group-hover:translate-x-0.5 transition-transform" />
                 </button>
 
                 {/* 2. GST Invoice Request Button */}
@@ -291,16 +288,16 @@ export default function CartDrawer({ onRequestGSTQuotation }: CartDrawerProps) {
                     closeCart();
                     if (onRequestGSTQuotation) onRequestGSTQuotation();
                   }}
-                  className="w-full flex items-center justify-center gap-1.5 bg-slate-100 hover:bg-slate-200 text-slate-800 font-bold text-xs py-2.5 rounded-xl border border-slate-200 hover:scale-[1.01] active:scale-[0.98] transition-all"
+                  className="w-full flex items-center justify-center gap-1.5 bg-white hover:bg-zinc-50 text-zinc-700 font-medium text-xs py-2.5 rounded-lg border border-zinc-200 transition-colors"
                 >
-                  <FileText className="h-3.5 w-3.5 text-slate-600" />
+                  <FileText className="h-3.5 w-3.5 text-zinc-400" />
                   <span>Request Official GST Quotation</span>
                 </button>
               </div>
 
               {/* GST Assurance Note */}
-              <div className="text-[10px] text-center text-slate-400 flex items-center justify-center gap-1">
-                <ShieldCheck className="h-3.5 w-3.5 text-emerald-500" />
+              <div className="text-[10px] text-center text-zinc-400 flex items-center justify-center gap-1">
+                <ShieldCheck className="h-3 w-3 text-zinc-400" />
                 <span>GST Tax Invoice provided with every order • Begusarai Showroom</span>
               </div>
             </div>

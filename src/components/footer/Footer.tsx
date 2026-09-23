@@ -3,17 +3,13 @@
 import React, { useState } from "react";
 import Link from "next/link";
 import {
-  ShieldCheck,
   MapPin,
   Phone,
   Mail,
   Clock,
-  ArrowRight,
   Cctv,
-  CreditCard,
-  CheckCircle2,
-  FileText,
   Package,
+  FileText,
 } from "lucide-react";
 import GSTQuotationModal from "@/components/quote/GSTQuotationModal";
 import OrderTrackingModal from "@/components/tracking/OrderTrackingModal";
@@ -28,114 +24,97 @@ export default function Footer({ onRequestInstallation }: FooterProps) {
 
   const quickLinks = [
     { label: "Home", href: "/" },
-    { label: "About Us", href: "/about" },
-    { label: "CCTV Package Builder", href: "/#builder" },
-    { label: "Best Selling Cameras", href: "/#bestsellers" },
-    { label: "Request Installation", href: "/installation" },
-    { label: "AMC & Maintenance Contracts", href: "/amc" },
-    { label: "Dealer & Bulk Trade Desk", href: "/dealer" },
-    { label: "Contact & Showroom Map", href: "/contact" },
+    { label: "About", href: "/about" },
+    { label: "Package Configurator", href: "/#builder" },
+    { label: "Equipment Catalog", href: "/#catalog" },
+    { label: "Installation Service", href: "/installation" },
+    { label: "AMC Contract", href: "/amc" },
+    { label: "Dealer Desk", href: "/dealer" },
+    { label: "Showroom Contact", href: "/contact" },
   ];
 
   const categories = [
     { label: "HD Analog Cameras", href: "/#catalog" },
     { label: "IP Network Cameras", href: "/#catalog" },
-    { label: "Wireless WiFi Cameras", href: "/#catalog" },
-    { label: "PTZ 360° Speed Domes", href: "/#catalog" },
-    { label: "DVR & NVR Recorders", href: "/#catalog" },
+    { label: "Smart WiFi Cameras", href: "/#catalog" },
+    { label: "PTZ Speed Domes", href: "/#catalog" },
+    { label: "DVR / NVR Recorders", href: "/#catalog" },
     { label: "Surveillance Hard Disks", href: "/#catalog" },
-    { label: "CCTV Cables & Connectors", href: "/#catalog" },
+    { label: "Cables & Power SMPS", href: "/#catalog" },
   ];
 
   const policies = [
     { label: "Privacy Policy", href: "#" },
-    { label: "Terms & Conditions", href: "#" },
-    { label: "Shipping & Delivery Policy", href: "#" },
-    { label: "Return & Refund Policy", href: "#" },
-    { label: "Warranty Support Guide", href: "#" },
+    { label: "Terms of Service", href: "#" },
+    { label: "Delivery & Shipping", href: "#" },
+    { label: "Returns & Warranty", href: "#" },
   ];
 
   return (
-    <footer id="about" className="bg-slate-950 text-slate-400 border-t border-slate-800 pt-14 pb-20 sm:pb-12 text-xs">
+    <footer id="about" className="bg-[#09090B] text-zinc-400 border-t border-zinc-800 pt-16 pb-20 sm:pb-12 text-xs">
       <div className="max-w-7xl mx-auto px-4">
         {/* Main Footer Columns */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-8 mb-12">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-10 mb-14">
           {/* Column 1: Company Profile (lg:col-span-2) */}
           <div className="lg:col-span-2 space-y-4">
             {/* Logo */}
             <Link href="/" className="flex items-center gap-3">
-              <div className="relative flex h-11 w-11 items-center justify-center rounded-xl bg-gradient-to-br from-brand-red to-red-700 text-white shadow-lg shadow-brand-red/30">
-                <ShieldCheck className="h-6 w-6" />
-                <div className="absolute -bottom-1 -right-1 bg-slate-950 rounded-full p-0.5 border border-white">
-                  <Cctv className="h-3 w-3 text-brand-red" />
-                </div>
+              <div className="flex h-9 w-9 items-center justify-center rounded bg-zinc-900 border border-zinc-800 text-white">
+                <Cctv className="h-4 w-4 stroke-[1.75]" />
               </div>
               <div>
-                <div className="flex items-center gap-1">
-                  <span className="text-xl font-black tracking-tight text-white">
-                    NANHEY
-                  </span>
-                  <span className="text-xl font-light tracking-tight text-brand-red">
-                    ACCESSORIES
-                  </span>
+                <div className="flex items-baseline gap-1.5 font-bold tracking-tight text-white text-base">
+                  <span>NANHEY</span>
+                  <span className="font-light text-zinc-500">ACCESSORIES</span>
                 </div>
-                <p className="text-[10px] font-bold text-slate-400 uppercase tracking-widest">
-                  Your Trusted Security Partner
+                <p className="text-[10px] font-medium text-zinc-500 uppercase tracking-wider">
+                  CCTV & Surveillance Begusarai
                 </p>
               </div>
             </Link>
 
-            <p className="text-slate-300 leading-relaxed text-xs max-w-sm">
-              Nanhey Accessories is Begusarai's premier CCTV surveillance, biometric security, and IT solutions destination. We deliver authentic equipment, transparent pricing, and meticulous turnkey installation for homes, retail, institutions, and industrial sites.
+            <p className="text-zinc-400 leading-relaxed text-xs max-w-sm">
+              Authorized provider of enterprise-grade CCTV surveillance, network storage, and professional turnkey installation across Begusarai and Bihar.
             </p>
 
             {/* Address & Direct Hotlines */}
-            <div className="space-y-2.5 pt-2 text-slate-300">
-              <div className="flex items-start gap-2.5">
-                <MapPin className="h-4 w-4 text-brand-red shrink-0 mt-0.5" />
-                <span className="leading-snug">
-                  Ambedkar Chowk, Kacahari Road, Begusarai, Bihar – 851101
-                </span>
+            <div className="space-y-2 pt-2 text-zinc-400 text-xs">
+              <div className="flex items-start gap-2">
+                <MapPin className="h-4 w-4 text-zinc-500 shrink-0 mt-0.5" />
+                <span>Ambedkar Chowk, Kacahari Road, Begusarai, Bihar – 851101</span>
               </div>
-              <div className="flex items-center gap-2.5">
-                <Phone className="h-4 w-4 text-brand-accent-green shrink-0" />
-                <a
-                  href="tel:+919065224224"
-                  className="font-bold text-white hover:text-brand-red transition-colors"
-                >
+              <div className="flex items-center gap-2">
+                <Phone className="h-4 w-4 text-zinc-500 shrink-0" />
+                <a href="tel:+919065224224" className="text-zinc-300 hover:text-white transition-colors tabular-nums">
                   +91 9065224224
                 </a>
               </div>
-              <div className="flex items-center gap-2.5">
-                <Mail className="h-4 w-4 text-brand-red shrink-0" />
-                <a
-                  href="mailto:info@nanheyaccessories.com"
-                  className="hover:text-white transition-colors"
-                >
+              <div className="flex items-center gap-2">
+                <Mail className="h-4 w-4 text-zinc-500 shrink-0" />
+                <a href="mailto:info@nanheyaccessories.com" className="text-zinc-300 hover:text-white transition-colors">
                   info@nanheyaccessories.com
                 </a>
               </div>
-              <div className="flex items-center gap-2.5 text-slate-400">
-                <Clock className="h-4 w-4 text-slate-500 shrink-0" />
-                <span>Mon – Sat: 9:30 AM to 8:30 PM (Sunday On Call)</span>
+              <div className="flex items-center gap-2 text-zinc-500">
+                <Clock className="h-4 w-4 text-zinc-600 shrink-0" />
+                <span>Mon – Sat: 9:30 AM to 8:30 PM</span>
               </div>
             </div>
           </div>
 
           {/* Column 2: Quick Links */}
           <div className="space-y-3">
-            <h4 className="text-xs font-black uppercase tracking-wider text-white border-l-2 border-brand-red pl-2">
-              Quick Links
+            <h4 className="text-xs font-semibold uppercase tracking-wider text-zinc-200">
+              Navigation
             </h4>
             <ul className="space-y-2">
               {quickLinks.map((link, idx) => (
                 <li key={idx}>
                   <Link
                     href={link.href}
-                    className="hover:text-brand-red transition-colors flex items-center gap-1.5 group"
+                    className="text-zinc-400 hover:text-white transition-colors block"
                   >
-                    <ArrowRight className="h-3 w-3 text-slate-600 group-hover:text-brand-red group-hover:translate-x-0.5 transition-all" />
-                    <span>{link.label}</span>
+                    {link.label}
                   </Link>
                 </li>
               ))}
@@ -144,27 +123,26 @@ export default function Footer({ onRequestInstallation }: FooterProps) {
 
           {/* Column 3: Categories */}
           <div className="space-y-3">
-            <h4 className="text-xs font-black uppercase tracking-wider text-white border-l-2 border-brand-red pl-2">
-              Top Categories
+            <h4 className="text-xs font-semibold uppercase tracking-wider text-zinc-200">
+              Hardware
             </h4>
             <ul className="space-y-2">
               {categories.map((cat, idx) => (
                 <li key={idx}>
                   <Link
                     href={cat.href}
-                    className="hover:text-brand-red transition-colors flex items-center gap-1.5 group"
+                    className="text-zinc-400 hover:text-white transition-colors block"
                   >
-                    <ArrowRight className="h-3 w-3 text-slate-600 group-hover:text-brand-red group-hover:translate-x-0.5 transition-all" />
-                    <span>{cat.label}</span>
+                    {cat.label}
                   </Link>
                 </li>
               ))}
             </ul>
           </div>
 
-          {/* Column 4: Customer Support, Quotations & Tracking */}
+          {/* Column 4: Services & Tools */}
           <div className="space-y-3">
-            <h4 className="text-xs font-black uppercase tracking-wider text-white border-l-2 border-brand-red pl-2">
+            <h4 className="text-xs font-semibold uppercase tracking-wider text-zinc-200">
               Services & Tools
             </h4>
             <ul className="space-y-2">
@@ -172,64 +150,51 @@ export default function Footer({ onRequestInstallation }: FooterProps) {
                 <li key={idx}>
                   <a
                     href={p.href}
-                    className="hover:text-brand-red transition-colors flex items-center gap-1.5 group"
+                    className="text-zinc-400 hover:text-white transition-colors block"
                   >
-                    <ArrowRight className="h-3 w-3 text-slate-600 group-hover:text-brand-red group-hover:translate-x-0.5 transition-all" />
-                    <span>{p.label}</span>
+                    {p.label}
                   </a>
                 </li>
               ))}
             </ul>
 
-            {/* Live Order Tracking Trigger */}
-            <div className="pt-2 space-y-2">
+            {/* Quiet Action Buttons */}
+            <div className="pt-3 space-y-2">
               <button
                 onClick={() => setIsTrackingModalOpen(true)}
-                className="w-full flex items-center justify-center gap-1.5 bg-slate-900 hover:bg-slate-800 text-brand-accent-green font-bold py-2 px-3 rounded-xl border border-slate-700 hover:border-brand-accent-green transition-colors text-[11px]"
+                className="w-full flex items-center justify-center gap-1.5 bg-zinc-900 hover:bg-zinc-800 text-zinc-200 py-2 px-3 rounded border border-zinc-800 text-xs transition-colors"
               >
-                <Package className="h-4 w-4" />
-                <span>Track Live Order & Technician</span>
+                <Package className="h-3.5 w-3.5 text-zinc-400" />
+                <span>Track Order</span>
               </button>
 
-              {/* Instant Quotation Generator Trigger Button */}
               <button
                 onClick={() => setIsQuoteModalOpen(true)}
-                className="w-full flex items-center justify-center gap-1.5 bg-slate-900 hover:bg-slate-800 text-white font-bold py-2 px-3 rounded-xl border border-slate-700 hover:border-brand-red transition-colors text-[11px]"
+                className="w-full flex items-center justify-center gap-1.5 bg-zinc-900 hover:bg-zinc-800 text-zinc-200 py-2 px-3 rounded border border-zinc-800 text-xs transition-colors"
               >
-                <FileText className="h-4 w-4 text-brand-red" />
-                <span>Instant Proforma Quotation</span>
+                <FileText className="h-3.5 w-3.5 text-zinc-400" />
+                <span>Proforma Quotation</span>
               </button>
             </div>
           </div>
         </div>
 
         {/* Bottom Bar: Payments & Copyright */}
-        <div className="border-t border-slate-800/80 pt-8 flex flex-col md:flex-row items-center justify-between gap-4">
-          <p className="text-slate-400 text-center md:text-left text-[11px]">
-            © {new Date().getFullYear()} <strong className="text-white">Nanhey Accessories</strong>. All rights reserved. 
-            Ambedkar Chowk, Begusarai, Bihar.
+        <div className="border-t border-zinc-800/80 pt-8 flex flex-col md:flex-row items-center justify-between gap-4 text-xs text-zinc-500">
+          <p>
+            © {new Date().getFullYear()} Nanhey Accessories. Ambedkar Chowk, Begusarai, Bihar.
           </p>
 
-          {/* Accepted Payment Badges */}
-          <div className="flex flex-wrap items-center justify-center gap-2">
-            <span className="text-[10px] font-bold uppercase tracking-wider text-slate-500 mr-2">
-              We Accept:
-            </span>
-            <span className="bg-slate-900 border border-slate-800 px-2.5 py-1 rounded text-[10px] font-bold text-slate-300">
-              UPI / QR
-            </span>
-            <span className="bg-slate-900 border border-slate-800 px-2.5 py-1 rounded text-[10px] font-bold text-slate-300">
-              RuPay
-            </span>
-            <span className="bg-slate-900 border border-slate-800 px-2.5 py-1 rounded text-[10px] font-bold text-slate-300">
-              Visa / Master
-            </span>
-            <span className="bg-slate-900 border border-slate-800 px-2.5 py-1 rounded text-[10px] font-bold text-slate-300">
-              NetBanking
-            </span>
-            <span className="bg-slate-900 border border-slate-800 px-2.5 py-1 rounded text-[10px] font-bold text-brand-accent-green">
-              Cash on Delivery
-            </span>
+          <div className="flex flex-wrap items-center gap-3 text-[11px] text-zinc-400">
+            <span>UPI</span>
+            <span>•</span>
+            <span>RuPay</span>
+            <span>•</span>
+            <span>Visa / Master</span>
+            <span>•</span>
+            <span>NetBanking</span>
+            <span>•</span>
+            <span>Cash on Delivery</span>
           </div>
         </div>
       </div>

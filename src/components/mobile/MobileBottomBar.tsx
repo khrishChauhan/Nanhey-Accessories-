@@ -6,7 +6,6 @@ import {
   Home,
   Grid,
   Cctv,
-  Phone,
   MessageCircle,
   ShoppingCart,
 } from "lucide-react";
@@ -22,35 +21,35 @@ export default function MobileBottomBar({
   const { cartCount, openCart } = useShop();
 
   return (
-    <div className="fixed bottom-0 left-0 right-0 z-40 bg-white/95 backdrop-blur-md border-t border-slate-200 py-1.5 px-3 md:hidden shadow-[0_-4px_12px_rgba(0,0,0,0.08)]">
+    <div className="fixed bottom-0 left-0 right-0 z-40 bg-white/95 backdrop-blur-md border-t border-zinc-200 py-1.5 px-3 md:hidden">
       <div className="grid grid-cols-5 gap-1 items-center text-center">
         {/* Home */}
         <Link
           href="/"
-          className="flex flex-col items-center justify-center py-1 text-slate-600 hover:text-brand-red transition-colors"
+          className="flex flex-col items-center justify-center py-1 text-zinc-500 hover:text-zinc-900 transition-colors"
         >
-          <Home className="h-5 w-5" />
-          <span className="text-[10px] font-semibold mt-0.5">Home</span>
+          <Home className="h-4 w-4" />
+          <span className="text-[10px] font-medium mt-0.5">Home</span>
         </Link>
 
         {/* Categories */}
         <Link
           href="/#catalog"
-          className="flex flex-col items-center justify-center py-1 text-slate-600 hover:text-brand-red transition-colors"
+          className="flex flex-col items-center justify-center py-1 text-zinc-500 hover:text-zinc-900 transition-colors"
         >
-          <Grid className="h-5 w-5" />
-          <span className="text-[10px] font-semibold mt-0.5">Catalog</span>
+          <Grid className="h-4 w-4" />
+          <span className="text-[10px] font-medium mt-0.5">Catalog</span>
         </Link>
 
-        {/* Builder / Center Highlight */}
+        {/* Builder / Center Minimal Button */}
         <Link
           href="/#builder"
-          className="flex flex-col items-center justify-center -mt-4 group"
+          className="flex flex-col items-center justify-center -mt-3 group"
         >
-          <div className="flex h-11 w-11 items-center justify-center rounded-full bg-brand-red text-white shadow-lg shadow-brand-red/40 group-active:scale-95 transition-transform">
-            <Cctv className="h-5 w-5" />
+          <div className="flex h-10 w-10 items-center justify-center rounded-full bg-zinc-900 text-white shadow-sm group-active:scale-95 transition-transform">
+            <Cctv className="h-4 w-4" />
           </div>
-          <span className="text-[10px] font-black text-brand-red mt-0.5 uppercase tracking-tighter">
+          <span className="text-[10px] font-semibold text-zinc-900 mt-0.5">
             Builder
           </span>
         </Link>
@@ -58,17 +57,17 @@ export default function MobileBottomBar({
         {/* Cart Trigger */}
         <button
           onClick={openCart}
-          className="relative flex flex-col items-center justify-center py-1 text-slate-600 hover:text-brand-red transition-colors"
+          className="relative flex flex-col items-center justify-center py-1 text-zinc-500 hover:text-zinc-900 transition-colors"
         >
           <div className="relative">
-            <ShoppingCart className="h-5 w-5 text-slate-700" />
+            <ShoppingCart className="h-4 w-4" />
             {cartCount > 0 && (
-              <span className="absolute -top-1 -right-2 flex h-4 w-4 items-center justify-center rounded-full bg-brand-red text-[9px] font-bold text-white">
+              <span className="absolute -top-1 -right-2 flex h-3.5 w-3.5 items-center justify-center rounded-full bg-brand-red text-[8px] font-bold text-white">
                 {cartCount}
               </span>
             )}
           </div>
-          <span className="text-[10px] font-semibold mt-0.5">Cart</span>
+          <span className="text-[10px] font-medium mt-0.5">Cart</span>
         </button>
 
         {/* WhatsApp */}
@@ -76,15 +75,10 @@ export default function MobileBottomBar({
           href="https://wa.me/919065224224?text=Hi%20Nanhey%20Accessories,%20I%20am%20interested%20in%20CCTV%20cameras."
           target="_blank"
           rel="noopener noreferrer"
-          className="flex flex-col items-center justify-center py-1 text-emerald-600 hover:text-emerald-700 transition-colors"
+          className="flex flex-col items-center justify-center py-1 text-zinc-500 hover:text-zinc-900 transition-colors"
         >
-          <div className="relative">
-            <MessageCircle className="h-5 w-5 fill-emerald-600 text-white" />
-            <span className="absolute -top-0.5 -right-0.5 h-2 w-2 rounded-full bg-emerald-500 animate-ping"></span>
-          </div>
-          <span className="text-[10px] font-semibold mt-0.5 text-emerald-700">
-            WhatsApp
-          </span>
+          <MessageCircle className="h-4 w-4" />
+          <span className="text-[10px] font-medium mt-0.5">Contact</span>
         </a>
       </div>
     </div>
