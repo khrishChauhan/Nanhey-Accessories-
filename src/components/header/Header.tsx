@@ -5,18 +5,16 @@ import TopBar from "./TopBar";
 import MainHeader from "./MainHeader";
 import NavigationBar from "./NavigationBar";
 import InstallationModal from "../modal/InstallationModal";
+import AuthModal from "../auth/AuthModal";
 
-interface HeaderProps {
-  onOpenAccount?: () => void;
-}
-
-export default function Header({ onOpenAccount }: HeaderProps) {
+export default function Header() {
   const [isInstallationModalOpen, setIsInstallationModalOpen] = useState(false);
+  const [isAuthModalOpen, setIsAuthModalOpen] = useState(false);
 
   return (
     <header className="w-full sticky top-0 z-40 bg-white shadow-sm">
       <TopBar />
-      <MainHeader onOpenAccount={onOpenAccount} />
+      <MainHeader onOpenAccount={() => setIsAuthModalOpen(true)} />
       <NavigationBar
         onRequestInstallation={() => setIsInstallationModalOpen(true)}
       />
@@ -25,6 +23,12 @@ export default function Header({ onOpenAccount }: HeaderProps) {
       <InstallationModal
         isOpen={isInstallationModalOpen}
         onClose={() => setIsInstallationModalOpen(false)}
+      />
+
+      {/* Customer & Dealer Auth Modal */}
+      <AuthModal
+        isOpen={isAuthModalOpen}
+        onClose={() => setIsAuthModalOpen(false)}
       />
     </header>
   );
