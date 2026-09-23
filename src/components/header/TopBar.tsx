@@ -1,72 +1,65 @@
 "use client";
 
 import React from "react";
-import { MapPin, Phone, Mail, Clock } from "lucide-react";
+import { MapPin, Phone, Clock } from "lucide-react";
 import { useLanguage } from "@/context/LanguageContext";
 
 export default function TopBar() {
   const { language, setLanguage, t } = useLanguage();
 
   return (
-    <div className="bg-[#09090B] border-b border-zinc-800/80 text-zinc-400 text-xs py-2 px-4 transition-colors relative z-40">
-      <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-2.5">
+    <div className="bg-zinc-950 text-zinc-400 text-[11px] h-[30px] flex items-center border-b border-zinc-900/80 px-4 relative z-40">
+      <div className="max-w-7xl mx-auto w-full flex items-center justify-between">
         {/* Left: Location & Hours */}
-        <div className="flex flex-wrap items-center justify-center md:justify-start gap-4 text-center md:text-left">
+        <div className="flex items-center gap-3">
           <div className="flex items-center gap-1.5 text-zinc-300 hover:text-white transition-colors">
-            <MapPin className="h-3.5 w-3.5 text-zinc-400 shrink-0" />
-            <span className="font-normal text-zinc-300">
+            <MapPin className="h-3 w-3 text-red-500 shrink-0" />
+            <span className="font-normal text-zinc-300 truncate max-w-[200px] sm:max-w-none">
               {t("storeAddress")}
             </span>
           </div>
-          <span className="hidden sm:inline text-zinc-700">/</span>
-          <div className="hidden lg:flex items-center gap-1.5 text-zinc-400">
-            <Clock className="h-3.5 w-3.5 text-zinc-500 shrink-0" />
+          <span className="hidden md:inline text-zinc-800">|</span>
+          <div className="hidden md:flex items-center gap-1.5 text-zinc-400">
+            <Clock className="h-3 w-3 text-zinc-500 shrink-0" />
             <span>{t("workingHours")}</span>
           </div>
         </div>
 
-        {/* Right: Phone, Email, Minimal Language Toggle */}
-        <div className="flex items-center gap-4 text-xs">
-          {/* Minimal Language Toggle */}
-          <div className="flex items-center gap-1 text-[11px] font-medium text-zinc-400">
+        {/* Right: Phone & Minimal [EN | हिंदी] Pill */}
+        <div className="flex items-center gap-3">
+          <a
+            href="tel:+919065224224"
+            className="flex items-center gap-1.5 text-zinc-300 hover:text-white transition-colors"
+          >
+            <Phone className="h-3 w-3 text-zinc-400 shrink-0" />
+            <span className="tabular-nums font-medium">+91 9065224224</span>
+          </a>
+
+          <span className="text-zinc-800">|</span>
+
+          {/* Minimal Language Toggle Pill */}
+          <div className="inline-flex items-center bg-zinc-900/90 border border-zinc-800 rounded-full p-0.5 text-[10px]">
             <button
               onClick={() => setLanguage("en")}
-              className={`px-1.5 py-0.5 rounded transition-colors ${
-                language === "en" ? "text-white font-semibold" : "text-zinc-500 hover:text-zinc-300"
+              className={`px-2 py-0.5 rounded-full transition-all ${
+                language === "en"
+                  ? "bg-zinc-800 text-white font-semibold shadow-xs"
+                  : "text-zinc-400 hover:text-zinc-200"
               }`}
             >
               EN
             </button>
-            <span className="text-zinc-700">/</span>
             <button
               onClick={() => setLanguage("hi")}
-              className={`px-1.5 py-0.5 rounded transition-colors ${
-                language === "hi" ? "text-white font-semibold" : "text-zinc-500 hover:text-zinc-300"
+              className={`px-2 py-0.5 rounded-full transition-all ${
+                language === "hi"
+                  ? "bg-zinc-800 text-white font-semibold shadow-xs"
+                  : "text-zinc-400 hover:text-zinc-200"
               }`}
             >
               हिंदी
             </button>
           </div>
-
-          <span className="text-zinc-800">|</span>
-
-          <a
-            href="tel:+919065224224"
-            className="flex items-center gap-1.5 text-zinc-300 hover:text-white transition-colors"
-          >
-            <Phone className="h-3.5 w-3.5 text-zinc-400 shrink-0" />
-            <span className="tabular-nums">+91 9065224224</span>
-          </a>
-
-          <span className="hidden sm:inline text-zinc-800">|</span>
-
-          <a
-            href="mailto:info@nanheyaccessories.com"
-            className="hidden sm:flex items-center gap-1.5 text-zinc-400 hover:text-zinc-200 transition-colors"
-          >
-            <Mail className="h-3.5 w-3.5 text-zinc-500 shrink-0" />
-            <span>info@nanheyaccessories.com</span>
-          </a>
         </div>
       </div>
     </div>
