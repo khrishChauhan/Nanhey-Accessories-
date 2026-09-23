@@ -56,8 +56,8 @@ export default function BestSellingProducts() {
       <div className="flex items-center justify-between pb-1 border-b border-slate-200">
         <div>
           <div className="flex items-center gap-1.5">
-            <span className="h-2 w-2 rounded-full bg-brand-red animate-pulse"></span>
-            <span className="text-[11px] font-black uppercase tracking-wider text-brand-red">
+            <span className="h-2 w-2 rounded-full bg-brand-ruby animate-pulse"></span>
+            <span className="text-[11px] font-black uppercase tracking-wider text-brand-ruby">
               Top Trending
             </span>
           </div>
@@ -80,12 +80,12 @@ export default function BestSellingProducts() {
           return (
             <div
               key={product.id}
-              className="group relative flex flex-col sm:flex-row items-center justify-between p-3.5 rounded-2xl bg-white border border-slate-200/90 hover:border-brand-red/50 shadow-sm hover:shadow-md transition-all gap-4"
+              className="group relative flex flex-col sm:flex-row items-center justify-between p-3.5 rounded-2xl bg-white border border-slate-200/80 hover:border-brand-ruby/50 shadow-sm hover:shadow-card-hover transition-all duration-300 gap-4"
             >
               {/* Product Thumbnail / Icon */}
-              <div className="relative flex-shrink-0 flex h-20 w-20 items-center justify-center rounded-xl bg-slate-100 text-slate-700 group-hover:bg-red-50 group-hover:text-brand-red transition-colors border border-slate-200">
-                <Icon className="h-9 w-9" />
-                <span className="absolute -top-1.5 -left-1.5 bg-brand-red text-white text-[9px] font-black px-1.5 py-0.5 rounded shadow-sm uppercase">
+              <div className="relative flex-shrink-0 flex h-20 w-20 items-center justify-center rounded-xl bg-slate-50 text-slate-700 group-hover:bg-red-50/50 group-hover:text-brand-ruby transition-all border border-slate-200/80">
+                <Icon className="h-9 w-9 stroke-[1.6]" />
+                <span className="absolute -top-1.5 -left-1.5 bg-[#090D14] text-white text-[9px] font-bold px-2 py-0.5 rounded-full border border-white/10 uppercase shadow-sm">
                   Best Seller
                 </span>
               </div>
@@ -109,7 +109,7 @@ export default function BestSellingProducts() {
 
                 <h4
                   onClick={() => openQuickView(product)}
-                  className="font-extrabold text-sm text-slate-900 hover:text-brand-red cursor-pointer transition-colors truncate"
+                  className="font-extrabold text-sm text-slate-900 hover:text-brand-ruby cursor-pointer transition-colors truncate"
                   title={product.name}
                 >
                   {product.name}
@@ -120,7 +120,7 @@ export default function BestSellingProducts() {
                   {product.features.slice(0, 3).map((spec, i) => (
                     <span
                       key={i}
-                      className="text-[9px] font-semibold bg-slate-100 text-slate-600 px-1.5 py-0.5 rounded truncate max-w-[140px]"
+                      className="text-[9px] font-medium bg-slate-100 text-slate-600 px-2 py-0.5 rounded-md truncate max-w-[140px]"
                     >
                       {spec}
                     </span>
@@ -132,7 +132,7 @@ export default function BestSellingProducts() {
               <div className="flex sm:flex-col items-center sm:items-end justify-between w-full sm:w-auto gap-3 pt-2 sm:pt-0 border-t sm:border-t-0 border-slate-100">
                 <div className="text-left sm:text-right">
                   <div className="flex items-baseline gap-1.5">
-                    <span className="text-base font-black text-brand-red">
+                    <span className="text-base font-black text-brand-ruby">
                       ₹{product.price.toLocaleString("en-IN")}
                     </span>
                     <span className="text-xs text-slate-400 line-through">
@@ -140,7 +140,7 @@ export default function BestSellingProducts() {
                     </span>
                   </div>
                   <div className="flex items-center gap-1">
-                    <span className="text-[10px] font-bold text-brand-accent-green">
+                    <span className="text-[10px] font-bold text-emerald-500">
                       {product.discount}
                     </span>
                     <span className="text-[9px] text-slate-400">
@@ -153,7 +153,7 @@ export default function BestSellingProducts() {
                 <div className="flex items-center gap-1.5">
                   <button
                     onClick={() => openQuickView(product)}
-                    className="p-2 rounded-xl border border-slate-200 hover:border-slate-300 text-slate-600 hover:text-brand-red bg-slate-50 hover:bg-white transition-colors"
+                    className="p-2 rounded-xl border border-slate-200 hover:border-slate-300 text-slate-600 hover:text-brand-ruby bg-slate-50 hover:bg-white hover:scale-105 active:scale-95 transition-all"
                     title="Quick View specifications"
                     aria-label="Quick View"
                   >
@@ -162,25 +162,25 @@ export default function BestSellingProducts() {
 
                   <button
                     onClick={() => toggleWishlist(product)}
-                    className={`p-2 rounded-xl border transition-colors ${
+                    className={`p-2 rounded-xl border transition-all hover:scale-105 active:scale-95 ${
                       wishlisted
-                        ? "bg-red-50 border-brand-red text-brand-red"
-                        : "border-slate-200 text-slate-600 hover:text-brand-red bg-slate-50 hover:bg-white"
+                        ? "bg-red-50 border-brand-ruby text-brand-ruby shadow-sm"
+                        : "border-slate-200 text-slate-600 hover:text-brand-ruby bg-slate-50 hover:bg-white"
                     }`}
                     title={wishlisted ? "Remove from wishlist" : "Add to wishlist"}
                     aria-label="Toggle Wishlist"
                   >
                     <Heart
-                      className={`h-3.5 w-3.5 ${wishlisted ? "fill-brand-red" : ""}`}
+                      className={`h-3.5 w-3.5 ${wishlisted ? "fill-brand-ruby" : ""}`}
                     />
                   </button>
 
                   <button
                     onClick={() => handleAddToCart(product)}
-                    className={`flex items-center justify-center gap-1.5 px-3 py-2 rounded-xl text-xs font-bold transition-all shadow-sm ${
+                    className={`flex items-center justify-center gap-1.5 px-3 py-2 rounded-xl text-xs font-bold transition-all hover:scale-105 active:scale-95 shadow-sm ${
                       isAdded
-                        ? "bg-brand-accent-green text-white"
-                        : "bg-brand-red text-white hover:bg-brand-red-600 active:scale-95 shadow-brand-red/20"
+                        ? "bg-emerald-500 text-white shadow-md shadow-emerald-500/20"
+                        : "bg-brand-ruby text-white hover:bg-brand-ruby-600 shadow-ruby"
                     }`}
                     aria-label={`Add ${product.name} to cart`}
                   >
