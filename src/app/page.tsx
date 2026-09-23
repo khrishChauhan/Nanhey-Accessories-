@@ -7,6 +7,9 @@ import ValuePropositionStrip from "@/components/hero/ValuePropositionStrip";
 import CategoryGrid from "@/components/category/CategoryGrid";
 import FeaturedSection from "@/components/featured/FeaturedSection";
 import { ProductItem } from "@/components/featured/BestSellingProducts";
+import TrustBadgesBar from "@/components/trust/TrustBadgesBar";
+import Footer from "@/components/footer/Footer";
+import MobileBottomBar from "@/components/mobile/MobileBottomBar";
 import InstallationModal from "@/components/modal/InstallationModal";
 
 export default function HomePage() {
@@ -31,16 +34,21 @@ export default function HomePage() {
     setIsInstallationModalOpen(true);
   };
 
+  const handleOpenGeneralInstallation = () => {
+    setSelectedPackageText("Standard CCTV Installation Service");
+    setIsInstallationModalOpen(true);
+  };
+
   return (
-    <main className="min-h-screen bg-slate-50 flex flex-col">
-      {/* Global Header */}
+    <main className="min-h-screen bg-slate-50 flex flex-col antialiased">
+      {/* 1. Global Navigation Header */}
       <Header
         cartCount={cartCount}
         cartTotal={cartTotal}
         wishlistCount={3}
       />
 
-      {/* Hero Section */}
+      {/* 2. Hero Security Banner */}
       <HeroSection
         onRequestQuote={() => {
           setSelectedPackageText("Custom CCTV Consultation");
@@ -48,23 +56,29 @@ export default function HomePage() {
         }}
       />
 
-      {/* Value Proposition Strip */}
+      {/* 3. Value Proposition Icons Bar */}
       <ValuePropositionStrip />
 
-      {/* Shop By Category Grid */}
+      {/* 4. Shop By Category Grid (8 Cards + View All) */}
       <CategoryGrid />
 
-      {/* 3-Column Featured Section */}
+      {/* 5. 3-Column Featured Section (Builder + Best Sellers + Installation) */}
       <FeaturedSection
-        onBookInstallation={() => {
-          setSelectedPackageText("Standard CCTV Installation Service");
-          setIsInstallationModalOpen(true);
-        }}
+        onBookInstallation={handleOpenGeneralInstallation}
         onAddToCart={handleAddToCart}
         onBuildPackage={handleBuildPackage}
       />
 
-      {/* Installation & Booking Modal */}
+      {/* 6. Trust Badges Section */}
+      <TrustBadgesBar />
+
+      {/* 7. Comprehensive Footer */}
+      <Footer onRequestInstallation={handleOpenGeneralInstallation} />
+
+      {/* 8. Fixed Mobile Quick Bottom Bar */}
+      <MobileBottomBar onRequestInstallation={handleOpenGeneralInstallation} />
+
+      {/* 9. Interactive Technician Booking Modal */}
       <InstallationModal
         isOpen={isInstallationModalOpen}
         onClose={() => setIsInstallationModalOpen(false)}
