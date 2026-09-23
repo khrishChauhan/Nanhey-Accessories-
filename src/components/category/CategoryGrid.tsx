@@ -23,7 +23,11 @@ export interface CategoryItem {
   popular?: boolean;
 }
 
-export default function CategoryGrid() {
+interface CategoryGridProps {
+  onSelectCategory?: (categoryId: string) => void;
+}
+
+export default function CategoryGrid({ onSelectCategory }: CategoryGridProps) {
   const categories: CategoryItem[] = [
     {
       id: "hd-camera",
@@ -86,6 +90,17 @@ export default function CategoryGrid() {
     },
   ];
 
+  const handleCategoryClick = (e: React.MouseEvent, catId: string) => {
+    if (onSelectCategory) {
+      e.preventDefault();
+      onSelectCategory(catId);
+      const el = document.getElementById("catalog");
+      if (el) {
+        el.scrollIntoView({ behavior: "smooth" });
+      }
+    }
+  };
+
   return (
     <section id="categories" className="py-12 bg-slate-50 border-b border-slate-200/80">
       <div className="max-w-7xl mx-auto px-4">
@@ -103,7 +118,7 @@ export default function CategoryGrid() {
             </h2>
           </div>
           <p className="text-xs sm:text-sm text-slate-500 max-w-md">
-            Find the right surveillance equipment for your premises with genuine warranty and certified support.
+            Click any category to filter our live inventory of 50+ genuine CCTV products with authorized warranty.
           </p>
         </div>
 
@@ -114,8 +129,9 @@ export default function CategoryGrid() {
             return (
               <a
                 key={cat.id}
-                href="#bestsellers"
-                className="group relative flex flex-col items-center text-center p-5 rounded-2xl bg-white border border-slate-200/90 hover:border-brand-red/60 shadow-sm hover:shadow-xl hover:shadow-brand-red/10 transition-all duration-300 hover:-translate-y-1"
+                href="#catalog"
+                onClick={(e) => handleCategoryClick(e, cat.id)}
+                className="group relative flex flex-col items-center text-center p-5 rounded-2xl bg-white border border-slate-200/90 hover:border-brand-red/60 shadow-sm hover:shadow-xl hover:shadow-brand-red/10 transition-all duration-300 hover:-translate-y-1 cursor-pointer"
               >
                 {/* Badge */}
                 {cat.badge && (
@@ -145,7 +161,7 @@ export default function CategoryGrid() {
 
                 {/* Hover arrow indicator */}
                 <div className="mt-3 flex items-center gap-1 text-[10px] font-bold text-brand-red opacity-0 group-hover:opacity-100 transition-opacity">
-                  <span>Browse</span>
+                  <span>Filter Catalog</span>
                   <ArrowRight className="h-3 w-3" />
                 </div>
               </a>
@@ -154,8 +170,9 @@ export default function CategoryGrid() {
 
           {/* 9th Card: Red Bordered "VIEW ALL Categories" Card */}
           <a
-            href="#bestsellers"
-            className="group relative flex flex-col items-center justify-center text-center p-5 rounded-2xl bg-gradient-to-br from-red-50 via-white to-red-100/40 border-2 border-dashed border-brand-red hover:border-solid hover:bg-brand-red shadow-sm hover:shadow-xl hover:shadow-brand-red/25 transition-all duration-300 hover:-translate-y-1"
+            href="#catalog"
+            onClick={(e) => handleCategoryClick(e, "all")}
+            className="group relative flex flex-col items-center justify-center text-center p-5 rounded-2xl bg-gradient-to-br from-red-50 via-white to-red-100/40 border-2 border-dashed border-brand-red hover:border-solid hover:bg-brand-red shadow-sm hover:shadow-xl hover:shadow-brand-red/25 transition-all duration-300 hover:-translate-y-1 cursor-pointer"
           >
             <div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-white text-brand-red shadow-md group-hover:bg-white group-hover:text-brand-red group-hover:scale-110 transition-all mb-3 border border-red-100">
               <Sparkles className="h-7 w-7" />
@@ -165,10 +182,10 @@ export default function CategoryGrid() {
               VIEW ALL
             </h3>
             <span className="text-xs font-bold text-slate-700 group-hover:text-white/90 transition-colors uppercase tracking-wider">
-              Categories
+              50+ Products
             </span>
             <p className="text-[10px] text-slate-500 group-hover:text-white/80 mt-1">
-              Complete Catalog
+              Explore Live Stock
             </p>
 
             <div className="mt-3 flex items-center gap-1 text-xs font-extrabold text-brand-red group-hover:text-white transition-colors">

@@ -5,6 +5,7 @@ import Header from "@/components/header/Header";
 import HeroSection from "@/components/hero/HeroSection";
 import ValuePropositionStrip from "@/components/hero/ValuePropositionStrip";
 import CategoryGrid from "@/components/category/CategoryGrid";
+import ProductCatalog from "@/components/catalog/ProductCatalog";
 import FeaturedSection from "@/components/featured/FeaturedSection";
 import TrustBadgesBar from "@/components/trust/TrustBadgesBar";
 import Footer from "@/components/footer/Footer";
@@ -16,6 +17,7 @@ import ProductQuickViewModal from "@/components/product/ProductQuickViewModal";
 export default function HomePage() {
   const [isInstallationModalOpen, setIsInstallationModalOpen] = useState(false);
   const [selectedPackageText, setSelectedPackageText] = useState<string>("");
+  const [activeCatalogCategory, setActiveCatalogCategory] = useState<string>("all");
 
   const handleBuildPackage = (pkg: {
     cameras: number;
@@ -39,6 +41,10 @@ export default function HomePage() {
     setIsInstallationModalOpen(true);
   };
 
+  const handleSelectCategoryFromGrid = (categoryId: string) => {
+    setActiveCatalogCategory(categoryId);
+  };
+
   return (
     <main className="min-h-screen bg-slate-50 flex flex-col antialiased">
       {/* 1. Global Navigation Header (Dynamic Cart & Wishlist via ShopContext) */}
@@ -56,30 +62,36 @@ export default function HomePage() {
       <ValuePropositionStrip />
 
       {/* 4. Shop By Category Grid (8 Cards + View All) */}
-      <CategoryGrid />
+      <CategoryGrid onSelectCategory={handleSelectCategoryFromGrid} />
 
-      {/* 5. 3-Column Featured Section (Builder + Best Sellers + Installation) */}
+      {/* 5. Full 50+ CCTV Interactive Product Catalog Explorer */}
+      <ProductCatalog
+        key={activeCatalogCategory}
+        initialCategory={activeCatalogCategory}
+      />
+
+      {/* 6. 3-Column Featured Section (Builder + Best Sellers + Installation) */}
       <FeaturedSection
         onBookInstallation={handleOpenGeneralInstallation}
         onBuildPackage={handleBuildPackage}
       />
 
-      {/* 6. Trust Badges Section */}
+      {/* 7. Trust Badges Section */}
       <TrustBadgesBar />
 
-      {/* 7. Comprehensive Showroom Footer */}
+      {/* 8. Comprehensive Showroom Footer */}
       <Footer onRequestInstallation={handleOpenGeneralInstallation} />
 
-      {/* 8. Fixed Mobile Quick Bottom Bar */}
+      {/* 9. Fixed Mobile Quick Bottom Bar */}
       <MobileBottomBar onRequestInstallation={handleOpenGeneralInstallation} />
 
-      {/* 9. Slide-Over Cart Drawer with GST & WhatsApp Order Generator */}
+      {/* 10. Slide-Over Cart Drawer with GST & WhatsApp Order Generator */}
       <CartDrawer onRequestGSTQuotation={handleOpenGSTQuotation} />
 
-      {/* 10. Product Quick View Specifications Modal */}
+      {/* 11. Product Quick View Specifications Modal */}
       <ProductQuickViewModal />
 
-      {/* 11. Interactive Technician & Lead Capture Modal */}
+      {/* 12. Interactive Technician & Lead Capture Modal */}
       <InstallationModal
         isOpen={isInstallationModalOpen}
         onClose={() => setIsInstallationModalOpen(false)}
