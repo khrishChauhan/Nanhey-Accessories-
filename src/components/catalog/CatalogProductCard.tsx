@@ -2,7 +2,6 @@
 
 import React, { useState } from "react";
 import {
-  Star,
   Check,
   Heart,
   Video,
@@ -24,6 +23,10 @@ export default function CatalogProductCard({ product }: CatalogProductCardProps)
   const { addToCart, toggleWishlist, isWishlisted, openQuickView } = useShop();
   const [isAdded, setIsAdded] = useState(false);
   const wishlisted = isWishlisted(product.id);
+
+  const discountPercentage = Math.round(
+    ((product.originalPrice - product.price) / product.originalPrice) * 100
+  );
 
   const getProductIcon = (category: string) => {
     switch (category) {
@@ -57,38 +60,45 @@ export default function CatalogProductCard({ product }: CatalogProductCardProps)
   return (
     <div
       onClick={() => openQuickView(product)}
-      className="group relative flex flex-col justify-between rounded-lg bg-white border border-zinc-200/80 hover:border-zinc-300 p-4 transition-colors cursor-pointer"
+      className="group relative flex flex-col justify-between rounded-lg bg-white border border-zinc-200/80 hover:border-red-200/90 hover:shadow-xs p-4 transition-all cursor-pointer"
     >
       <div>
-        {/* Top Header: Brand & Wishlist Button */}
+        {/* Top Header: Brand, Discount Pill & Wishlist Button */}
         <div className="flex items-center justify-between mb-3">
-          <span className="text-[10px] font-semibold uppercase tracking-wider text-zinc-400">
-            {product.brand}
-          </span>
+          <div className="flex items-center gap-2">
+            <span className="text-[10px] font-semibold uppercase tracking-wider text-zinc-400">
+              {product.brand}
+            </span>
+            {discountPercentage > 0 && (
+              <span className="text-[10px] font-semibold text-red-600 bg-red-50 border border-red-100 px-1.5 py-0.5 rounded">
+                {discountPercentage}% OFF
+              </span>
+            )}
+          </div>
 
           <button
             onClick={(e) => {
               e.stopPropagation();
               toggleWishlist(product);
             }}
-            className={`p-1 rounded text-zinc-400 hover:text-zinc-900 transition-colors ${
-              wishlisted ? "text-brand-red fill-brand-red" : ""
+            className={`p-1 rounded text-zinc-400 hover:text-red-600 transition-colors ${
+              wishlisted ? "text-red-600 fill-red-600" : ""
             }`}
             title={wishlisted ? "Remove from wishlist" : "Add to wishlist"}
             aria-label="Wishlist"
           >
-            <Heart className={`h-3.5 w-3.5 ${wishlisted ? "fill-brand-red text-brand-red" : ""}`} />
+            <Heart className={`h-3.5 w-3.5 ${wishlisted ? "fill-red-600 text-red-600" : ""}`} />
           </button>
         </div>
 
-        {/* Product Image / Icon - Clean Light Zinc Gallery Container */}
-        <div className="relative flex h-36 w-full items-center justify-center rounded bg-zinc-50/80 border border-zinc-100 p-4 mb-3 transition-colors group-hover:bg-zinc-100/60">
-          <Icon className="h-10 w-10 text-zinc-600 stroke-[1.5]" />
+        {/* Product Image / Icon Container */}
+        <div className="relative flex h-36 w-full items-center justify-center rounded bg-zinc-50/80 border border-zinc-100 p-4 mb-3 transition-colors group-hover:bg-red-50/20 group-hover:border-red-100">
+          <Icon className="h-10 w-10 text-zinc-600 group-hover:text-red-600 stroke-[1.5] transition-colors" />
         </div>
 
         {/* Product Title */}
         <h4
-          className="text-xs font-semibold text-zinc-900 line-clamp-2 leading-snug group-hover:text-zinc-600 transition-colors"
+          className="text-xs font-semibold text-zinc-900 line-clamp-2 leading-snug group-hover:text-red-600 transition-colors"
           title={product.name}
         >
           {product.name}
@@ -116,13 +126,13 @@ export default function CatalogProductCard({ product }: CatalogProductCardProps)
           </span>
         </div>
 
-        {/* Quiet Add Button */}
+        {/* Add Button with Red Active/Hover */}
         <button
           onClick={handleAddToCart}
           className={`flex items-center gap-1 px-3 py-1.5 rounded text-xs font-medium transition-colors ${
             isAdded
-              ? "bg-zinc-100 text-zinc-900 border border-zinc-200"
-              : "bg-zinc-900 hover:bg-zinc-800 text-white"
+              ? "bg-red-50 text-red-600 border border-red-200"
+              : "bg-zinc-900 hover:bg-red-600 text-white"
           }`}
           aria-label={`Add ${product.name} to cart`}
         >

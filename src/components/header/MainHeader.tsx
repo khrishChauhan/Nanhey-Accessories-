@@ -97,13 +97,13 @@ export default function MainHeader({
             </div>
           </Link>
 
-          {/* 2. Refined Navigation Links (Desktop) */}
+          {/* 2. Refined Navigation Links with Red Hover Underline */}
           <nav className="hidden xl:flex items-center gap-5 2xl:gap-6">
             {navLinks.map((link, idx) => (
               <Link
                 key={idx}
                 href={link.href}
-                className="text-xs font-semibold text-zinc-600 hover:text-zinc-950 transition-colors tracking-wide relative py-1 after:absolute after:bottom-0 after:left-0 after:w-0 after:h-[2px] after:bg-zinc-950 hover:after:w-full after:transition-all"
+                className="text-xs font-semibold text-zinc-600 hover:text-red-600 transition-colors tracking-wide relative py-1 after:absolute after:bottom-0 after:left-0 after:w-0 after:h-[2px] after:bg-red-600 hover:after:w-full after:transition-all"
               >
                 {link.label}
               </Link>
@@ -114,14 +114,14 @@ export default function MainHeader({
           <div className="hidden md:flex flex-1 max-w-xs lg:max-w-sm xl:max-w-md">
             <form
               onSubmit={handleSearch}
-              className="w-full flex items-center bg-zinc-100/90 hover:bg-zinc-100 border border-zinc-200/80 focus-within:border-zinc-400 focus-within:bg-white rounded-full px-3 py-1.5 transition-all text-xs"
+              className="w-full flex items-center bg-zinc-100/90 hover:bg-zinc-100 border border-zinc-200/80 focus-within:border-red-400 focus-within:bg-white rounded-full px-3 py-1.5 transition-all text-xs"
             >
               {/* Category Dropdown */}
               <div className="relative flex items-center pr-2 border-r border-zinc-200 shrink-0">
                 <select
                   value={selectedCategory}
                   onChange={(e) => setSelectedCategory(e.target.value)}
-                  className="appearance-none bg-transparent pr-4 text-[11px] font-medium text-zinc-600 focus:outline-none cursor-pointer hover:text-zinc-950 transition-colors"
+                  className="appearance-none bg-transparent pr-4 text-[11px] font-medium text-zinc-600 focus:outline-none cursor-pointer hover:text-red-600 transition-colors"
                 >
                   <option value="All">All</option>
                   <option value="HD Cameras">HD Cameras</option>
@@ -146,7 +146,7 @@ export default function MainHeader({
               {/* Quiet Icon Button */}
               <button
                 type="submit"
-                className="p-1 text-zinc-400 hover:text-zinc-900 transition-colors shrink-0"
+                className="p-1 text-zinc-400 hover:text-red-600 transition-colors shrink-0"
                 aria-label="Search"
               >
                 <Search className="h-3.5 w-3.5" />
@@ -154,12 +154,12 @@ export default function MainHeader({
             </form>
           </div>
 
-          {/* 4. Elegant Consolidated Action Cluster */}
+          {/* 4. Elegant Consolidated Action Cluster with Red Accents */}
           <div className="flex items-center gap-1 sm:gap-2 shrink-0">
             {/* Mobile Search Toggle */}
             <button
               onClick={() => setMobileSearchOpen(!mobileSearchOpen)}
-              className="md:hidden p-2 rounded-full text-zinc-600 hover:text-zinc-950 hover:bg-zinc-100 transition-colors"
+              className="md:hidden p-2 rounded-full text-zinc-600 hover:text-red-600 hover:bg-red-50/50 transition-colors"
               title="Search"
               aria-label="Search"
             >
@@ -169,7 +169,7 @@ export default function MainHeader({
             {/* Account Icon */}
             <button
               onClick={onOpenAccount}
-              className="p-2 rounded-full text-zinc-600 hover:text-zinc-950 hover:bg-zinc-100 transition-colors"
+              className="p-2 rounded-full text-zinc-600 hover:text-red-600 hover:bg-red-50/50 transition-colors"
               title="My Account"
               aria-label="My Account"
             >
@@ -179,7 +179,7 @@ export default function MainHeader({
             {/* Wishlist Icon */}
             <button
               onClick={handleOpenWishlist}
-              className="p-2 rounded-full text-zinc-600 hover:text-zinc-950 hover:bg-zinc-100 transition-colors relative"
+              className="p-2 rounded-full text-zinc-600 hover:text-red-600 hover:bg-red-50/50 transition-colors relative"
               title="Wishlist"
               aria-label="Wishlist"
             >
@@ -192,26 +192,26 @@ export default function MainHeader({
             {/* Cart Delicate Bordered Pill */}
             <button
               onClick={openCart}
-              className="border border-zinc-200 hover:border-zinc-300 hover:bg-zinc-50 rounded-full px-2.5 sm:px-3 py-1.5 flex items-center gap-1.5 sm:gap-2 transition-all shadow-2xs group"
+              className="border border-zinc-200 hover:border-red-300 hover:bg-red-50/20 rounded-full px-2.5 sm:px-3 py-1.5 flex items-center gap-1.5 sm:gap-2 transition-all shadow-2xs group"
               aria-label="Shopping Cart"
             >
               <div className="relative flex items-center">
-                <ShoppingCart className="h-3.5 w-3.5 text-zinc-700 group-hover:text-zinc-950 transition-colors" />
+                <ShoppingCart className="h-3.5 w-3.5 text-zinc-700 group-hover:text-red-600 transition-colors" />
                 {cartCount > 0 && (
                   <span className="absolute -top-1.5 -right-2 flex h-3.5 min-w-3.5 px-1 items-center justify-center rounded-full bg-red-600 text-[8px] font-bold text-white leading-none">
                     {cartCount}
                   </span>
                 )}
               </div>
-              <span className="tabular-nums text-xs font-semibold text-zinc-800">
+              <span className="tabular-nums text-xs font-semibold text-zinc-800 group-hover:text-red-600 transition-colors">
                 {cartTotalFormatted}
               </span>
             </button>
 
-            {/* Single Primary CTA: Request Installation Pill (Desktop) */}
+            {/* Single Primary CTA: Red Precision Installation Pill */}
             <button
               onClick={onRequestInstallation}
-              className="hidden sm:inline-flex items-center gap-1.5 bg-zinc-900 hover:bg-red-600 text-white text-xs font-semibold px-4 py-2 rounded-full transition-all shadow-xs shrink-0"
+              className="hidden sm:inline-flex items-center gap-1.5 bg-red-600 hover:bg-red-700 text-white text-xs font-semibold px-4 py-2 rounded-full transition-all shadow-xs shadow-red-600/25 shrink-0"
             >
               <Wrench className="h-3.5 w-3.5" />
               <span>Request Installation</span>
@@ -220,7 +220,7 @@ export default function MainHeader({
             {/* Mobile Menu Toggle Button */}
             <button
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              className="xl:hidden p-2 rounded-full text-zinc-700 hover:text-zinc-950 hover:bg-zinc-100 transition-colors ml-0.5"
+              className="xl:hidden p-2 rounded-full text-zinc-700 hover:text-red-600 hover:bg-red-50/50 transition-colors ml-0.5"
               aria-label="Toggle navigation menu"
             >
               {mobileMenuOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
@@ -237,7 +237,7 @@ export default function MainHeader({
               handleSearch(e);
               setMobileSearchOpen(false);
             }}
-            className="flex items-center bg-zinc-100/90 border border-zinc-200 focus-within:border-zinc-400 focus-within:bg-white rounded-full px-3 py-1.5 text-xs"
+            className="flex items-center bg-zinc-100/90 border border-zinc-200 focus-within:border-red-400 focus-within:bg-white rounded-full px-3 py-1.5 text-xs"
           >
             <input
               type="text"
@@ -249,7 +249,7 @@ export default function MainHeader({
             />
             <button
               type="submit"
-              className="p-1 text-zinc-500 hover:text-zinc-900 transition-colors"
+              className="p-1 text-zinc-500 hover:text-red-600 transition-colors"
               aria-label="Search"
             >
               <Search className="h-3.5 w-3.5" />
@@ -324,7 +324,7 @@ export default function MainHeader({
                     key={idx}
                     href={link.href}
                     onClick={() => setMobileMenuOpen(false)}
-                    className="flex items-center justify-between px-3 py-2.5 rounded-lg text-sm font-medium text-zinc-700 hover:text-zinc-950 hover:bg-zinc-50 transition-colors"
+                    className="flex items-center justify-between px-3 py-2.5 rounded-lg text-sm font-medium text-zinc-700 hover:text-red-600 hover:bg-red-50/40 transition-colors"
                   >
                     <span>{link.label}</span>
                     <ArrowRight className="h-3.5 w-3.5 text-zinc-400" />
@@ -341,7 +341,7 @@ export default function MainHeader({
                   <Link
                     href="/installation"
                     onClick={() => setMobileMenuOpen(false)}
-                    className="flex flex-col p-2.5 rounded-lg bg-zinc-50 border border-zinc-200/70 hover:border-zinc-300 transition-colors text-xs"
+                    className="flex flex-col p-2.5 rounded-lg bg-zinc-50 border border-zinc-200/70 hover:border-red-300 hover:bg-red-50/20 transition-colors text-xs"
                   >
                     <span className="font-semibold text-zinc-900">Doorstep Setup</span>
                     <span className="text-[10px] text-zinc-500 mt-0.5">Certified Engineers</span>
@@ -349,7 +349,7 @@ export default function MainHeader({
                   <Link
                     href="/amc"
                     onClick={() => setMobileMenuOpen(false)}
-                    className="flex flex-col p-2.5 rounded-lg bg-zinc-50 border border-zinc-200/70 hover:border-zinc-300 transition-colors text-xs"
+                    className="flex flex-col p-2.5 rounded-lg bg-zinc-50 border border-zinc-200/70 hover:border-red-300 hover:bg-red-50/20 transition-colors text-xs"
                   >
                     <span className="font-semibold text-zinc-900">AMC Contracts</span>
                     <span className="text-[10px] text-zinc-500 mt-0.5">Annual Maintenance</span>
@@ -365,7 +365,7 @@ export default function MainHeader({
                   setMobileMenuOpen(false);
                   if (onRequestInstallation) onRequestInstallation();
                 }}
-                className="w-full bg-zinc-900 hover:bg-red-600 text-white font-semibold py-2.5 rounded-full flex items-center justify-center gap-2 text-xs shadow-xs transition-all"
+                className="w-full bg-red-600 hover:bg-red-700 text-white font-semibold py-2.5 rounded-full flex items-center justify-center gap-2 text-xs shadow-xs shadow-red-600/25 transition-all"
               >
                 <Wrench className="h-3.5 w-3.5" />
                 <span>Request Installation</span>
@@ -374,7 +374,7 @@ export default function MainHeader({
               <div className="flex items-center justify-between text-[11px] text-zinc-500 px-1 pt-1">
                 <a
                   href="tel:+919065224224"
-                  className="text-zinc-700 hover:text-zinc-950 font-medium"
+                  className="text-zinc-700 hover:text-red-600 font-medium"
                 >
                   +91 9065224224
                 </a>

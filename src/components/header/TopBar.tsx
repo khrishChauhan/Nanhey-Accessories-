@@ -29,9 +29,9 @@ export default function TopBar() {
         <div className="flex items-center gap-3">
           <a
             href="tel:+919065224224"
-            className="flex items-center gap-1.5 text-zinc-300 hover:text-white transition-colors"
+            className="flex items-center gap-1.5 text-zinc-300 hover:text-red-400 transition-colors"
           >
-            <Phone className="h-3 w-3 text-zinc-400 shrink-0" />
+            <Phone className="h-3 w-3 text-red-500 shrink-0" />
             <span className="tabular-nums font-medium">+91 9065224224</span>
           </a>
 
@@ -43,7 +43,7 @@ export default function TopBar() {
               onClick={() => setLanguage("en")}
               className={`px-2 py-0.5 rounded-full transition-all ${
                 language === "en"
-                  ? "bg-zinc-800 text-white font-semibold shadow-xs"
+                  ? "bg-red-600 text-white font-semibold shadow-xs shadow-red-600/30"
                   : "text-zinc-400 hover:text-zinc-200"
               }`}
             >
@@ -53,7 +53,7 @@ export default function TopBar() {
               onClick={() => setLanguage("hi")}
               className={`px-2 py-0.5 rounded-full transition-all ${
                 language === "hi"
-                  ? "bg-zinc-800 text-white font-semibold shadow-xs"
+                  ? "bg-red-600 text-white font-semibold shadow-xs shadow-red-600/30"
                   : "text-zinc-400 hover:text-zinc-200"
               }`}
             >

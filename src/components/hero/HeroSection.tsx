@@ -25,19 +25,23 @@ export default function HeroSection({
 
   return (
     <section className="relative bg-[#09090B] text-white overflow-hidden py-16 lg:py-28 border-b border-zinc-800/80">
+      {/* Subtle Crimson Ambient Spotlight */}
+      <div className="absolute top-1/4 left-1/3 -translate-x-1/2 w-96 h-96 bg-red-600/10 rounded-full blur-3xl pointer-events-none" />
+      <div className="absolute top-1/2 right-10 w-80 h-80 bg-red-600/10 rounded-full blur-3xl pointer-events-none" />
+
       <div className="max-w-7xl mx-auto px-4 relative z-10">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
           {/* Left Column: Quiet Editorial Typography (7 cols) */}
           <div className="lg:col-span-7 space-y-6 text-center lg:text-left">
-            {/* Minimal Understated Tagline */}
-            <div className="inline-flex items-center gap-2 text-xs font-medium tracking-widest uppercase text-zinc-400">
-              <span className="h-1.5 w-1.5 rounded-full bg-brand-red"></span>
+            {/* Minimal Tagline Badge with Ruby Pulse */}
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-red-950/40 border border-red-800/40 text-xs font-semibold tracking-wider uppercase text-red-400">
+              <span className="h-2 w-2 rounded-full bg-red-500 animate-pulse"></span>
               <span>Enterprise CCTV & Surveillance</span>
             </div>
 
-            {/* Authoritative Minimal Headline */}
+            {/* Authoritative Minimal Headline with Red Focus */}
             <h1 className="text-3xl sm:text-5xl lg:text-6xl font-black tracking-tight leading-[1.08] text-white max-w-2xl">
-              Security, engineered for absolute clarity.
+              Security, engineered for <span className="text-red-500">absolute clarity</span>.
             </h1>
 
             {/* Editorial Subtitle */}
@@ -45,12 +49,12 @@ export default function HeroSection({
               Official CP Plus and Hikvision systems with certified doorstep installation, GST compliance, and local Begusarai technical support.
             </p>
 
-            {/* Clean Action Buttons */}
+            {/* Clean Action Buttons with Red Primary Anchor */}
             <div className="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4 pt-2">
               <a
                 href="#catalog"
                 onClick={onShopNow}
-                className="w-full sm:w-auto inline-flex items-center justify-center gap-2 bg-white hover:bg-zinc-200 text-zinc-950 font-semibold text-xs tracking-wide px-6 py-3.5 rounded-lg transition-colors"
+                className="w-full sm:w-auto inline-flex items-center justify-center gap-2 bg-red-600 hover:bg-red-700 text-white font-semibold text-xs tracking-wide px-6 py-3.5 rounded-lg transition-all shadow-md shadow-red-600/25"
               >
                 <span>Browse Catalog</span>
                 <ArrowRight className="h-3.5 w-3.5" />
@@ -59,7 +63,7 @@ export default function HeroSection({
               <a
                 href="#builder"
                 onClick={onRequestQuote}
-                className="w-full sm:w-auto inline-flex items-center justify-center gap-2 text-zinc-300 hover:text-white font-medium text-xs tracking-wide px-4 py-3.5 transition-colors border border-zinc-800 hover:border-zinc-700 rounded-lg"
+                className="w-full sm:w-auto inline-flex items-center justify-center gap-2 text-zinc-300 hover:text-white font-medium text-xs tracking-wide px-5 py-3.5 transition-colors border border-zinc-800 hover:border-red-600/60 hover:text-red-400 rounded-lg"
               >
                 <span>Configure Custom Package</span>
               </a>
@@ -68,7 +72,7 @@ export default function HeroSection({
             {/* Minimalist Metrics Line */}
             <div className="pt-6 border-t border-zinc-800/80 flex flex-wrap items-center justify-center lg:justify-start gap-6 sm:gap-10 text-xs text-zinc-400">
               <div>
-                <span className="block font-bold text-white text-sm tabular-nums">10+ Years</span>
+                <span className="block font-bold text-red-500 text-sm tabular-nums">10+ Years</span>
                 <span className="text-[11px] text-zinc-500">Begusarai Heritage</span>
               </div>
               <div className="h-6 w-[1px] bg-zinc-800 hidden sm:block"></div>
@@ -78,7 +82,10 @@ export default function HeroSection({
               </div>
               <div className="h-6 w-[1px] bg-zinc-800 hidden sm:block"></div>
               <div>
-                <span className="block font-bold text-white text-sm">Authorized</span>
+                <span className="block font-bold text-white text-sm flex items-center gap-1.5">
+                  <span className="inline-block w-1.5 h-1.5 rounded-full bg-red-500"></span>
+                  Authorized
+                </span>
                 <span className="text-[11px] text-zinc-500">CP Plus & Hikvision</span>
               </div>
             </div>
@@ -89,18 +96,20 @@ export default function HeroSection({
             <div className="relative rounded-xl bg-zinc-900/60 border border-zinc-800 p-6 shadow-xl backdrop-blur-sm">
               <div className="flex items-center justify-between border-b border-zinc-800/80 pb-3.5 mb-5 text-xs">
                 <span className="text-zinc-400 font-medium">Hardware Profile</span>
-                <span className="text-[11px] text-zinc-400 font-mono">4K UHD / H.265+</span>
+                <span className="text-[11px] text-red-400 font-mono bg-red-950/60 border border-red-800/50 px-2.5 py-0.5 rounded-full">
+                  4K UHD / H.265+
+                </span>
               </div>
 
               {/* Hardware Graphic Area */}
               <div className="relative h-48 w-full flex items-center justify-center rounded-lg bg-zinc-950/80 border border-zinc-800/60 p-4">
                 <div className="flex items-center justify-center gap-8">
                   {/* Bullet Spec Item */}
-                  <div className="flex flex-col items-center">
-                    <div className="flex h-14 w-14 items-center justify-center rounded-lg bg-zinc-900 border border-zinc-800 text-zinc-200">
+                  <div className="flex flex-col items-center group/item cursor-pointer">
+                    <div className="flex h-14 w-14 items-center justify-center rounded-lg bg-zinc-900 border border-zinc-800 group-hover/item:border-red-600/50 group-hover/item:text-red-400 text-zinc-200 transition-colors">
                       <Video className="h-7 w-7 stroke-[1.5]" />
                     </div>
-                    <span className="text-xs font-semibold text-zinc-200 mt-2.5">
+                    <span className="text-xs font-semibold text-zinc-200 mt-2.5 group-hover/item:text-red-400 transition-colors">
                       Bullet Series
                     </span>
                     <span className="text-[11px] text-zinc-500">
@@ -111,11 +120,11 @@ export default function HeroSection({
                   <div className="h-12 w-[1px] bg-zinc-800"></div>
 
                   {/* Dome Spec Item */}
-                  <div className="flex flex-col items-center">
-                    <div className="flex h-14 w-14 items-center justify-center rounded-lg bg-zinc-900 border border-zinc-800 text-zinc-200">
+                  <div className="flex flex-col items-center group/item cursor-pointer">
+                    <div className="flex h-14 w-14 items-center justify-center rounded-lg bg-zinc-900 border border-zinc-800 group-hover/item:border-red-600/50 group-hover/item:text-red-400 text-zinc-200 transition-colors">
                       <Cctv className="h-7 w-7 stroke-[1.5]" />
                     </div>
-                    <span className="text-xs font-semibold text-zinc-200 mt-2.5">
+                    <span className="text-xs font-semibold text-zinc-200 mt-2.5 group-hover/item:text-red-400 transition-colors">
                       Dome Series
                     </span>
                     <span className="text-[11px] text-zinc-500">
@@ -125,14 +134,14 @@ export default function HeroSection({
                 </div>
               </div>
 
-              {/* Quiet Spec Summary */}
+              {/* Quiet Spec Summary with Subtle Red Icons */}
               <div className="mt-4 pt-3.5 border-t border-zinc-800/80 grid grid-cols-2 gap-3 text-xs text-zinc-400">
                 <div className="flex items-center gap-2">
-                  <ShieldCheck className="h-4 w-4 text-zinc-400" />
+                  <ShieldCheck className="h-4 w-4 text-red-500" />
                   <span>2-Year Warranty</span>
                 </div>
                 <div className="flex items-center gap-2">
-                  <Clock className="h-4 w-4 text-zinc-400" />
+                  <Clock className="h-4 w-4 text-red-500" />
                   <span>Doorstep Support</span>
                 </div>
               </div>

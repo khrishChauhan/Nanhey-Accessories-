@@ -64,10 +64,11 @@ export default function PackageBuilder({ onBuildPackage }: PackageBuilderProps) 
       id="builder"
       className="flex flex-col h-full rounded-lg bg-white border border-zinc-200 p-6 shadow-sm justify-between space-y-6"
     >
-      {/* Quiet Minimal Header */}
+      {/* Quiet Minimal Header with Red Accent */}
       <div>
         <div className="flex items-center justify-between mb-1.5">
-          <span className="text-[11px] font-semibold uppercase tracking-wider text-zinc-400">
+          <span className="text-[11px] font-semibold uppercase tracking-wider text-red-600 flex items-center gap-1.5">
+            <span className="w-1.5 h-1.5 rounded-full bg-red-600"></span>
             System Configurator
           </span>
           <span className="text-[11px] font-medium text-zinc-500">
@@ -86,7 +87,7 @@ export default function PackageBuilder({ onBuildPackage }: PackageBuilderProps) 
       <div className="space-y-4">
         {/* Step 1: Camera Channels Toggle */}
         <div>
-          <label className="block text-xs font-medium text-zinc-700 mb-1.5">
+          <label className="block text-xs font-semibold text-zinc-800 mb-1.5">
             Cameras
           </label>
           <div className="grid grid-cols-4 gap-1.5">
@@ -97,8 +98,8 @@ export default function PackageBuilder({ onBuildPackage }: PackageBuilderProps) 
                 onClick={() => setCameraCount(count)}
                 className={`py-2 text-xs font-medium rounded border transition-colors ${
                   cameraCount === count
-                    ? "bg-zinc-900 text-white border-zinc-900"
-                    : "bg-white text-zinc-700 border-zinc-200 hover:border-zinc-300"
+                    ? "bg-red-600 text-white border-red-600 shadow-xs shadow-red-600/20"
+                    : "bg-white text-zinc-700 border-zinc-200 hover:border-red-300"
                 }`}
               >
                 {count} Cams
@@ -109,7 +110,7 @@ export default function PackageBuilder({ onBuildPackage }: PackageBuilderProps) 
 
         {/* Step 2: Storage Toggle */}
         <div>
-          <label className="block text-xs font-medium text-zinc-700 mb-1.5">
+          <label className="block text-xs font-semibold text-zinc-800 mb-1.5">
             Surveillance Storage
           </label>
           <div className="grid grid-cols-3 gap-1.5">
@@ -120,8 +121,8 @@ export default function PackageBuilder({ onBuildPackage }: PackageBuilderProps) 
                 onClick={() => setStorageOption(opt)}
                 className={`py-2 text-xs font-medium rounded border transition-colors ${
                   storageOption === opt
-                    ? "bg-zinc-900 text-white border-zinc-900"
-                    : "bg-white text-zinc-700 border-zinc-200 hover:border-zinc-300"
+                    ? "bg-red-600 text-white border-red-600 shadow-xs shadow-red-600/20"
+                    : "bg-white text-zinc-700 border-zinc-200 hover:border-red-300"
                 }`}
               >
                 {opt}
@@ -132,7 +133,7 @@ export default function PackageBuilder({ onBuildPackage }: PackageBuilderProps) 
 
         {/* Step 3: Audio Mic Toggle */}
         <div>
-          <label className="block text-xs font-medium text-zinc-700 mb-1.5">
+          <label className="block text-xs font-semibold text-zinc-800 mb-1.5">
             Audio Recording (Mic)
           </label>
           <div className="grid grid-cols-2 gap-1.5">
@@ -143,8 +144,8 @@ export default function PackageBuilder({ onBuildPackage }: PackageBuilderProps) 
                 onClick={() => setAudioOption(opt)}
                 className={`py-2 text-xs font-medium rounded border transition-colors ${
                   audioOption === opt
-                    ? "bg-zinc-900 text-white border-zinc-900"
-                    : "bg-white text-zinc-700 border-zinc-200 hover:border-zinc-300"
+                    ? "bg-red-600 text-white border-red-600 shadow-xs shadow-red-600/20"
+                    : "bg-white text-zinc-700 border-zinc-200 hover:border-red-300"
                 }`}
               >
                 {opt === "Yes" ? "Audio + Video" : "Video Only"}
@@ -156,11 +157,11 @@ export default function PackageBuilder({ onBuildPackage }: PackageBuilderProps) 
         {/* Minimal Included Specs List */}
         <div className="pt-2 border-t border-zinc-100 text-[11px] text-zinc-500 space-y-1">
           <div className="flex items-center gap-1.5 text-zinc-600">
-            <Check className="h-3 w-3 text-zinc-400 shrink-0" />
+            <Check className="h-3 w-3 text-red-500 shrink-0" />
             <span>Includes Full HD DVR/NVR, Power SMPS, Connectors</span>
           </div>
           <div className="flex items-center gap-1.5 text-zinc-600">
-            <Check className="h-3 w-3 text-zinc-400 shrink-0" />
+            <Check className="h-3 w-3 text-red-500 shrink-0" />
             <span>Doorstep Installation & Mobile App Setup included</span>
           </div>
         </div>
@@ -174,7 +175,7 @@ export default function PackageBuilder({ onBuildPackage }: PackageBuilderProps) 
             <span className="text-[10px] text-zinc-400">Includes 18% GST</span>
           </div>
           <div className="text-right">
-            <span className="text-2xl font-bold tracking-tight text-zinc-950 tabular-nums">
+            <span className="text-2xl font-bold tracking-tight text-red-600 tabular-nums">
               ₹{calculatedPrice.toLocaleString("en-IN")}
             </span>
           </div>
@@ -182,7 +183,7 @@ export default function PackageBuilder({ onBuildPackage }: PackageBuilderProps) 
 
         <button
           onClick={handleBuildNow}
-          className="w-full flex items-center justify-center gap-2 bg-zinc-900 hover:bg-zinc-800 text-white font-medium text-xs py-3 rounded-lg transition-colors"
+          className="w-full flex items-center justify-center gap-2 bg-red-600 hover:bg-red-700 text-white font-semibold text-xs py-3 rounded-lg transition-all shadow-sm shadow-red-600/25"
         >
           <span>Confirm Configuration</span>
           <ArrowRight className="h-3.5 w-3.5" />
