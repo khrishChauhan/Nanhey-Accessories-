@@ -134,34 +134,38 @@ export default function GSTQuotationModal({
     <div className="fixed inset-0 z-[100] overflow-y-auto bg-black/80 backdrop-blur-sm p-2 sm:p-4 flex items-start sm:items-center justify-center print:p-0 print:bg-white print:static print:overflow-visible">
       <div className="relative w-full max-w-4xl my-4 sm:my-auto rounded-2xl bg-white shadow-2xl overflow-hidden border border-zinc-200 print:border-none print:shadow-none print:max-w-full print:my-0">
         {/* Top Control Header (Hidden when printing) — sticky */}
-        <div className="sticky top-0 z-10 bg-[#090D14] text-white px-6 py-4 flex items-center justify-between border-b border-white/10 rounded-t-2xl print:hidden">
-          <div className="flex items-center gap-2">
-            <FileText className="h-5 w-5 text-brand-red" />
-            <h3 className="font-bold text-sm sm:text-base">
-              GST Proforma Invoice & Official Quotation Generator
+        <div className="sticky top-0 z-10 bg-[#090D14] text-white px-4 sm:px-6 py-3 sm:py-4 flex items-center justify-between border-b border-white/10 rounded-t-2xl print:hidden gap-2">
+          {/* Responsive Title */}
+          <div className="flex items-center gap-2 min-w-0">
+            <FileText className="h-4 w-4 sm:h-5 sm:w-5 text-red-500 shrink-0" />
+            <h3 className="font-bold text-xs sm:text-base truncate">
+              <span className="sm:hidden">GST Quotation</span>
+              <span className="hidden sm:inline">GST Proforma Invoice & Quotation</span>
             </h3>
           </div>
 
-          <div className="flex items-center gap-2">
+          {/* Actions */}
+          <div className="flex items-center gap-1.5 sm:gap-2 shrink-0">
             <button
               onClick={handlePrint}
-              className="flex items-center gap-1.5 bg-brand-red hover:bg-brand-red-600 text-white text-xs font-bold px-3 py-1.5 rounded-lg transition-colors shadow-sm"
+              className="flex items-center gap-1 sm:gap-1.5 bg-red-600 hover:bg-red-700 text-white text-[11px] sm:text-xs font-semibold px-2.5 sm:px-3 py-1.5 rounded-lg transition-colors shadow-sm"
             >
-              <Printer className="h-4 w-4" />
-              <span>Print / Save PDF</span>
+              <Printer className="h-3.5 w-3.5" />
+              <span className="hidden sm:inline">Print / Save PDF</span>
+              <span className="sm:hidden">Print</span>
             </button>
 
             <button
               onClick={handleShareWhatsApp}
-              className="hidden sm:flex items-center gap-1.5 bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-bold px-3 py-1.5 rounded-lg transition-colors shadow-sm"
+              className="hidden md:flex items-center gap-1.5 bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-semibold px-3 py-1.5 rounded-lg transition-colors shadow-sm"
             >
-              <Share2 className="h-4 w-4" />
-              <span>Share via WhatsApp</span>
+              <Share2 className="h-3.5 w-3.5" />
+              <span>WhatsApp</span>
             </button>
 
             <button
               onClick={onClose}
-              className="rounded-lg p-1.5 text-slate-400 hover:bg-slate-800 hover:text-white transition-colors ml-2"
+              className="rounded-lg p-1 text-zinc-400 hover:bg-zinc-800 hover:text-white transition-colors"
               aria-label="Close"
             >
               <X className="h-5 w-5" />
@@ -177,7 +181,7 @@ export default function GSTQuotationModal({
           <p className="font-bold text-slate-700 mb-2 uppercase tracking-wider text-[11px]">
             Quotation Recipient Details (Customize on the fly):
           </p>
-          <div className="grid grid-cols-1 sm:grid-cols-4 gap-2">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-2">
             <input
               type="text"
               placeholder="Company / Firm Name"
