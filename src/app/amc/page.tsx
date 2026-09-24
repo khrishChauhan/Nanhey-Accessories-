@@ -133,11 +133,28 @@ export default function AMCPage() {
           <p className="text-sm sm:text-base text-slate-300 max-w-2xl mx-auto">
             Ensure your surveillance never fails when you need it most. Preventive maintenance, zero-labour repairs, and rapid emergency response across Begusarai and Bihar.
           </p>
+
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-3 pt-4 max-w-md mx-auto">
+            <a
+              href="#amc-plans"
+              className="w-full sm:w-auto inline-flex items-center justify-center gap-2 bg-red-600 hover:bg-red-700 text-white font-semibold text-xs px-6 py-3 rounded-lg transition-all shadow-md shadow-red-600/25"
+            >
+              <span>View AMC Plans</span>
+              <ArrowRight className="h-3.5 w-3.5" />
+            </a>
+            <a
+              href="tel:+919065224224"
+              className="w-full sm:w-auto inline-flex items-center justify-center gap-2 border border-zinc-700 hover:border-zinc-500 text-zinc-300 hover:text-white text-xs font-medium px-5 py-3 rounded-lg transition-colors"
+            >
+              <Phone className="h-3.5 w-3.5 text-red-500" />
+              <span>Call Expert: 9065224224</span>
+            </a>
+          </div>
         </div>
       </section>
 
       {/* Plans Comparison */}
-      <section className="py-14 px-4 max-w-7xl mx-auto w-full">
+      <section id="amc-plans" className="py-14 px-4 max-w-7xl mx-auto w-full">
         <div className="text-center max-w-3xl mx-auto mb-10">
           <h2 className="text-2xl sm:text-3xl font-black text-slate-900">
             Choose Your Maintenance Plan
@@ -199,13 +216,13 @@ export default function AMCPage() {
                     const el = document.getElementById("amc-form");
                     if (el) el.scrollIntoView({ behavior: "smooth" });
                   }}
-                  className={`w-full py-3 rounded-xl text-xs font-bold uppercase tracking-wider transition-all shadow-md ${
+                  className={`w-full py-3 px-4 rounded-xl text-xs sm:text-sm font-bold tracking-wide transition-all shadow-sm flex items-center justify-center text-center ${
                     plan.popular
-                      ? "bg-brand-red text-white hover:bg-brand-red-600 shadow-brand-red/25"
-                      : "bg-slate-900 text-white hover:bg-slate-800"
+                      ? "bg-red-600 text-white hover:bg-red-700 shadow-red-600/25"
+                      : "bg-zinc-900 text-white hover:bg-zinc-800"
                   }`}
                 >
-                  Choose {plan.name}
+                  Select {plan.name}
                 </button>
               </div>
             </div>
@@ -348,11 +365,11 @@ export default function AMCPage() {
 
               <button
                 type="submit"
-                className="w-full flex items-center justify-center gap-2 bg-brand-red hover:bg-brand-red-600 text-white font-black text-xs uppercase tracking-wider py-3.5 rounded-xl shadow-lg shadow-brand-red/30 transition-all active:scale-[0.99]"
+                className="w-full flex items-center justify-center gap-2 bg-red-600 hover:bg-red-700 text-white font-bold text-xs sm:text-sm py-3.5 px-4 rounded-xl shadow-md shadow-red-600/25 transition-all active:scale-[0.99]"
               >
-                <ShieldCheck className="h-4 w-4" />
-                <span>Submit AMC Proposal Request</span>
-                <ArrowRight className="h-4 w-4" />
+                <ShieldCheck className="h-4 w-4 shrink-0" />
+                <span className="truncate">Submit AMC Proposal Request</span>
+                <ArrowRight className="h-4 w-4 shrink-0" />
               </button>
             </form>
           )}
