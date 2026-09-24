@@ -155,31 +155,21 @@ export default function MainHeader({
           </div>
 
           {/* 4. Elegant Consolidated Action Cluster with Red Accents */}
-          <div className="flex items-center gap-1 sm:gap-2 shrink-0">
-            {/* Mobile Search Toggle */}
-            <button
-              onClick={() => setMobileSearchOpen(!mobileSearchOpen)}
-              className="md:hidden p-2 rounded-full text-zinc-600 hover:text-red-600 hover:bg-red-50/50 transition-colors"
-              title="Search"
-              aria-label="Search"
-            >
-              <Search className="h-4 w-4" />
-            </button>
-
-            {/* Account Icon */}
+          <div className="flex items-center gap-1.5 sm:gap-2 shrink-0">
+            {/* Account Icon (Hidden on mobile, accessible via drawer) */}
             <button
               onClick={onOpenAccount}
-              className="p-2 rounded-full text-zinc-600 hover:text-red-600 hover:bg-red-50/50 transition-colors"
+              className="hidden sm:flex p-2 rounded-full text-zinc-600 hover:text-red-600 hover:bg-red-50/50 transition-colors"
               title="My Account"
               aria-label="My Account"
             >
               <User className="h-4 w-4" />
             </button>
 
-            {/* Wishlist Icon */}
+            {/* Wishlist Icon (Hidden on mobile, accessible via drawer) */}
             <button
               onClick={handleOpenWishlist}
-              className="p-2 rounded-full text-zinc-600 hover:text-red-600 hover:bg-red-50/50 transition-colors relative"
+              className="hidden sm:flex p-2 rounded-full text-zinc-600 hover:text-red-600 hover:bg-red-50/50 transition-colors relative"
               title="Wishlist"
               aria-label="Wishlist"
             >
@@ -189,21 +179,21 @@ export default function MainHeader({
               )}
             </button>
 
-            {/* Cart Delicate Bordered Pill */}
+            {/* Cart Delicate Bordered Pill: icon-only on mobile, full price pill on sm+ */}
             <button
               onClick={openCart}
-              className="border border-zinc-200 hover:border-red-300 hover:bg-red-50/20 rounded-full px-2.5 sm:px-3 py-1.5 flex items-center gap-1.5 sm:gap-2 transition-all shadow-2xs group"
+              className="border border-zinc-200 hover:border-red-300 hover:bg-red-50/20 rounded-full px-2.5 py-1.5 sm:px-3 sm:py-1.5 flex items-center gap-1.5 sm:gap-2 transition-all shadow-2xs group shrink-0"
               aria-label="Shopping Cart"
             >
-              <div className="relative flex items-center">
-                <ShoppingCart className="h-3.5 w-3.5 text-zinc-700 group-hover:text-red-600 transition-colors" />
+              <div className="relative flex items-center justify-center">
+                <ShoppingCart className="h-4 w-4 sm:h-3.5 sm:w-3.5 text-zinc-700 group-hover:text-red-600 transition-colors" />
                 {cartCount > 0 && (
                   <span className="absolute -top-1.5 -right-2 flex h-3.5 min-w-3.5 px-1 items-center justify-center rounded-full bg-red-600 text-[8px] font-bold text-white leading-none">
                     {cartCount}
                   </span>
                 )}
               </div>
-              <span className="tabular-nums text-xs font-semibold text-zinc-800 group-hover:text-red-600 transition-colors">
+              <span className="hidden sm:inline tabular-nums text-xs font-semibold text-zinc-800 group-hover:text-red-600 transition-colors">
                 {cartTotalFormatted}
               </span>
             </button>
@@ -211,7 +201,7 @@ export default function MainHeader({
             {/* Single Primary CTA: Red Precision Installation Pill */}
             <button
               onClick={onRequestInstallation}
-              className="hidden sm:inline-flex items-center gap-1.5 bg-red-600 hover:bg-red-700 text-white text-xs font-semibold px-4 py-2 rounded-full transition-all shadow-xs shadow-red-600/25 shrink-0"
+              className="hidden md:inline-flex items-center gap-1.5 bg-red-600 hover:bg-red-700 text-white text-xs font-semibold px-4 py-2 rounded-full transition-all shadow-xs shadow-red-600/25 shrink-0"
             >
               <Wrench className="h-3.5 w-3.5" />
               <span>Request Installation</span>
@@ -228,35 +218,6 @@ export default function MainHeader({
           </div>
         </div>
       </div>
-
-      {/* Collapsible Mobile Search Row */}
-      {mobileSearchOpen && (
-        <div className="md:hidden border-t border-zinc-100 bg-white/95 px-4 py-2.5 animate-in slide-in-from-top-2 duration-150">
-          <form
-            onSubmit={(e) => {
-              handleSearch(e);
-              setMobileSearchOpen(false);
-            }}
-            className="flex items-center bg-zinc-100/90 border border-zinc-200 focus-within:border-red-400 focus-within:bg-white rounded-full px-3 py-1.5 text-xs"
-          >
-            <input
-              type="text"
-              value={searchQuery}
-              onChange={(e) => setSearchQuery(e.target.value)}
-              placeholder="Search cameras, DVR, NVR, WiFi..."
-              className="w-full bg-transparent px-2 text-xs text-zinc-800 placeholder:text-zinc-400 focus:outline-none"
-              autoFocus
-            />
-            <button
-              type="submit"
-              className="p-1 text-zinc-500 hover:text-red-600 transition-colors"
-              aria-label="Search"
-            >
-              <Search className="h-3.5 w-3.5" />
-            </button>
-          </form>
-        </div>
-      )}
 
       {/* Mobile Drawer & Sticky Responsive Overlay */}
       {mobileMenuOpen && (
