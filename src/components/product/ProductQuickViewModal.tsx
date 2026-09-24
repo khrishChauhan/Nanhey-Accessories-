@@ -62,17 +62,17 @@ export default function ProductQuickViewModal() {
 
   const modalContent = (
     <div
-      className="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-black/75 backdrop-blur-sm overflow-y-auto animate-in fade-in duration-200"
+      className="fixed inset-0 z-[100] overflow-y-auto bg-black/80 backdrop-blur-sm p-3 sm:p-6 flex items-start sm:items-center justify-center animate-in fade-in duration-200"
       onClick={(e) => {
         if (e.target === e.currentTarget) closeQuickView();
       }}
     >
       <div
-        className="relative w-full max-w-2xl bg-white rounded-2xl shadow-2xl overflow-hidden border border-zinc-200 my-auto"
+        className="relative w-full max-w-2xl my-4 sm:my-auto bg-white rounded-2xl shadow-2xl overflow-hidden border border-zinc-200"
         onClick={(e) => e.stopPropagation()}
       >
-        {/* Header - Obsidian Onyx Styling */}
-        <div className="bg-[#090D14] px-6 py-4 text-white flex items-center justify-between border-b border-white/10">
+        {/* Header - Obsidian Onyx Styling — sticky */}
+        <div className="sticky top-0 z-10 bg-[#090D14] px-6 py-4 text-white flex items-center justify-between border-b border-white/10 rounded-t-2xl">
           <div className="flex items-center gap-2.5">
             <span className="text-[10px] font-bold uppercase tracking-wider bg-brand-ruby px-2.5 py-0.5 rounded-full text-white shadow-ruby">
               {product.brand}
@@ -93,7 +93,7 @@ export default function ProductQuickViewModal() {
         </div>
 
         {/* Modal Body */}
-        <div className="p-6 max-h-[80vh] overflow-y-auto space-y-5">
+        <div className="overflow-y-auto max-h-[70vh] sm:max-h-[80vh] p-6 space-y-5">
           <div className="grid grid-cols-1 md:grid-cols-12 gap-6 items-start">
             {/* Left Graphic & Trust (5 cols) */}
             <div className="md:col-span-5 space-y-3">

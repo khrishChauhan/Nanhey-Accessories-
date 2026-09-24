@@ -60,17 +60,17 @@ export default function InstallationModal({
 
   const modalContent = (
     <div
-      className="fixed inset-0 z-[100] flex items-center justify-center bg-black/75 p-4 backdrop-blur-sm overflow-y-auto animate-in fade-in"
+      className="fixed inset-0 z-[100] overflow-y-auto bg-black/80 backdrop-blur-sm p-3 sm:p-6 flex items-start sm:items-center justify-center animate-in fade-in"
       onClick={(e) => {
         if (e.target === e.currentTarget) onClose();
       }}
     >
       <div
-        className="relative w-full max-w-lg rounded-2xl bg-white shadow-2xl overflow-hidden border border-zinc-200 my-auto"
+        className="relative w-full max-w-lg my-4 sm:my-auto rounded-2xl bg-white shadow-2xl overflow-hidden border border-zinc-200"
         onClick={(e) => e.stopPropagation()}
       >
-        {/* Header */}
-        <div className="bg-zinc-950 px-6 py-4 text-white flex items-center justify-between border-b border-zinc-800">
+        {/* Header — sticky */}
+        <div className="sticky top-0 z-10 bg-zinc-950 px-6 py-4 text-white flex items-center justify-between border-b border-zinc-800 rounded-t-2xl">
           <div className="flex items-center gap-3">
             <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-red-600 text-white shadow-md">
               <Wrench className="h-5 w-5" />
@@ -89,8 +89,8 @@ export default function InstallationModal({
           </button>
         </div>
 
-        {/* Content */}
-        <div className="p-6 max-h-[80vh] overflow-y-auto">
+        {/* Content — scrollable body */}
+        <div className="overflow-y-auto max-h-[70vh] sm:max-h-[80vh] p-6">
           {submitted ? (
             <div className="py-8 text-center space-y-4">
               <div className="mx-auto flex h-16 w-16 items-center justify-center rounded-full bg-emerald-100 text-emerald-600">

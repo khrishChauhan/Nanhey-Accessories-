@@ -83,17 +83,17 @@ export default function AuthModal({
 
   const modalContent = (
     <div
-      className="fixed inset-0 z-[100] flex items-center justify-center bg-black/75 p-4 backdrop-blur-sm overflow-y-auto animate-in fade-in"
+      className="fixed inset-0 z-[100] overflow-y-auto bg-black/80 backdrop-blur-sm p-3 sm:p-6 flex items-start sm:items-center justify-center animate-in fade-in"
       onClick={(e) => {
         if (e.target === e.currentTarget) onClose();
       }}
     >
       <div
-        className="relative w-full max-w-md rounded-2xl bg-white shadow-2xl overflow-hidden border border-zinc-200 my-auto"
+        className="relative w-full max-w-md my-4 sm:my-auto rounded-2xl bg-white shadow-2xl overflow-hidden border border-zinc-200"
         onClick={(e) => e.stopPropagation()}
       >
-        {/* Header - Obsidian Styling */}
-        <div className="bg-zinc-950 px-6 py-4 text-white flex items-center justify-between border-b border-zinc-800">
+        {/* Header - Obsidian Styling — sticky so it never scrolls away */}
+        <div className="sticky top-0 z-10 bg-zinc-950 px-6 py-4 text-white flex items-center justify-between border-b border-zinc-800 rounded-t-2xl">
           <div className="flex items-center gap-2.5">
             <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-red-600 text-white shadow-xs">
               <User className="h-5 w-5" />
@@ -156,8 +156,8 @@ export default function AuthModal({
           </div>
         )}
 
-        {/* Content Body */}
-        <div className="p-6">
+        {/* Content Body — scrollable */}
+        <div className="overflow-y-auto max-h-[65vh] sm:max-h-[75vh] p-6">
           {/* ================= STATE 1: CUSTOMER LOGGED IN ================= */}
           {isCustomerLoggedIn && (
             <div className="space-y-4">

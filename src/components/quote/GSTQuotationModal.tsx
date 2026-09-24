@@ -1,6 +1,7 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import { createPortal } from "react-dom";
 import {
   X,
   Printer,
@@ -26,6 +27,7 @@ export default function GSTQuotationModal({
   onClose,
 }: GSTQuotationModalProps) {
   const { cart, cartTotal, cartTotalFormatted } = useShop();
+  const [mounted, setMounted] = useState(false);
 
   const [customerName, setCustomerName] = useState("B2B Enterprise Client");
   const [companyName, setCompanyName] = useState("M/s ABC Enterprises");
@@ -34,7 +36,11 @@ export default function GSTQuotationModal({
   const [quotationNo] = useState(() => `NA-QT-2026-${Math.floor(1000 + Math.random() * 9000)}`);
   const [quotationDate] = useState(() => new Date().toLocaleDateString("en-IN", { day: "2-digit", month: "short", year: "numeric" }));
 
-  if (!isOpen) return null;
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  if (!isOpen || !mounted) return null;
 
   // Fallback items if cart is empty
   const quoteItems = cart.length > 0 ? cart : [
@@ -124,11 +130,11 @@ export default function GSTQuotationModal({
     window.open(`https://wa.me/919065224224?text=${text}`, "_blank");
   };
 
-  return (
-    <div className="fixed inset-0 z-[100] flex items-center justify-center bg-black/75 p-2 sm:p-4 backdrop-blur-sm overflow-y-auto print:p-0 print:bg-white print:static">
-      <div className="relative w-full max-w-4xl rounded-2xl bg-white shadow-2xl overflow-hidden border border-zinc-200 my-auto print:border-none print:shadow-none print:max-w-full">
-        {/* Top Control Header (Hidden when printing) */}
-        <div className="bg-[#090D14] text-white px-6 py-4 flex items-center justify-between border-b border-white/10 print:hidden">
+  const modalContent = (
+    <div className="fixed inset-0 z-[100] overflow-y-auto bg-black/80 backdrop-blur-sm p-2 sm:p-4 flex items-start sm:items-center justify-center print:p-0 print:bg-white print:static print:overflow-visible">
+      <div className="relative w-full max-w-4xl my-4 sm:my-auto rounded-2xl bg-white shadow-2xl overflow-hidden border border-zinc-200 print:border-none print:shadow-none print:max-w-full print:my-0">
+        {/* Top Control Header (Hidden when printing) — sticky */}
+        <div className="sticky top-0 z-10 bg-[#090D14] text-white px-6 py-4 flex items-center justify-between border-b border-white/10 rounded-t-2xl print:hidden">
           <div className="flex items-center gap-2">
             <FileText className="h-5 w-5 text-brand-red" />
             <h3 className="font-bold text-sm sm:text-base">
@@ -163,6 +169,9 @@ export default function GSTQuotationModal({
           </div>
         </div>
 
+        {/* Scrollable Body — print expands fully */}
+        <div className="overflow-y-auto max-h-[70vh] sm:max-h-[82vh] print:max-h-none print:overflow-visible">
+
         {/* Customizable Metadata Drawer (Hidden when printing) */}
         <div className="p-4 bg-slate-50 border-b border-slate-200 print:hidden text-xs">
           <p className="font-bold text-slate-700 mb-2 uppercase tracking-wider text-[11px]">
@@ -174,28 +183,28 @@ export default function GSTQuotationModal({
               placeholder="Company / Firm Name"
               value={companyName}
               onChange={(e) => setCompanyName(e.target.value)}
-              className="rounded-lg border border-slate-200 px-2.5 py-1.5 bg-white text-xs"
+              className="rounded-lg border border-slate-200 px-2.5 py-1.5 bg-white text-base sm:text-xs"
             />
             <input
               type="text"
               placeholder="Contact Person Name"
               value={customerName}
               onChange={(e) => setCustomerName(e.target.value)}
-              className="rounded-lg border border-slate-200 px-2.5 py-1.5 bg-white text-xs"
+              className="rounded-lg border border-slate-200 px-2.5 py-1.5 bg-white text-base sm:text-xs"
             />
             <input
               type="text"
               placeholder="Recipient GSTIN (Optional)"
               value={customerGstin}
               onChange={(e) => setCustomerGstin(e.target.value)}
-              className="rounded-lg border border-slate-200 px-2.5 py-1.5 bg-white text-xs font-mono"
+              className="rounded-lg border border-slate-200 px-2.5 py-1.5 bg-white text-base sm:text-xs font-mono"
             />
             <input
               type="text"
               placeholder="Address / City"
               value={address}
               onChange={(e) => setAddress(e.target.value)}
-              className="rounded-lg border border-slate-200 px-2.5 py-1.5 bg-white text-xs"
+              className="rounded-lg border border-slate-200 px-2.5 py-1.5 bg-white text-base sm:text-xs"
             />
           </div>
         </div>
@@ -380,7 +389,11 @@ export default function GSTQuotationModal({
             </div>
           </div>
         </div>
+        {/* end scrollable body */}
+        </div>
       </div>
     </div>
   );
+
+  return typeof document !== "undefined" ? createPortal(modalContent, document.body) : null;
 }

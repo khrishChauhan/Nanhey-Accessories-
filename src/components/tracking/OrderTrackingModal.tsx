@@ -1,6 +1,7 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import { createPortal } from "react-dom";
 import {
   X,
   Package,
@@ -52,8 +53,13 @@ export default function OrderTrackingModal({
   });
 
   const [hasSearched, setHasSearched] = useState(true);
+  const [mounted, setMounted] = useState(false);
 
-  if (!isOpen) return null;
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  if (!isOpen || !mounted) return null;
 
   const handleSearch = (e: React.FormEvent) => {
     e.preventDefault();
@@ -89,11 +95,11 @@ export default function OrderTrackingModal({
     },
   ];
 
-  return (
-    <div className="fixed inset-0 z-[100] flex items-center justify-center bg-black/75 p-4 backdrop-blur-sm animate-in fade-in overflow-y-auto">
-      <div className="relative w-full max-w-xl rounded-2xl bg-white shadow-2xl overflow-hidden border border-zinc-200 my-auto">
-        {/* Header */}
-        <div className="bg-[#090D14] px-6 py-4 text-white flex items-center justify-between border-b border-white/10">
+  const modalContent = (
+    <div className="fixed inset-0 z-[100] overflow-y-auto bg-black/80 backdrop-blur-sm p-3 sm:p-6 flex items-start sm:items-center justify-center animate-in fade-in">
+      <div className="relative w-full max-w-xl my-4 sm:my-auto rounded-2xl bg-white shadow-2xl overflow-hidden border border-zinc-200">
+        {/* Header — sticky */}
+        <div className="sticky top-0 z-10 bg-[#090D14] px-6 py-4 text-white flex items-center justify-between border-b border-white/10 rounded-t-2xl">
           <div className="flex items-center gap-2.5">
             <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-brand-red text-white shadow-md">
               <Package className="h-5 w-5" />
@@ -117,8 +123,8 @@ export default function OrderTrackingModal({
           </button>
         </div>
 
-        {/* Content Body */}
-        <div className="p-6 space-y-5 max-h-[80vh] overflow-y-auto">
+        {/* Content Body — scrollable */}
+        <div className="overflow-y-auto max-h-[70vh] sm:max-h-[80vh] p-6 space-y-5">
           {/* Tracking Search Input */}
           <form onSubmit={handleSearch} className="flex gap-2">
             <div className="relative flex-1">
@@ -128,7 +134,7 @@ export default function OrderTrackingModal({
                 placeholder="Enter Order ID (e.g. NA-85421) or Mobile Number"
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
-                className="w-full pl-10 pr-3 py-2 rounded-xl border border-slate-200 text-xs font-semibold focus:border-brand-red focus:outline-none focus:ring-2 focus:ring-brand-red/20"
+                className="w-full pl-10 pr-3 py-2 rounded-xl border border-slate-200 text-base sm:text-xs font-semibold focus:border-brand-red focus:outline-none focus:ring-2 focus:ring-brand-red/20"
               />
             </div>
             <button
@@ -286,4 +292,6 @@ export default function OrderTrackingModal({
       </div>
     </div>
   );
+
+  return typeof document !== "undefined" ? createPortal(modalContent, document.body) : null;
 }
