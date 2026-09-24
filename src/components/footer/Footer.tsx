@@ -2,6 +2,7 @@
 
 import React, { useState } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import {
   MapPin,
   Phone,
@@ -57,20 +58,15 @@ export default function Footer({ onRequestInstallation }: FooterProps) {
         <div className="grid grid-cols-1 lg:grid-cols-5 gap-10 mb-12">
           {/* Column 1: Company Profile (lg:col-span-2) */}
           <div className="lg:col-span-2 space-y-4">
-            {/* Logo */}
-            <Link href="/" className="flex items-center gap-3">
-              <div className="flex h-9 w-9 items-center justify-center rounded bg-zinc-900 border border-zinc-800 text-white">
-                <Cctv className="h-4 w-4 stroke-[1.75]" />
-              </div>
-              <div>
-                <div className="flex items-baseline gap-1.5 font-bold tracking-tight text-white text-base">
-                  <span>NANHEY</span>
-                  <span className="font-light text-zinc-500">ACCESSORIES</span>
-                </div>
-                <p className="text-[10px] font-medium text-zinc-500 uppercase tracking-wider">
-                  CCTV & Surveillance Begusarai
-                </p>
-              </div>
+            {/* Official Logo */}
+            <Link href="/" className="inline-block py-1 group">
+              <Image
+                src="/images/logo.png"
+                alt="Nanhey Accessories – CCTV & Security Solutions Begusarai"
+                width={190}
+                height={52}
+                className="h-9 w-auto object-contain brightness-105 transition-transform group-hover:scale-[1.02]"
+              />
             </Link>
 
             <p className="text-zinc-400 leading-relaxed text-xs max-w-sm">

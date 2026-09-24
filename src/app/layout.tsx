@@ -44,6 +44,11 @@ export const metadata: Metadata = {
     "CCTV Installation AMC Services",
     "Security Camera Wholesale",
   ],
+  icons: {
+    icon: "/images/logo.png",
+    shortcut: "/images/logo.png",
+    apple: "/images/logo.png",
+  },
   authors: [{ name: "Nanhey Accessories", url: "https://nanheyaccessories.com" }],
   creator: "Nanhey Accessories",
   publisher: "Nanhey Accessories",
@@ -60,9 +65,9 @@ export const metadata: Metadata = {
     siteName: "Nanhey Accessories",
     images: [
       {
-        url: "/og-image.jpg",
+        url: "/images/logo.png",
         width: 1200,
-        height: 630,
+        height: 400,
         alt: "Nanhey Accessories CCTV Security Systems Begusarai",
       },
     ],
@@ -72,7 +77,7 @@ export const metadata: Metadata = {
     title: "Nanhey Accessories – CCTV & Security Solutions Begusarai",
     description:
       "Premier CCTV, Surveillance Systems, and Security Solutions provider in Begusarai, Bihar. Doorstep installation and genuine warranty.",
-    images: ["/og-image.jpg"],
+    images: ["/images/logo.png"],
   },
   robots: {
     index: true,
@@ -96,7 +101,8 @@ const localBusinessSchema = {
   "telephone": "+919065224224",
   "email": "info@nanheyaccessories.com",
   "priceRange": "₹₹",
-  "image": "https://nanheyaccessories.com/og-image.jpg",
+  "image": "https://nanheyaccessories.com/images/logo.png",
+  "logo": "https://nanheyaccessories.com/images/logo.png",
   "description":
     "Premier CCTV security cameras, surveillance systems, biometric attendance, DVR/NVR, and professional security installations in Begusarai and across Bihar.",
   "address": {
