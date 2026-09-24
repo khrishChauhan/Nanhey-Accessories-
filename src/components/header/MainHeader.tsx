@@ -1,6 +1,7 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import { createPortal } from "react-dom";
 import Link from "next/link";
 import {
   Search,
@@ -12,6 +13,8 @@ import {
   X,
   Wrench,
   ArrowRight,
+  Phone,
+  MessageCircle,
 } from "lucide-react";
 import { useShop } from "@/context/ShopContext";
 import { useLanguage } from "@/context/LanguageContext";
@@ -28,10 +31,25 @@ export default function MainHeader({
   const { cartCount, cartTotalFormatted, wishlistCount, openCart } = useShop();
   const { t } = useLanguage();
 
+  const [mounted, setMounted] = useState(false);
   const [selectedCategory, setSelectedCategory] = useState("All");
   const [searchQuery, setSearchQuery] = useState("");
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const [mobileSearchOpen, setMobileSearchOpen] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  useEffect(() => {
+    if (mobileMenuOpen) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "";
+    }
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, [mobileMenuOpen]);
 
   const handleSearch = (e: React.FormEvent) => {
     e.preventDefault();
@@ -219,132 +237,202 @@ export default function MainHeader({
         </div>
       </div>
 
-      {/* Mobile Drawer & Sticky Responsive Overlay */}
-      {mobileMenuOpen && (
-        <div className="fixed inset-0 z-50 xl:hidden">
-          {/* Backdrop Blur Overlay */}
-          <div
-            onClick={() => setMobileMenuOpen(false)}
-            className="fixed inset-0 bg-black/60 backdrop-blur-xs transition-opacity"
-          />
+      {/* Portalized Mobile Menu Drawer rendered directly into document.body */}
+      {mounted &&
+        mobileMenuOpen &&
+        typeof document !== "undefined" &&
+        createPortal(
+          <div className="fixed inset-0 z-[120] xl:hidden">
+            {/* Dark Backdrop Blur */}
+            <div
+              onClick={() => setMobileMenuOpen(false)}
+              className="fixed inset-0 bg-black/75 backdrop-blur-sm transition-opacity"
+            />
 
-          {/* Drawer Panel */}
-          <div className="fixed inset-y-0 right-0 w-full max-w-sm bg-white shadow-2xl flex flex-col justify-between p-5 z-10 overflow-y-auto animate-in slide-in-from-right duration-200">
-            {/* Drawer Top */}
-            <div>
-              <div className="flex items-center justify-between pb-4 border-b border-zinc-100">
-                {/* Logo in Drawer */}
-                <div className="flex items-center gap-2.5">
-                  <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-zinc-950 text-white shadow-xs">
-                    <svg
-                      className="w-4 h-4 text-red-500"
-                      viewBox="0 0 24 24"
-                      fill="none"
-                      stroke="currentColor"
-                      strokeWidth="2"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                    >
-                      <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
-                      <circle cx="12" cy="11" r="3" className="stroke-white" />
-                      <circle cx="12" cy="11" r="1" className="fill-red-500" />
-                    </svg>
-                  </div>
-                  <div className="flex flex-col">
-                    <div className="flex items-baseline gap-1 leading-none">
-                      <span className="font-black text-sm tracking-tight text-zinc-950">
-                        NANHEY
-                      </span>
-                      <span className="font-extrabold text-sm tracking-tight text-red-600">
-                        SECURITY
+            {/* Slide-out Drawer Panel */}
+            <div className="fixed inset-y-0 right-0 w-full max-w-xs sm:max-w-sm bg-white shadow-2xl flex flex-col justify-between p-5 z-10 overflow-y-auto animate-in slide-in-from-right duration-200">
+              {/* Drawer Top: Logo + Close Button */}
+              <div>
+                <div className="flex items-center justify-between pb-4 border-b border-zinc-100">
+                  {/* Logo in Drawer */}
+                  <div className="flex items-center gap-2.5">
+                    <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-zinc-950 text-white shadow-xs">
+                      <svg
+                        className="w-4 h-4 text-red-500"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        strokeWidth="2"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                      >
+                        <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
+                        <circle cx="12" cy="11" r="3" className="stroke-white" />
+                        <circle cx="12" cy="11" r="1" className="fill-red-500" />
+                      </svg>
+                    </div>
+                    <div className="flex flex-col">
+                      <div className="flex items-baseline gap-1 leading-none">
+                        <span className="font-black text-sm tracking-tight text-zinc-950">
+                          NANHEY
+                        </span>
+                        <span className="font-extrabold text-sm tracking-tight text-red-600">
+                          SECURITY
+                        </span>
+                      </div>
+                      <span className="text-[8px] tracking-[0.2em] font-medium text-zinc-400 uppercase mt-0.5">
+                        Begusarai
                       </span>
                     </div>
-                    <span className="text-[8px] tracking-[0.2em] font-medium text-zinc-400 uppercase mt-0.5">
-                      Begusarai
-                    </span>
+                  </div>
+
+                  {/* Close Button */}
+                  <button
+                    onClick={() => setMobileMenuOpen(false)}
+                    className="p-1.5 rounded-full text-zinc-500 hover:text-zinc-900 hover:bg-zinc-100 transition-colors"
+                    aria-label="Close menu"
+                  >
+                    <X className="h-5 w-5" />
+                  </button>
+                </div>
+
+                {/* Drawer Body: Search Bar */}
+                <div className="mt-4">
+                  <form
+                    onSubmit={(e) => {
+                      handleSearch(e);
+                      setMobileMenuOpen(false);
+                    }}
+                    className="flex items-center bg-zinc-100/90 border border-zinc-200 focus-within:border-red-400 focus-within:bg-white rounded-full px-3 py-1.5 text-xs"
+                  >
+                    <input
+                      type="text"
+                      value={searchQuery}
+                      onChange={(e) => setSearchQuery(e.target.value)}
+                      placeholder="Search cameras, DVR, NVR..."
+                      className="w-full bg-transparent px-2 text-xs text-zinc-800 placeholder:text-zinc-400 focus:outline-none"
+                    />
+                    <button
+                      type="submit"
+                      className="p-1 text-zinc-500 hover:text-red-600 transition-colors"
+                      aria-label="Search"
+                    >
+                      <Search className="h-3.5 w-3.5" />
+                    </button>
+                  </form>
+                </div>
+
+                {/* Quick Account & Wishlist Actions */}
+                <div className="mt-3 grid grid-cols-2 gap-2">
+                  <button
+                    onClick={() => {
+                      setMobileMenuOpen(false);
+                      if (onOpenAccount) onOpenAccount();
+                    }}
+                    className="flex items-center gap-2 p-2.5 rounded-xl bg-zinc-50 border border-zinc-200/80 hover:bg-red-50/30 text-xs font-semibold text-zinc-800 transition-colors text-left"
+                  >
+                    <User className="h-4 w-4 text-red-600 shrink-0" />
+                    <span className="truncate">My Account</span>
+                  </button>
+
+                  <button
+                    onClick={() => {
+                      setMobileMenuOpen(false);
+                      handleOpenWishlist();
+                    }}
+                    className="flex items-center gap-2 p-2.5 rounded-xl bg-zinc-50 border border-zinc-200/80 hover:bg-red-50/30 text-xs font-semibold text-zinc-800 transition-colors text-left relative"
+                  >
+                    <Heart className="h-4 w-4 text-red-600 shrink-0" />
+                    <span className="truncate">Wishlist</span>
+                    {wishlistCount > 0 && (
+                      <span className="ml-auto bg-red-600 text-white text-[9px] font-bold px-1.5 py-0.5 rounded-full leading-none">
+                        {wishlistCount}
+                      </span>
+                    )}
+                  </button>
+                </div>
+
+                {/* Navigation Links in Drawer */}
+                <div className="mt-4 space-y-0.5">
+                  <div className="text-[10px] font-semibold text-zinc-400 uppercase tracking-wider px-3 mb-1.5">
+                    Navigation
+                  </div>
+                  {navLinks.map((link, idx) => (
+                    <Link
+                      key={idx}
+                      href={link.href}
+                      onClick={() => setMobileMenuOpen(false)}
+                      className="flex items-center justify-between px-3 py-2 rounded-lg text-xs font-medium text-zinc-700 hover:text-red-600 hover:bg-red-50/40 transition-colors"
+                    >
+                      <span>{link.label}</span>
+                      <ArrowRight className="h-3 w-3 text-zinc-400" />
+                    </Link>
+                  ))}
+                </div>
+
+                {/* Quick Services Section */}
+                <div className="mt-4 pt-3 border-t border-zinc-100">
+                  <div className="text-[10px] font-semibold text-zinc-400 uppercase tracking-wider px-3 mb-1.5">
+                    Direct Services
+                  </div>
+                  <div className="grid grid-cols-2 gap-2">
+                    <Link
+                      href="/installation"
+                      onClick={() => setMobileMenuOpen(false)}
+                      className="flex flex-col p-2 rounded-lg bg-zinc-50 border border-zinc-200/70 hover:border-red-300 hover:bg-red-50/20 transition-colors text-xs"
+                    >
+                      <span className="font-semibold text-zinc-900 text-[11px]">Doorstep Setup</span>
+                      <span className="text-[9px] text-zinc-500 mt-0.5">Certified Engineers</span>
+                    </Link>
+                    <Link
+                      href="/amc"
+                      onClick={() => setMobileMenuOpen(false)}
+                      className="flex flex-col p-2 rounded-lg bg-zinc-50 border border-zinc-200/70 hover:border-red-300 hover:bg-red-50/20 transition-colors text-xs"
+                    >
+                      <span className="font-semibold text-zinc-900 text-[11px]">AMC Contracts</span>
+                      <span className="text-[9px] text-zinc-500 mt-0.5">Annual Maintenance</span>
+                    </Link>
                   </div>
                 </div>
+              </div>
 
-                {/* Close Button */}
+              {/* Drawer Bottom Actions & Contacts */}
+              <div className="pt-4 border-t border-zinc-100 space-y-2.5">
                 <button
-                  onClick={() => setMobileMenuOpen(false)}
-                  className="p-1.5 rounded-full text-zinc-500 hover:text-zinc-900 hover:bg-zinc-100 transition-colors"
-                  aria-label="Close menu"
+                  onClick={() => {
+                    setMobileMenuOpen(false);
+                    if (onRequestInstallation) onRequestInstallation();
+                  }}
+                  className="w-full bg-red-600 hover:bg-red-700 text-white font-semibold py-2.5 rounded-full flex items-center justify-center gap-2 text-xs shadow-xs shadow-red-600/25 transition-all"
                 >
-                  <X className="h-5 w-5" />
+                  <Wrench className="h-3.5 w-3.5" />
+                  <span>Request Installation</span>
                 </button>
-              </div>
 
-              {/* Navigation Links in Drawer */}
-              <div className="mt-5 space-y-1">
-                <div className="text-[10px] font-semibold text-zinc-400 uppercase tracking-wider px-3 mb-2">
-                  Navigation
-                </div>
-                {navLinks.map((link, idx) => (
-                  <Link
-                    key={idx}
-                    href={link.href}
-                    onClick={() => setMobileMenuOpen(false)}
-                    className="flex items-center justify-between px-3 py-2.5 rounded-lg text-sm font-medium text-zinc-700 hover:text-red-600 hover:bg-red-50/40 transition-colors"
+                <div className="grid grid-cols-2 gap-2 pt-0.5">
+                  <a
+                    href="tel:+919065224224"
+                    className="flex items-center justify-center gap-1.5 py-2 px-2.5 rounded-lg border border-zinc-200 bg-zinc-50 text-[11px] font-semibold text-zinc-700 hover:bg-zinc-100 transition-colors"
                   >
-                    <span>{link.label}</span>
-                    <ArrowRight className="h-3.5 w-3.5 text-zinc-400" />
-                  </Link>
-                ))}
-              </div>
+                    <Phone className="h-3.5 w-3.5 text-red-500" />
+                    <span>Call Us</span>
+                  </a>
 
-              {/* Quick Services Section */}
-              <div className="mt-5 pt-4 border-t border-zinc-100">
-                <div className="text-[10px] font-semibold text-zinc-400 uppercase tracking-wider px-3 mb-2">
-                  Direct Services
-                </div>
-                <div className="grid grid-cols-2 gap-2">
-                  <Link
-                    href="/installation"
-                    onClick={() => setMobileMenuOpen(false)}
-                    className="flex flex-col p-2.5 rounded-lg bg-zinc-50 border border-zinc-200/70 hover:border-red-300 hover:bg-red-50/20 transition-colors text-xs"
+                  <a
+                    href="https://wa.me/919065224224?text=Hi%20Nanhey%20Accessories,%20I%20am%20interested%20in%20CCTV%20cameras."
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex items-center justify-center gap-1.5 py-2 px-2.5 rounded-lg border border-emerald-200 bg-emerald-50 text-[11px] font-semibold text-emerald-800 hover:bg-emerald-100 transition-colors"
                   >
-                    <span className="font-semibold text-zinc-900">Doorstep Setup</span>
-                    <span className="text-[10px] text-zinc-500 mt-0.5">Certified Engineers</span>
-                  </Link>
-                  <Link
-                    href="/amc"
-                    onClick={() => setMobileMenuOpen(false)}
-                    className="flex flex-col p-2.5 rounded-lg bg-zinc-50 border border-zinc-200/70 hover:border-red-300 hover:bg-red-50/20 transition-colors text-xs"
-                  >
-                    <span className="font-semibold text-zinc-900">AMC Contracts</span>
-                    <span className="text-[10px] text-zinc-500 mt-0.5">Annual Maintenance</span>
-                  </Link>
+                    <MessageCircle className="h-3.5 w-3.5 text-emerald-600" />
+                    <span>WhatsApp</span>
+                  </a>
                 </div>
               </div>
             </div>
-
-            {/* Drawer Bottom Actions & Contacts */}
-            <div className="pt-4 border-t border-zinc-100 space-y-3">
-              <button
-                onClick={() => {
-                  setMobileMenuOpen(false);
-                  if (onRequestInstallation) onRequestInstallation();
-                }}
-                className="w-full bg-red-600 hover:bg-red-700 text-white font-semibold py-2.5 rounded-full flex items-center justify-center gap-2 text-xs shadow-xs shadow-red-600/25 transition-all"
-              >
-                <Wrench className="h-3.5 w-3.5" />
-                <span>Request Installation</span>
-              </button>
-
-              <div className="flex items-center justify-between text-[11px] text-zinc-500 px-1 pt-1">
-                <a
-                  href="tel:+919065224224"
-                  className="text-zinc-700 hover:text-red-600 font-medium"
-                >
-                  +91 9065224224
-                </a>
-                <span>Begusarai, Bihar</span>
-              </div>
-            </div>
-          </div>
-        </div>
-      )}
+          </div>,
+          document.body
+        )}
     </div>
   );
 }
