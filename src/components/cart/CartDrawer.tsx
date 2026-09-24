@@ -80,7 +80,7 @@ export default function CartDrawer({ onRequestGSTQuotation }: CartDrawerProps) {
         className="absolute inset-0 bg-[#090D14]/70 backdrop-blur-md transition-opacity"
       />
 
-      <div className="fixed inset-y-0 right-0 max-w-full flex pl-6 sm:pl-10">
+      <div className="fixed inset-y-0 right-0 max-w-full flex pl-0 sm:pl-10">
         <div className="w-screen max-w-md bg-white shadow-2xl flex flex-col border-l border-slate-200">
           {/* Header - Obsidian Onyx Styling */}
           <div className="bg-[#090D14] text-white px-5 py-4 flex items-center justify-between border-b border-white/10">
