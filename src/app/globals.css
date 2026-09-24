@@ -84,3 +84,19 @@ h1, h2, h3, h4, h5, h6 {
   border-color: #a1a1aa;
   box-shadow: 0 2px 8px -2px rgba(0, 0, 0, 0.06);
 }
+
+/* Mobile bottom padding — prevents content being hidden behind fixed MobileBottomBar */
+@media (max-width: 768px) {
+  .mobile-content-wrapper {
+    padding-bottom: calc(64px + env(safe-area-inset-bottom));
+  }
+}
+
+/* iOS input zoom prevention — force ≥16px so Safari doesn't zoom in */
+@media (max-width: 768px) {
+  input:not([type="range"]),
+  select,
+  textarea {
+    font-size: max(16px, 1em) !important;
+  }
+}

@@ -43,7 +43,7 @@ export default function HomePage() {
   };
 
   return (
-    <main className="min-h-screen bg-slate-50 flex flex-col antialiased">
+    <main className="min-h-screen bg-slate-50 flex flex-col antialiased mobile-content-wrapper">
       {/* 1. Global Navigation Header (Dynamic Cart & Wishlist via ShopContext) */}
       <Header />
 

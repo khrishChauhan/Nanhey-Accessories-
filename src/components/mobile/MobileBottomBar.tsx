@@ -21,8 +21,11 @@ export default function MobileBottomBar({
   const { cartCount, openCart } = useShop();
 
   return (
-    <div className="fixed bottom-0 left-0 right-0 z-40 bg-white/95 backdrop-blur-md border-t border-zinc-200 py-1.5 px-3 md:hidden">
-      <div className="grid grid-cols-5 gap-1 items-center text-center">
+    <div
+      className="fixed bottom-0 left-0 right-0 z-40 bg-white/95 backdrop-blur-md border-t border-zinc-200 md:hidden"
+      style={{ paddingBottom: "env(safe-area-inset-bottom)" }}
+    >
+      <div className="grid grid-cols-5 gap-1 items-center text-center px-2 py-1.5">
         {/* Home */}
         <Link
           href="/"
