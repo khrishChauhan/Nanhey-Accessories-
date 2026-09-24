@@ -139,14 +139,14 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" className={`scroll-smooth ${plusJakarta.variable} ${inter.variable}`}>
+    <html lang="en" className={`scroll-smooth overflow-x-hidden max-w-full w-full ${plusJakarta.variable} ${inter.variable}`}>
       <head>
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(localBusinessSchema) }}
         />
       </head>
-      <body className="min-h-screen bg-white text-zinc-900 font-sans antialiased selection:bg-zinc-900 selection:text-white">
+      <body className="min-h-screen bg-white text-zinc-900 font-sans antialiased selection:bg-zinc-900 selection:text-white overflow-x-hidden max-w-full w-full relative">
         <AppProviders>{children}</AppProviders>
       </body>
     </html>

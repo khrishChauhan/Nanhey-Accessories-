@@ -53,7 +53,7 @@ export default function ContactPage() {
   };
 
   return (
-    <main className="min-h-screen bg-slate-50 flex flex-col antialiased mobile-content-wrapper">
+    <main className="min-h-screen bg-slate-50 flex flex-col antialiased mobile-content-wrapper w-full max-w-full overflow-x-hidden">
       <Header />
 
       {/* Hero Header */}
