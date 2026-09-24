@@ -58,14 +58,14 @@ export default function Footer({ onRequestInstallation }: FooterProps) {
         <div className="grid grid-cols-1 lg:grid-cols-5 gap-10 mb-12">
           {/* Column 1: Company Profile (lg:col-span-2) */}
           <div className="lg:col-span-2 space-y-4">
-            {/* Official Logo */}
-            <Link href="/" className="inline-block py-1 group">
+            {/* Authorized Regional Distributor Badge Logo */}
+            <Link href="/" className="inline-block mb-1 group">
               <Image
-                src="/images/logo.png"
-                alt="Nanhey Accessories – CCTV & Security Solutions Begusarai"
-                width={190}
-                height={52}
-                className="h-9 w-auto object-contain brightness-105 transition-transform group-hover:scale-[1.02]"
+                src="/images/logo-footer.png"
+                alt="Nanhey Accessories - Authorized Regional Distributor CP Plus Begusarai"
+                width={240}
+                height={75}
+                className="h-12 sm:h-14 w-auto object-contain transition-transform group-hover:scale-[1.02]"
               />
             </Link>
 
