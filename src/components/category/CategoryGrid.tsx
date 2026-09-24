@@ -102,7 +102,7 @@ export default function CategoryGrid({ onSelectCategory }: CategoryGridProps) {
           <a
             href="#catalog"
             onClick={(e) => handleCategoryClick(e, "all")}
-            className="group flex flex-col justify-between p-4 rounded-lg bg-zinc-900 hover:bg-zinc-800 text-white transition-colors cursor-pointer"
+            className="col-span-2 sm:col-span-1 group flex flex-col justify-between p-4 rounded-lg bg-zinc-900 hover:bg-zinc-800 text-white transition-colors cursor-pointer"
           >
             <div className="flex items-center justify-between mb-6">
               <span className="text-[10px] font-semibold text-zinc-400 uppercase tracking-wider">

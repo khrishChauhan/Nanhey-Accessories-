@@ -50,7 +50,7 @@ export default function BestSellingProducts() {
   };
 
   return (
-    <div id="bestsellers" className="flex flex-col h-full space-y-4">
+    <div id="bestsellers" className="w-full flex flex-col h-full space-y-4">
       {/* Section Title */}
       <div className="flex items-baseline justify-between pb-2 border-b border-zinc-200/80">
         <div>
@@ -67,7 +67,7 @@ export default function BestSellingProducts() {
       </div>
 
       {/* Product List */}
-      <div className="space-y-2.5 flex-1 overflow-y-auto pr-1">
+      <div className="space-y-2.5 flex-1 w-full overflow-y-auto pr-1">
         {bestSellers.map((product) => {
           const Icon = getProductIcon(product.category);
           const isAdded = addedId === product.id;
@@ -77,7 +77,7 @@ export default function BestSellingProducts() {
             <div
               key={product.id}
               onClick={() => openQuickView(product)}
-              className="group flex flex-col sm:flex-row items-center justify-between p-3 rounded-lg bg-white border border-zinc-200/70 hover:border-zinc-300 transition-colors gap-3 cursor-pointer"
+              className="w-full group flex flex-col sm:flex-row items-center justify-between p-3 rounded-lg bg-white border border-zinc-200/70 hover:border-zinc-300 transition-colors gap-3 cursor-pointer"
             >
               {/* Product Thumbnail / Icon */}
               <div className="flex-shrink-0 flex h-14 w-14 items-center justify-center rounded bg-zinc-50 text-zinc-600 border border-zinc-100 group-hover:bg-zinc-100/60 transition-colors">
