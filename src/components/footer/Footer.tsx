@@ -51,10 +51,10 @@ export default function Footer({ onRequestInstallation }: FooterProps) {
   ];
 
   return (
-    <footer id="about" className="bg-[#09090B] text-zinc-400 border-t border-zinc-800 pt-16 pb-20 sm:pb-12 text-xs">
+    <footer id="about" className="bg-[#09090B] text-zinc-400 border-t border-zinc-800 pt-16 pb-32 sm:pb-16 text-xs">
       <div className="max-w-7xl mx-auto px-4">
         {/* Main Footer Columns */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-10 mb-14">
+        <div className="grid grid-cols-1 lg:grid-cols-5 gap-10 mb-12">
           {/* Column 1: Company Profile (lg:col-span-2) */}
           <div className="lg:col-span-2 space-y-4">
             {/* Logo */}
@@ -102,90 +102,93 @@ export default function Footer({ onRequestInstallation }: FooterProps) {
             </div>
           </div>
 
-          {/* Column 2: Quick Links */}
-          <div className="space-y-3">
-            <h4 className="text-xs font-semibold uppercase tracking-wider text-zinc-200">
-              Navigation
-            </h4>
-            <ul className="space-y-2">
-              {quickLinks.map((link, idx) => (
-                <li key={idx}>
-                  <Link
-                    href={link.href}
-                    className="text-zinc-400 hover:text-white transition-colors block"
-                  >
-                    {link.label}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </div>
+          {/* Columns 2-4: Clean 2-column grid on mobile (< 768px), 3 columns on tablet/desktop */}
+          <div className="lg:col-span-3 grid grid-cols-2 sm:grid-cols-3 gap-6 sm:gap-8">
+            {/* Quick Links */}
+            <div className="space-y-3">
+              <h4 className="text-xs font-semibold uppercase tracking-wider text-zinc-200">
+                Navigation
+              </h4>
+              <ul className="space-y-2">
+                {quickLinks.map((link, idx) => (
+                  <li key={idx}>
+                    <Link
+                      href={link.href}
+                      className="text-zinc-400 hover:text-white transition-colors block"
+                    >
+                      {link.label}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </div>
 
-          {/* Column 3: Categories */}
-          <div className="space-y-3">
-            <h4 className="text-xs font-semibold uppercase tracking-wider text-zinc-200">
-              Hardware
-            </h4>
-            <ul className="space-y-2">
-              {categories.map((cat, idx) => (
-                <li key={idx}>
-                  <Link
-                    href={cat.href}
-                    className="text-zinc-400 hover:text-white transition-colors block"
-                  >
-                    {cat.label}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </div>
+            {/* Categories */}
+            <div className="space-y-3">
+              <h4 className="text-xs font-semibold uppercase tracking-wider text-zinc-200">
+                Hardware
+              </h4>
+              <ul className="space-y-2">
+                {categories.map((cat, idx) => (
+                  <li key={idx}>
+                    <Link
+                      href={cat.href}
+                      className="text-zinc-400 hover:text-white transition-colors block"
+                    >
+                      {cat.label}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </div>
 
-          {/* Column 4: Services & Tools */}
-          <div className="space-y-3">
-            <h4 className="text-xs font-semibold uppercase tracking-wider text-zinc-200">
-              Services & Tools
-            </h4>
-            <ul className="space-y-2">
-              {policies.map((p, idx) => (
-                <li key={idx}>
-                  <a
-                    href={p.href}
-                    className="text-zinc-400 hover:text-white transition-colors block"
-                  >
-                    {p.label}
-                  </a>
-                </li>
-              ))}
-            </ul>
+            {/* Services & Tools */}
+            <div className="col-span-2 sm:col-span-1 space-y-3">
+              <h4 className="text-xs font-semibold uppercase tracking-wider text-zinc-200">
+                Services & Tools
+              </h4>
+              <ul className="grid grid-cols-2 sm:grid-cols-1 gap-2">
+                {policies.map((p, idx) => (
+                  <li key={idx}>
+                    <a
+                      href={p.href}
+                      className="text-zinc-400 hover:text-white transition-colors block"
+                    >
+                      {p.label}
+                    </a>
+                  </li>
+                ))}
+              </ul>
 
-            {/* Quiet Action Buttons */}
-            <div className="pt-3 space-y-2">
-              <button
-                onClick={() => setIsTrackingModalOpen(true)}
-                className="w-full flex items-center justify-center gap-1.5 bg-zinc-900 hover:bg-zinc-800 text-zinc-200 py-2 px-3 rounded border border-zinc-800 text-xs transition-colors"
-              >
-                <Package className="h-3.5 w-3.5 text-zinc-400" />
-                <span>Track Order</span>
-              </button>
+              {/* Action Buttons */}
+              <div className="pt-3 grid grid-cols-2 sm:grid-cols-1 gap-2">
+                <button
+                  onClick={() => setIsTrackingModalOpen(true)}
+                  className="w-full flex items-center justify-center gap-1.5 bg-zinc-900 hover:bg-zinc-800 text-zinc-200 py-2 px-2.5 rounded border border-zinc-800 text-xs transition-colors"
+                >
+                  <Package className="h-3.5 w-3.5 text-zinc-400 shrink-0" />
+                  <span className="truncate">Track Order</span>
+                </button>
 
-              <button
-                onClick={() => setIsQuoteModalOpen(true)}
-                className="w-full flex items-center justify-center gap-1.5 bg-zinc-900 hover:bg-zinc-800 text-zinc-200 py-2 px-3 rounded border border-zinc-800 text-xs transition-colors"
-              >
-                <FileText className="h-3.5 w-3.5 text-zinc-400" />
-                <span>Proforma Quotation</span>
-              </button>
+                <button
+                  onClick={() => setIsQuoteModalOpen(true)}
+                  className="w-full flex items-center justify-center gap-1.5 bg-zinc-900 hover:bg-zinc-800 text-zinc-200 py-2 px-2.5 rounded border border-zinc-800 text-xs transition-colors"
+                >
+                  <FileText className="h-3.5 w-3.5 text-zinc-400 shrink-0" />
+                  <span className="truncate">Quotation</span>
+                </button>
+              </div>
             </div>
           </div>
         </div>
 
-        {/* Bottom Bar: Payments & Copyright */}
-        <div className="border-t border-zinc-800/80 pt-8 flex flex-col md:flex-row items-center justify-between gap-4 text-xs text-zinc-500">
+        {/* Bottom Bar: Payments & Copyright with safe mb-4 */}
+        <div className="border-t border-zinc-800/80 pt-8 flex flex-col md:flex-row items-center justify-between gap-4 text-xs text-zinc-500 text-center md:text-left mb-4">
           <p>
             © {new Date().getFullYear()} Nanhey Accessories. Ambedkar Chowk, Begusarai, Bihar.
           </p>
 
-          <div className="flex flex-wrap items-center gap-3 text-[11px] text-zinc-400">
+          <div className="flex flex-wrap justify-center md:justify-end items-center gap-2.5 sm:gap-3 text-[11px] text-zinc-400">
             <span>UPI</span>
             <span>•</span>
             <span>RuPay</span>
