@@ -3,6 +3,7 @@
 import React, { useState, useEffect } from "react";
 import { createPortal } from "react-dom";
 import Link from "next/link";
+import Image from "next/image";
 import {
   Search,
   User,
@@ -82,37 +83,16 @@ export default function MainHeader({
       {/* Main 70px Bar */}
       <div className="h-[68px] sm:h-[72px] flex items-center px-4 sm:px-6">
         <div className="max-w-7xl mx-auto w-full flex items-center justify-between gap-3 sm:gap-6">
-          {/* 1. Sharp Minimalist Logo */}
-          <Link href="/" className="flex items-center gap-2.5 sm:gap-3 group shrink-0">
-            <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-zinc-950 text-white shadow-xs ring-1 ring-zinc-800 transition-transform group-hover:scale-105 shrink-0">
-              <svg
-                className="w-5 h-5 text-red-500"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="2"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              >
-                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
-                <circle cx="12" cy="11" r="3" className="stroke-white" />
-                <circle cx="12" cy="11" r="1" className="fill-red-500" />
-              </svg>
-            </div>
-
-            <div className="flex flex-col">
-              <div className="flex items-baseline gap-1 leading-none">
-                <span className="font-black text-base sm:text-lg tracking-tight text-zinc-950">
-                  NANHEY
-                </span>
-                <span className="font-extrabold text-base sm:text-lg tracking-tight text-red-600">
-                  SECURITY
-                </span>
-              </div>
-              <span className="text-[9px] tracking-[0.22em] font-medium text-zinc-400 uppercase mt-0.5">
-                Begusarai
-              </span>
-            </div>
+          {/* 1. Official Brand Logo */}
+          <Link href="/" className="flex items-center group shrink-0 py-1">
+            <Image
+              src="/images/logo.png"
+              alt="Nanhey Accessories – CCTV & Security Solutions Begusarai"
+              width={190}
+              height={52}
+              priority
+              className="h-8 sm:h-9 md:h-10 w-auto object-contain transition-transform group-hover:scale-[1.02]"
+            />
           </Link>
 
           {/* 2. Refined Navigation Links with Red Hover Underline */}
@@ -255,36 +235,19 @@ export default function MainHeader({
               <div>
                 <div className="flex items-center justify-between pb-4 border-b border-zinc-100">
                   {/* Logo in Drawer */}
-                  <div className="flex items-center gap-2.5">
-                    <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-zinc-950 text-white shadow-xs">
-                      <svg
-                        className="w-4 h-4 text-red-500"
-                        viewBox="0 0 24 24"
-                        fill="none"
-                        stroke="currentColor"
-                        strokeWidth="2"
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                      >
-                        <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
-                        <circle cx="12" cy="11" r="3" className="stroke-white" />
-                        <circle cx="12" cy="11" r="1" className="fill-red-500" />
-                      </svg>
-                    </div>
-                    <div className="flex flex-col">
-                      <div className="flex items-baseline gap-1 leading-none">
-                        <span className="font-black text-sm tracking-tight text-zinc-950">
-                          NANHEY
-                        </span>
-                        <span className="font-extrabold text-sm tracking-tight text-red-600">
-                          SECURITY
-                        </span>
-                      </div>
-                      <span className="text-[8px] tracking-[0.2em] font-medium text-zinc-400 uppercase mt-0.5">
-                        Begusarai
-                      </span>
-                    </div>
-                  </div>
+                  <Link
+                    href="/"
+                    onClick={() => setMobileMenuOpen(false)}
+                    className="flex items-center group shrink-0 py-0.5"
+                  >
+                    <Image
+                      src="/images/logo.png"
+                      alt="Nanhey Accessories – CCTV & Security Solutions Begusarai"
+                      width={160}
+                      height={44}
+                      className="h-7 sm:h-8 w-auto object-contain"
+                    />
+                  </Link>
 
                   {/* Close Button */}
                   <button
