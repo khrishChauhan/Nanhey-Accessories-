@@ -312,7 +312,9 @@ export default function GSTQuotationModal({
                           {item.product.name}
                         </span>
                         <span className="text-[10px] text-slate-500">
-                          Brand: {item.product.brand} | {item.product.warranty}
+                          Brand: {item.product.brand}
+                          {item.product.model ? ` (${item.product.model})` : ""} |{" "}
+                          {item.product.warranty}
                         </span>
                       </td>
                       <td className="p-2.5 border border-slate-200 text-center font-mono text-[11px]">

@@ -157,9 +157,16 @@ export default function CartDrawer({ onRequestGSTQuotation }: CartDrawerProps) {
                     {/* Details */}
                     <div className="flex-1 min-w-0">
                       <div className="flex items-center justify-between gap-1">
-                        <span className="text-[10px] font-bold text-slate-400 uppercase tracking-wider">
-                          {item.product.brand}
-                        </span>
+                        <div className="flex items-center gap-1.5 min-w-0">
+                          <span className="text-[10px] font-bold text-slate-400 uppercase tracking-wider">
+                            {item.product.brand}
+                          </span>
+                          {item.product.model && (
+                            <span className="font-mono text-[9px] text-zinc-500 bg-zinc-100 px-1 rounded border border-zinc-200 truncate">
+                              {item.product.model}
+                            </span>
+                          )}
+                        </div>
                         <button
                           onClick={() => removeFromCart(item.product.id)}
                           className="text-slate-400 hover:text-brand-ruby p-1 rounded-lg hover:bg-slate-100 transition-colors"

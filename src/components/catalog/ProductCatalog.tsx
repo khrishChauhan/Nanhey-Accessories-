@@ -60,6 +60,9 @@ export default function ProductCatalog({ initialCategory = "all" }: ProductCatal
         const query = filters.searchQuery.toLowerCase();
         const matchesName = product.name.toLowerCase().includes(query);
         const matchesBrand = product.brand.toLowerCase().includes(query);
+        const matchesModel = product.model
+          ? product.model.toLowerCase().includes(query)
+          : false;
         const matchesCat = product.categoryName.toLowerCase().includes(query);
         const matchesDesc = product.description.toLowerCase().includes(query);
         const matchesFeatures = product.features.some((f) =>
@@ -74,6 +77,7 @@ export default function ProductCatalog({ initialCategory = "all" }: ProductCatal
         if (
           !matchesName &&
           !matchesBrand &&
+          !matchesModel &&
           !matchesCat &&
           !matchesDesc &&
           !matchesFeatures &&

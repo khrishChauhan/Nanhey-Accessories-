@@ -64,14 +64,21 @@ export default function CatalogProductCard({ product }: CatalogProductCardProps)
     >
       <div>
         {/* Top Header: Brand, Discount Pill & Wishlist Button */}
-        <div className="flex items-center justify-between mb-3">
-          <div className="flex items-center gap-2">
-            <span className="text-[10px] font-semibold uppercase tracking-wider text-zinc-400">
-              {product.brand}
-            </span>
-            {discountPercentage > 0 && (
-              <span className="text-[10px] font-semibold text-red-600 bg-red-50 border border-red-100 px-1.5 py-0.5 rounded">
-                {discountPercentage}% OFF
+        <div className="flex items-start justify-between mb-3 gap-2">
+          <div className="flex flex-col">
+            <div className="flex items-center gap-2">
+              <span className="text-[10px] font-semibold uppercase tracking-wider text-zinc-400">
+                {product.brand}
+              </span>
+              {discountPercentage > 0 && (
+                <span className="text-[10px] font-semibold text-red-600 bg-red-50 border border-red-100 px-1.5 py-0.5 rounded">
+                  {discountPercentage}% OFF
+                </span>
+              )}
+            </div>
+            {product.model && (
+              <span className="font-mono text-[10px] text-zinc-500 bg-zinc-100 px-1.5 py-0.5 rounded border border-zinc-200/60 inline-block mt-0.5 tracking-tight">
+                {product.model}
               </span>
             )}
           </div>

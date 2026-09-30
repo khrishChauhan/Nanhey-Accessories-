@@ -53,6 +53,7 @@ export default function ProductQuickViewModal() {
     const message = encodeURIComponent(
       `Hi Nanhey Accessories! I am inquiring about:\n` +
       `Product: ${product.name}\n` +
+      (product.model ? `Model: ${product.model}\n` : "") +
       `Brand: ${product.brand}\n` +
       `Price: ₹${product.price.toLocaleString("en-IN")}\n` +
       `Is this available for installation/purchase in Begusarai?`
@@ -73,10 +74,18 @@ export default function ProductQuickViewModal() {
       >
         {/* Header - Obsidian Onyx Styling — sticky */}
         <div className="sticky top-0 z-10 bg-[#090D14] px-6 py-4 text-white flex items-center justify-between border-b border-white/10 rounded-t-2xl">
-          <div className="flex items-center gap-2.5">
+          <div className="flex items-center gap-2.5 flex-wrap">
             <span className="text-[10px] font-bold uppercase tracking-wider bg-brand-ruby px-2.5 py-0.5 rounded-full text-white shadow-ruby">
               {product.brand}
             </span>
+            {product.model && (
+              <>
+                <span className="text-xs text-white/20">|</span>
+                <span className="font-mono text-[11px] text-amber-300 bg-white/10 px-2 py-0.5 rounded border border-white/15">
+                  {product.model}
+                </span>
+              </>
+            )}
             <span className="text-xs text-white/20">|</span>
             <span className="text-xs text-slate-300 font-medium">
               {product.categoryName}
@@ -139,10 +148,17 @@ export default function ProductQuickViewModal() {
                 </span>
               </div>
 
-              {/* Title */}
-              <h3 className="text-lg font-black text-slate-900 leading-snug">
-                {product.name}
-              </h3>
+              {/* Title & Model */}
+              <div>
+                {product.model && (
+                  <span className="inline-block font-mono text-[11px] font-semibold text-zinc-600 bg-zinc-100 border border-zinc-200/80 px-2 py-0.5 rounded mb-1.5 tracking-tight">
+                    Model: {product.model}
+                  </span>
+                )}
+                <h3 className="text-lg font-black text-slate-900 leading-snug">
+                  {product.name}
+                </h3>
+              </div>
 
               {/* Price */}
               <div className="flex items-baseline gap-2.5 pt-1">

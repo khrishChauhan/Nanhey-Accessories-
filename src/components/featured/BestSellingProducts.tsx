@@ -86,9 +86,16 @@ export default function BestSellingProducts() {
 
               {/* Product Details */}
               <div className="flex-1 text-center sm:text-left min-w-0">
-                <span className="text-[10px] font-semibold text-zinc-400 uppercase tracking-wider block">
-                  {product.brand}
-                </span>
+                <div className="flex items-center justify-center sm:justify-start gap-1.5 flex-wrap">
+                  <span className="text-[10px] font-semibold text-zinc-400 uppercase tracking-wider block">
+                    {product.brand}
+                  </span>
+                  {product.model && (
+                    <span className="font-mono text-[9px] text-zinc-500 bg-zinc-100 px-1 py-0.2 rounded border border-zinc-200/60 tracking-tight">
+                      {product.model}
+                    </span>
+                  )}
+                </div>
 
                 <h4
                   className="font-semibold text-xs text-zinc-900 group-hover:text-zinc-600 transition-colors truncate"
