@@ -11,6 +11,7 @@ import {
   Cable,
   Cpu,
   Cctv,
+  Shield,
   Plus,
 } from "lucide-react";
 import { PRODUCTS, Product } from "@/data/products";
@@ -26,6 +27,10 @@ export default function BestSellingProducts() {
     switch (category) {
       case "cp-2.4mp":
         return Video;
+      case "cp-2mp-ip":
+        return Shield;
+      case "cp-4mp-ip":
+        return Wifi;
       case "cp-5mp":
       default:
         return Cctv;

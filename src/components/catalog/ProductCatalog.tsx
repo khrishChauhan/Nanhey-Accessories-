@@ -118,10 +118,10 @@ export default function ProductCatalog({ initialCategory = "all" }: ProductCatal
             <span>Genuine Begusarai Inventory</span>
           </div>
           <h2 className="text-2xl sm:text-3xl lg:text-4xl font-black text-slate-900 tracking-tight">
-            CP PLUS ANALOG CAMERA CATALOG
+            CP PLUS CAMERA CATALOG
           </h2>
           <p className="text-xs sm:text-sm text-slate-500 mt-2">
-            Browse 10 authentic CP PLUS 2.4MP and 5MP analog cameras with official model numbers, two-way audio, and 24/7 full-color night vision.
+            Browse 24 authentic CP PLUS cameras — Analog 2.4MP &amp; 5MP series and IP STQC-certified 2MP &amp; 4MP WDR network cameras with official model codes.
           </p>
         </div>
 

@@ -37,6 +37,8 @@ export default function Footer({ onRequestInstallation }: FooterProps) {
   const categories = [
     { label: "CP PLUS 2.4MP — Analog", href: "/#catalog" },
     { label: "CP PLUS 5MP — Analog", href: "/#catalog" },
+    { label: "CP PLUS 2MP IP STQC Diamond", href: "/#catalog" },
+    { label: "CP PLUS 4MP IP STQC WDR", href: "/#catalog" },
   ];
 
   const policies = [
