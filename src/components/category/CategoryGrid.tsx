@@ -1,23 +1,16 @@
 "use client";
 
 import React from "react";
-import {
-  Video,
-  Shield,
-  Wifi,
-  Cctv,
-  HardDrive,
-  Cpu,
-  Database,
-  SlidersHorizontal,
-  ArrowRight,
-} from "lucide-react";
+import { Video, Cctv, ArrowRight } from "lucide-react";
 
 export interface CategoryItem {
   id: string;
   name: string;
   count: string;
+  tag: string;
+  description: string;
   icon: React.ElementType;
+  priceStart: string;
 }
 
 interface CategoryGridProps {
@@ -26,14 +19,26 @@ interface CategoryGridProps {
 
 export default function CategoryGrid({ onSelectCategory }: CategoryGridProps) {
   const categories: CategoryItem[] = [
-    { id: "hd-camera", name: "HD Cameras", count: "48 Models", icon: Video },
-    { id: "ip-camera", name: "IP & Network", count: "35 Models", icon: Shield },
-    { id: "wifi-camera", name: "Smart WiFi", count: "26 Models", icon: Wifi },
-    { id: "ptz-camera", name: "PTZ Dome", count: "15 Models", icon: Cctv },
-    { id: "dvr", name: "DVR Recorders", count: "20 Models", icon: Cpu },
-    { id: "nvr", name: "NVR Recorders", count: "18 Models", icon: Database },
-    { id: "hard-disk", name: "Surveillance HDD", count: "12 Models", icon: HardDrive },
-    { id: "accessories", name: "Cables & SMPS", count: "65 Items", icon: SlidersHorizontal },
+    {
+      id: "cp-2.4mp",
+      name: "CP PLUS 2.4MP — Analog",
+      count: "4 Models",
+      tag: "1080P Full HD",
+      description:
+        "40M & 20M Smart Dual IR Domes & Bullets with Two-Way Coaxial Audio",
+      icon: Video,
+      priceStart: "Starting from ₹1,674",
+    },
+    {
+      id: "cp-5mp",
+      name: "CP PLUS 5MP — Analog",
+      count: "6 Models",
+      tag: "Ultra HD Clarity",
+      description:
+        "5MP Ultra HD, Dual IR Illumination & Guard+ 24/7 Full Color Night Vision",
+      icon: Cctv,
+      priceStart: "Starting from ₹1,768",
+    },
   ];
 
   const handleCategoryClick = (e: React.MouseEvent, catId: string) => {
@@ -48,25 +53,31 @@ export default function CategoryGrid({ onSelectCategory }: CategoryGridProps) {
   };
 
   return (
-    <section id="categories" className="py-16 bg-white border-b border-zinc-200/80">
+    <section id="categories" className="py-14 bg-white border-b border-zinc-200/80">
       <div className="max-w-7xl mx-auto px-4">
         {/* Section Header */}
         <div className="flex flex-col md:flex-row md:items-end justify-between mb-8 gap-4">
           <div>
-            <span className="text-[11px] font-semibold uppercase tracking-wider text-zinc-400 block mb-1">
-              Category Directory
+            <span className="text-[11px] font-semibold uppercase tracking-wider text-red-600 block mb-1">
+              Official Dealer Inventory
             </span>
             <h2 className="text-xl sm:text-2xl font-bold text-zinc-950 tracking-tight">
-              Hardware Categories
+              CP PLUS Analog Camera Series
             </h2>
           </div>
-          <p className="text-xs text-zinc-500 max-w-sm">
-            Select a category to filter live inventory at the Begusarai showroom.
-          </p>
+          <div className="flex items-center gap-2">
+            <button
+              onClick={(e) => handleCategoryClick(e, "all")}
+              className="text-xs font-semibold text-zinc-700 hover:text-red-600 bg-zinc-100 hover:bg-red-50 border border-zinc-200 hover:border-red-200 px-3 py-1.5 rounded-lg transition-colors flex items-center gap-1.5"
+            >
+              <span>View All 10 Cameras</span>
+              <ArrowRight className="h-3.5 w-3.5" />
+            </button>
+          </div>
         </div>
 
-        {/* 9 Clean Architectural Cards Grid */}
-        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-3">
+        {/* 2 Clean Showcase Cards */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-5 max-w-4xl mx-auto">
           {categories.map((cat) => {
             const Icon = cat.icon;
             return (
@@ -74,53 +85,43 @@ export default function CategoryGrid({ onSelectCategory }: CategoryGridProps) {
                 key={cat.id}
                 href="#catalog"
                 onClick={(e) => handleCategoryClick(e, cat.id)}
-                className="group flex flex-col justify-between p-4 rounded-lg bg-zinc-50/70 hover:bg-white border border-zinc-200/70 hover:border-zinc-300 transition-colors cursor-pointer"
+                className="group relative flex flex-col justify-between p-6 rounded-2xl bg-zinc-50/70 hover:bg-white border border-zinc-200/80 hover:border-red-200 hover:shadow-md transition-all cursor-pointer overflow-hidden"
               >
-                <div className="flex items-center justify-between mb-6">
-                  <div className="flex h-9 w-9 items-center justify-center rounded bg-white text-zinc-600 border border-zinc-200/60 group-hover:text-zinc-950 transition-colors">
-                    <Icon className="h-4 w-4 stroke-[1.6]" />
-                  </div>
-                  <span className="text-[10px] text-zinc-400 font-medium tabular-nums">
-                    {cat.count}
-                  </span>
-                </div>
-
                 <div>
-                  <h3 className="font-semibold text-xs text-zinc-900 group-hover:text-zinc-950 transition-colors">
+                  <div className="flex items-start justify-between mb-4">
+                    <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-white text-zinc-800 border border-zinc-200/70 group-hover:bg-red-50 group-hover:text-red-600 group-hover:border-red-200 transition-colors shadow-xs">
+                      <Icon className="h-6 w-6 stroke-[1.75]" />
+                    </div>
+                    <div className="flex flex-col items-end gap-1">
+                      <span className="text-[10px] font-bold text-red-600 bg-red-50 border border-red-100 px-2 py-0.5 rounded-full">
+                        {cat.tag}
+                      </span>
+                      <span className="text-[11px] text-zinc-500 font-medium tabular-nums">
+                        {cat.count}
+                      </span>
+                    </div>
+                  </div>
+
+                  <h3 className="font-bold text-base text-zinc-950 group-hover:text-red-600 transition-colors">
                     {cat.name}
                   </h3>
-                  <span className="text-[11px] text-zinc-400 group-hover:text-zinc-600 flex items-center gap-1 mt-1 transition-colors">
-                    <span>View all</span>
-                    <ArrowRight className="h-3 w-3" />
+                  <p className="text-xs text-zinc-500 mt-1.5 leading-relaxed">
+                    {cat.description}
+                  </p>
+                </div>
+
+                <div className="pt-4 mt-4 border-t border-zinc-200/60 flex items-center justify-between">
+                  <span className="text-xs font-semibold text-zinc-900">
+                    {cat.priceStart}
+                  </span>
+                  <span className="text-xs font-semibold text-red-600 flex items-center gap-1 group-hover:translate-x-0.5 transition-transform">
+                    <span>Explore Models</span>
+                    <ArrowRight className="h-3.5 w-3.5" />
                   </span>
                 </div>
               </a>
             );
           })}
-
-          {/* 9th Card: View All */}
-          <a
-            href="#catalog"
-            onClick={(e) => handleCategoryClick(e, "all")}
-            className="col-span-2 sm:col-span-1 group flex flex-col justify-between p-4 rounded-lg bg-zinc-900 hover:bg-zinc-800 text-white transition-colors cursor-pointer"
-          >
-            <div className="flex items-center justify-between mb-6">
-              <span className="text-[10px] font-semibold text-zinc-400 uppercase tracking-wider">
-                Full Stock
-              </span>
-              <span className="text-[10px] text-zinc-400 tabular-nums">50+</span>
-            </div>
-
-            <div>
-              <h3 className="font-semibold text-xs text-white">
-                All Products
-              </h3>
-              <span className="text-[11px] text-zinc-400 group-hover:text-white flex items-center gap-1 mt-1 transition-colors">
-                <span>Open Catalog</span>
-                <ArrowRight className="h-3 w-3" />
-              </span>
-            </div>
-          </a>
         </div>
       </div>
     </section>

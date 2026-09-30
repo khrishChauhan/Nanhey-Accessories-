@@ -32,7 +32,10 @@ export default function DealerPage() {
     city: "Begusarai",
     businessType: "CCTV Installer / Contractor",
     monthlyVolume: "₹1,00,000 - ₹3,00,000",
-    interestedCategories: ["HD Cameras", "DVR / NVR", "Surveillance Hard Disks"],
+    interestedCategories: [
+      "CP PLUS 2.4MP — Analog",
+      "CP PLUS 5MP — Analog",
+    ],
     notes: "",
   });
 
@@ -406,14 +409,8 @@ export default function DealerPage() {
                   </label>
                   <div className="flex flex-wrap gap-2">
                     {[
-                      "HD Cameras",
-                      "IP & PoE Cameras",
-                      "WiFi Cameras",
-                      "DVR / NVR",
-                      "Surveillance Hard Disks",
-                      "3+1 Cables & SMPS",
-                      "Server Racks",
-                      "Video Door Phones",
+                      "CP PLUS 2.4MP — Analog",
+                      "CP PLUS 5MP — Analog",
                     ].map((cat) => {
                       const isSelected = formData.interestedCategories.includes(cat);
                       return (

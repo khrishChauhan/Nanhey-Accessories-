@@ -22,12 +22,7 @@ interface ProductFilterBarProps {
 
 const BRANDS: { id: string; name: string }[] = [
   { id: "all", name: "All Brands" },
-  { id: "CP Plus", name: "CP Plus" },
-  { id: "Hikvision", name: "Hikvision" },
-  { id: "Dahua", name: "Dahua" },
-  { id: "Seagate", name: "Seagate" },
-  { id: "Western Digital", name: "Western Digital" },
-  { id: "Nanhey Vision", name: "Nanhey Vision" },
+  { id: "CP Plus", name: "CP Plus (10)" },
 ];
 
 export default function ProductFilterBar({

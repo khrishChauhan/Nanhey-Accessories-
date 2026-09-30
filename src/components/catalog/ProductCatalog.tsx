@@ -118,10 +118,10 @@ export default function ProductCatalog({ initialCategory = "all" }: ProductCatal
             <span>Genuine Begusarai Inventory</span>
           </div>
           <h2 className="text-2xl sm:text-3xl lg:text-4xl font-black text-slate-900 tracking-tight">
-            FULL SECURITY HARDWARE CATALOG
+            CP PLUS ANALOG CAMERA CATALOG
           </h2>
           <p className="text-xs sm:text-sm text-slate-500 mt-2">
-            Browse 50+ authentic CCTV cameras, AI network devices, digital recorders, surveillance storage drives, and installation hardware.
+            Browse 10 authentic CP PLUS 2.4MP and 5MP analog cameras with official model numbers, two-way audio, and 24/7 full-color night vision.
           </p>
         </div>
 

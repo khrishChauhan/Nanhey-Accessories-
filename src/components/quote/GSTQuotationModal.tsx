@@ -16,6 +16,7 @@ import {
   Cctv,
 } from "lucide-react";
 import { useShop } from "@/context/ShopContext";
+import { PRODUCTS } from "@/data/products";
 
 interface GSTQuotationModalProps {
   isOpen: boolean;
@@ -43,68 +44,19 @@ export default function GSTQuotationModal({
   if (!isOpen || !mounted) return null;
 
   // Fallback items if cart is empty
-  const quoteItems = cart.length > 0 ? cart : [
-    {
-      product: {
-        id: "sample-1",
-        name: "CP Plus 2.4MP Full Color Guard+ Bullet Camera (Audio)",
-        category: "hd-camera" as const,
-        brand: "CP Plus" as const,
-        categoryName: "HD CCTV Camera",
-        price: 1499,
-        originalPrice: 1999,
-        discount: "25% OFF",
-        rating: 4.9,
-        reviewCount: 142,
-        inStock: true,
-        warranty: "2 Years",
-        features: [],
-        specs: {},
-        description: "",
-      },
-      quantity: 4,
-    },
-    {
-      product: {
-        id: "sample-2",
-        name: "CP Plus 4 Channel 1080P Full HD Digital Video Recorder",
-        category: "dvr" as const,
-        brand: "CP Plus" as const,
-        categoryName: "DVR",
-        price: 2999,
-        originalPrice: 3999,
-        discount: "25% OFF",
-        rating: 4.8,
-        reviewCount: 98,
-        inStock: true,
-        warranty: "2 Years",
-        features: [],
-        specs: {},
-        description: "",
-      },
-      quantity: 1,
-    },
-    {
-      product: {
-        id: "sample-3",
-        name: "Seagate SkyHawk 1TB Surveillance Hard Drive",
-        category: "hard-disk" as const,
-        brand: "Seagate" as const,
-        categoryName: "Hard Disk",
-        price: 4500,
-        originalPrice: 5500,
-        discount: "18% OFF",
-        rating: 4.9,
-        reviewCount: 312,
-        inStock: true,
-        warranty: "3 Years",
-        features: [],
-        specs: {},
-        description: "",
-      },
-      quantity: 1,
-    },
-  ];
+  const quoteItems =
+    cart.length > 0
+      ? cart
+      : [
+          {
+            product: PRODUCTS[0],
+            quantity: 4,
+          },
+          {
+            product: PRODUCTS[4],
+            quantity: 2,
+          },
+        ];
 
   const totalAmount = quoteItems.reduce((acc, item) => acc + item.product.price * item.quantity, 0);
   const taxableBase = Math.round(totalAmount / 1.18);
@@ -300,7 +252,7 @@ export default function GSTQuotationModal({
               <tbody className="divide-y divide-slate-200 text-xs">
                 {quoteItems.map((item, idx) => {
                   const lineTotal = item.product.price * item.quantity;
-                  const hsnCode = item.product.category === "hard-disk" ? "8471" : "8525";
+                  const hsnCode = "8525";
 
                   return (
                     <tr key={idx} className="hover:bg-slate-50">

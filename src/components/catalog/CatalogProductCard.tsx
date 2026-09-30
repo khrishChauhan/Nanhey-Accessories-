@@ -30,17 +30,9 @@ export default function CatalogProductCard({ product }: CatalogProductCardProps)
 
   const getProductIcon = (category: string) => {
     switch (category) {
-      case "hd-camera":
+      case "cp-2.4mp":
         return Video;
-      case "wifi-camera":
-        return Wifi;
-      case "dvr":
-      case "nvr":
-        return Cpu;
-      case "hard-disk":
-        return HardDrive;
-      case "accessories":
-        return Cable;
+      case "cp-5mp":
       default:
         return Cctv;
     }

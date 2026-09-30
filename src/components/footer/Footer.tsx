@@ -35,13 +35,8 @@ export default function Footer({ onRequestInstallation }: FooterProps) {
   ];
 
   const categories = [
-    { label: "HD Analog Cameras", href: "/#catalog" },
-    { label: "IP Network Cameras", href: "/#catalog" },
-    { label: "Smart WiFi Cameras", href: "/#catalog" },
-    { label: "PTZ Speed Domes", href: "/#catalog" },
-    { label: "DVR / NVR Recorders", href: "/#catalog" },
-    { label: "Surveillance Hard Disks", href: "/#catalog" },
-    { label: "Cables & Power SMPS", href: "/#catalog" },
+    { label: "CP PLUS 2.4MP — Analog", href: "/#catalog" },
+    { label: "CP PLUS 5MP — Analog", href: "/#catalog" },
   ];
 
   const policies = [

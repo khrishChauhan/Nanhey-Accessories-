@@ -8,7 +8,7 @@ import React, {
   useMemo,
   ReactNode,
 } from "react";
-import { Product } from "@/data/products";
+import { Product, PRODUCTS } from "@/data/products";
 
 export interface CartItem {
   product: Product;
@@ -54,57 +54,34 @@ export function ShopProvider({ children }: { children: ReactNode }) {
     try {
       const savedCart = localStorage.getItem(CART_STORAGE_KEY);
       if (savedCart) {
-        setCart(JSON.parse(savedCart));
+        try {
+          const parsed = JSON.parse(savedCart);
+          const validItems = parsed.filter((item: CartItem) =>
+            PRODUCTS.some((p) => p.id === item.product?.id)
+          );
+          setCart(
+            validItems.length > 0
+              ? validItems
+              : [{ product: PRODUCTS[0], quantity: 1 }]
+          );
+        } catch {
+          setCart([{ product: PRODUCTS[0], quantity: 1 }]);
+        }
       } else {
-        // Pre-populate with 2 default starter items as specified in Phase 1
-        const defaultStarterCart: CartItem[] = [
-          {
-            product: {
-              id: "hd-cp-2.4-color",
-              name: "CP Plus 2.4MP Full Color Guard+ Bullet Camera",
-              brand: "CP Plus",
-              category: "hd-camera",
-              categoryName: "HD CCTV Camera",
-              price: 1499,
-              originalPrice: 1999,
-              discount: "25% OFF",
-              rating: 4.9,
-              reviewCount: 142,
-              inStock: true,
-              warranty: "2 Years Brand Warranty",
-              features: ["20M Warm LED Full Color", "Audio Mic Built-in", "IP67 Weatherproof"],
-              specs: { resolution: "2.4MP 1080P", lens: "3.6mm" },
-              description: "Industry leading full-color analog bullet camera from CP Plus.",
-            },
-            quantity: 1,
-          },
-          {
-            product: {
-              id: "dvr-cp-4ch-1080p",
-              name: "CP Plus 4 Channel 1080P Full HD Digital Video Recorder",
-              brand: "CP Plus",
-              category: "dvr",
-              categoryName: "DVR",
-              price: 2999,
-              originalPrice: 3999,
-              discount: "25% OFF",
-              rating: 4.8,
-              reviewCount: 98,
-              inStock: true,
-              warranty: "2 Years Brand Warranty",
-              features: ["H.265+ Compression", "Audio over Coaxial", "1 SATA Support"],
-              specs: { channels: "4 Channels", resolution: "1080P" },
-              description: "Reliable 4-channel DVR with coaxial audio and mobile view.",
-            },
-            quantity: 1,
-          },
-        ];
-        setCart(defaultStarterCart);
+        setCart([{ product: PRODUCTS[0], quantity: 1 }]);
       }
 
       const savedWishlist = localStorage.getItem(WISHLIST_STORAGE_KEY);
       if (savedWishlist) {
-        setWishlist(JSON.parse(savedWishlist));
+        try {
+          const parsedWishlist = JSON.parse(savedWishlist);
+          const validWishlist = parsedWishlist.filter((prod: Product) =>
+            PRODUCTS.some((p) => p.id === prod?.id)
+          );
+          setWishlist(validWishlist);
+        } catch {
+          setWishlist([]);
+        }
       }
     } catch (e) {
       console.warn("Could not read from localStorage:", e);
