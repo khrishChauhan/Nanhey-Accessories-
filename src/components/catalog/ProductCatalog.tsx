@@ -121,7 +121,7 @@ export default function ProductCatalog({ initialCategory = "all" }: ProductCatal
             CP PLUS CAMERA CATALOG
           </h2>
           <p className="text-xs sm:text-sm text-slate-500 mt-2">
-            Browse 17 authentic CP PLUS cameras — STQC Diamond IP series and 2.4MP & 5MP Analog cameras with official model codes and dealer pricing.
+            Browse 26 authentic CP PLUS cameras — 2MP · 4MP WDR · 6MP IP STQC series and 2.4MP & 5MP Analog cameras with official model codes and dealer pricing.
           </p>
         </div>
 

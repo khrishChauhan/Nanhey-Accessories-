@@ -21,10 +21,10 @@ export default function CategoryGrid({ onSelectCategory }: CategoryGridProps) {
   const categories: CategoryItem[] = [
     {
       id: "ip-camera",
-      name: "CP PLUS 2MP IP STQC Diamond",
-      count: "7 Models",
+      name: "CP PLUS IP STQC Series",
+      count: "16 Models",
       tag: "STQC Certified",
-      description: "H.265+ PoE IP Domes & Bullets — 30M to 60M Smart IR, Two-Way Audio, Tender Ready",
+      description: "2MP Diamond · 4MP WDR · 6MP 3K — H.265+ PoE IP Cameras, Two-Way Audio, 60M IR, Tender Ready",
       icon: Shield,
       priceStart: "Starting from ₹4,170",
     },
@@ -77,7 +77,7 @@ export default function CategoryGrid({ onSelectCategory }: CategoryGridProps) {
               onClick={(e) => handleCategoryClick(e, "all")}
               className="text-xs font-semibold text-zinc-700 hover:text-red-600 bg-zinc-100 hover:bg-red-50 border border-zinc-200 hover:border-red-200 px-3 py-1.5 rounded-lg transition-colors flex items-center gap-1.5"
             >
-              <span>View All 17 Cameras</span>
+              <span>View All 26 Cameras</span>
               <ArrowRight className="h-3.5 w-3.5" />
             </button>
           </div>
