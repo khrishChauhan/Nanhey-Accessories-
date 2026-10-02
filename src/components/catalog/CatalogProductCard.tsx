@@ -37,6 +37,12 @@ export default function CatalogProductCard({ product }: CatalogProductCardProps)
         return Shield;
       case "cp-4mp-ip":
         return Wifi;
+      case "cp-6mp-ip":
+        return Cctv;
+      case "cp-8mp-ip":
+        return HardDrive;
+      case "cp-ezykam-wifi":
+        return Wifi;
       case "cp-5mp":
       default:
         return Cctv;

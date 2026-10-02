@@ -121,7 +121,7 @@ export default function ProductCatalog({ initialCategory = "all" }: ProductCatal
             CP PLUS CAMERA CATALOG
           </h2>
           <p className="text-xs sm:text-sm text-slate-500 mt-2">
-            Browse 24 authentic CP PLUS cameras — Analog 2.4MP &amp; 5MP series and IP STQC-certified 2MP &amp; 4MP WDR network cameras with official model codes.
+            Browse 37 authentic CP PLUS cameras — Analog, IP STQC, and Ezykam Wi-Fi/4G series with official model codes and dealer pricing.
           </p>
         </div>
 
