@@ -32,13 +32,9 @@ export default function Footer({ onRequestInstallation }: FooterProps) {
   ];
 
   const categories = [
-    { label: "CP PLUS 2.4MP — Analog", href: "/#catalog" },
-    { label: "CP PLUS 5MP — Analog", href: "/#catalog" },
     { label: "CP PLUS 2MP IP STQC Diamond", href: "/#catalog" },
-    { label: "CP PLUS 4MP IP STQC WDR", href: "/#catalog" },
-    { label: "CP PLUS 6MP IP STQC", href: "/#catalog" },
-    { label: "CP PLUS 8MP IP STQC", href: "/#catalog" },
-    { label: "CP PLUS Ezykam Wi-Fi / 4G", href: "/#catalog" },
+    { label: "CP PLUS 2.4MP Analog", href: "/#catalog" },
+    { label: "CP PLUS 5MP Analog", href: "/#catalog" },
   ];
 
   const policies = [

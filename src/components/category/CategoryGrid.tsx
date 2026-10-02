@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import { Video, Cctv, ArrowRight, Shield, Wifi } from "lucide-react";
+import { Video, Cctv, ArrowRight, Shield } from "lucide-react";
 
 export interface CategoryItem {
   id: string;
@@ -20,8 +20,17 @@ interface CategoryGridProps {
 export default function CategoryGrid({ onSelectCategory }: CategoryGridProps) {
   const categories: CategoryItem[] = [
     {
+      id: "ip-camera",
+      name: "CP PLUS 2MP IP STQC Diamond",
+      count: "7 Models",
+      tag: "STQC Certified",
+      description: "H.265+ PoE IP Domes & Bullets — 30M to 60M Smart IR, Two-Way Audio, Tender Ready",
+      icon: Shield,
+      priceStart: "Starting from ₹4,170",
+    },
+    {
       id: "cp-2.4mp",
-      name: "CP PLUS 2.4MP — Analog",
+      name: "CP PLUS 2.4MP Analog",
       count: "4 Models",
       tag: "1080P Full HD",
       description: "40M & 20M Smart Dual IR Domes & Bullets with Two-Way Coaxial Audio",
@@ -30,57 +39,12 @@ export default function CategoryGrid({ onSelectCategory }: CategoryGridProps) {
     },
     {
       id: "cp-5mp",
-      name: "CP PLUS 5MP — Analog",
+      name: "CP PLUS 5MP Analog",
       count: "6 Models",
       tag: "Ultra HD 5MP",
-      description: "5MP Ultra HD, Dual IR & Guard+ 24/7 Full Color Night Vision",
+      description: "5MP Ultra HD — Dual IR, Guard+ 24/7 Full Color Night Vision with Audio",
       icon: Cctv,
       priceStart: "Starting from ₹1,768",
-    },
-    {
-      id: "cp-2mp-ip",
-      name: "CP PLUS 2MP IP STQC Diamond",
-      count: "7 Models",
-      tag: "H.265+ PoE",
-      description: "STQC-Certified 2MP H.265+ IP Domes & Bullets with up to 60M Smart IR",
-      icon: Shield,
-      priceStart: "Starting from ₹4,170",
-    },
-    {
-      id: "cp-4mp-ip",
-      name: "CP PLUS 4MP IP STQC WDR",
-      count: "7 Models",
-      tag: "4MP WDR H.265+",
-      description: "STQC-Certified 4MP WDR H.265+ IP Cameras with Two-Way Audio & 60M IR",
-      icon: Wifi,
-      priceStart: "Starting from ₹4,980",
-    },
-    {
-      id: "cp-6mp-ip",
-      name: "CP PLUS 6MP IP STQC",
-      count: "2 Models",
-      tag: "6MP 3K H.265+",
-      description: "STQC-Certified 6MP H.265+ IP Dome & Bullet with 30M Smart IR",
-      icon: Cctv,
-      priceStart: "Starting from ₹7,021",
-    },
-    {
-      id: "cp-8mp-ip",
-      name: "CP PLUS 8MP IP STQC",
-      count: "2 Models",
-      tag: "8MP 4K H.265+",
-      description: "STQC-Certified 8MP True 4K IP Dome & Bullet for Maximum Detail",
-      icon: Shield,
-      priceStart: "Starting from ₹9,878",
-    },
-    {
-      id: "cp-ezykam-wifi",
-      name: "CP PLUS Ezykam Wi-Fi / 4G",
-      count: "9 Models",
-      tag: "Wi-Fi & 4G",
-      description: "Pan-Tilt Wi-Fi & 4G SIM Cameras with Two-Way Audio for Home & Outdoor",
-      icon: Wifi,
-      priceStart: "Starting from ₹2,458",
     },
   ];
 
@@ -113,14 +77,14 @@ export default function CategoryGrid({ onSelectCategory }: CategoryGridProps) {
               onClick={(e) => handleCategoryClick(e, "all")}
               className="text-xs font-semibold text-zinc-700 hover:text-red-600 bg-zinc-100 hover:bg-red-50 border border-zinc-200 hover:border-red-200 px-3 py-1.5 rounded-lg transition-colors flex items-center gap-1.5"
             >
-              <span>View All 37 Cameras</span>
+              <span>View All 17 Cameras</span>
               <ArrowRight className="h-3.5 w-3.5" />
             </button>
           </div>
         </div>
 
-        {/* 7 Showcase Cards */}
-        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4">
+        {/* 3 Showcase Cards */}
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-5">
           {categories.map((cat) => {
             const Icon = cat.icon;
             return (

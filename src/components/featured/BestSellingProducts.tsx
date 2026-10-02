@@ -21,22 +21,17 @@ export default function BestSellingProducts() {
   const { addToCart, toggleWishlist, isWishlisted, openQuickView } = useShop();
   const [addedId, setAddedId] = useState<string | null>(null);
 
-  const bestSellers = PRODUCTS.filter((p) => p.isBestSeller).slice(0, 5);
+  const bestSellers = (() => {
+    const bs = PRODUCTS.filter((p) => p.isBestSeller);
+    return bs.length >= 3 ? bs.slice(0, 5) : PRODUCTS.slice(0, 5);
+  })();
 
   const getProductIcon = (category: string) => {
     switch (category) {
+      case "ip-camera":
+        return Shield;
       case "cp-2.4mp":
         return Video;
-      case "cp-2mp-ip":
-        return Shield;
-      case "cp-4mp-ip":
-        return Wifi;
-      case "cp-6mp-ip":
-        return Cctv;
-      case "cp-8mp-ip":
-        return HardDrive;
-      case "cp-ezykam-wifi":
-        return Wifi;
       case "cp-5mp":
       default:
         return Cctv;

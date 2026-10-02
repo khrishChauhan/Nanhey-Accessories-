@@ -121,7 +121,7 @@ export default function ProductCatalog({ initialCategory = "all" }: ProductCatal
             CP PLUS CAMERA CATALOG
           </h2>
           <p className="text-xs sm:text-sm text-slate-500 mt-2">
-            Browse 37 authentic CP PLUS cameras — Analog, IP STQC, and Ezykam Wi-Fi/4G series with official model codes and dealer pricing.
+            Browse 17 authentic CP PLUS cameras — STQC Diamond IP series and 2.4MP & 5MP Analog cameras with official model codes and dealer pricing.
           </p>
         </div>
 

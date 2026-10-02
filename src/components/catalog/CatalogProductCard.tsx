@@ -31,18 +31,10 @@ export default function CatalogProductCard({ product }: CatalogProductCardProps)
 
   const getProductIcon = (category: string) => {
     switch (category) {
+      case "ip-camera":
+        return Shield;
       case "cp-2.4mp":
         return Video;
-      case "cp-2mp-ip":
-        return Shield;
-      case "cp-4mp-ip":
-        return Wifi;
-      case "cp-6mp-ip":
-        return Cctv;
-      case "cp-8mp-ip":
-        return HardDrive;
-      case "cp-ezykam-wifi":
-        return Wifi;
       case "cp-5mp":
       default:
         return Cctv;
