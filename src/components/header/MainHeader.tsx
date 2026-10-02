@@ -74,7 +74,6 @@ export default function MainHeader({
     { label: "DVR/NVR", href: "/#catalog" },
     { label: "WiFi Cameras", href: "/#catalog" },
     { label: "Installation", href: "/installation" },
-    { label: "AMC Plans", href: "/amc" },
     { label: "B2B Dealer", href: "/dealer" },
   ];
 
@@ -338,7 +337,7 @@ export default function MainHeader({
                   <div className="text-[10px] font-semibold text-zinc-400 uppercase tracking-wider px-3 mb-1.5">
                     Direct Services
                   </div>
-                  <div className="grid grid-cols-2 gap-2">
+                  <div className="grid grid-cols-1 gap-2">
                     <Link
                       href="/installation"
                       onClick={() => setMobileMenuOpen(false)}
@@ -346,14 +345,6 @@ export default function MainHeader({
                     >
                       <span className="font-semibold text-zinc-900 text-[11px]">Doorstep Setup</span>
                       <span className="text-[9px] text-zinc-500 mt-0.5">Certified Engineers</span>
-                    </Link>
-                    <Link
-                      href="/amc"
-                      onClick={() => setMobileMenuOpen(false)}
-                      className="flex flex-col p-2 rounded-lg bg-zinc-50 border border-zinc-200/70 hover:border-red-300 hover:bg-red-50/20 transition-colors text-xs"
-                    >
-                      <span className="font-semibold text-zinc-900 text-[11px]">AMC Contracts</span>
-                      <span className="text-[9px] text-zinc-500 mt-0.5">Annual Maintenance</span>
                     </Link>
                   </div>
                 </div>

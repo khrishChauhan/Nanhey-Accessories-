@@ -29,7 +29,6 @@ export default function Footer({ onRequestInstallation }: FooterProps) {
     { label: "Package Configurator", href: "/#builder" },
     { label: "Equipment Catalog", href: "/#catalog" },
     { label: "Installation Service", href: "/installation" },
-    { label: "AMC Contract", href: "/amc" },
     { label: "Dealer Desk", href: "/dealer" },
     { label: "Showroom Contact", href: "/contact" },
   ];
