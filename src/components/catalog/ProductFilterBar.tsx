@@ -22,7 +22,7 @@ interface ProductFilterBarProps {
 
 const BRANDS: { id: string; name: string }[] = [
   { id: "all", name: "All Brands" },
-  { id: "CP Plus", name: "CP Plus (10)" },
+  { id: "CP Plus", name: "CP Plus" },
 ];
 
 export default function ProductFilterBar({

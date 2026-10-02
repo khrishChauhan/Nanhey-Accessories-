@@ -32,9 +32,12 @@ export default function Footer({ onRequestInstallation }: FooterProps) {
   ];
 
   const categories = [
-    { label: "CP PLUS 2MP IP STQC Diamond", href: "/#catalog" },
-    { label: "CP PLUS 2.4MP Analog", href: "/#catalog" },
-    { label: "CP PLUS 5MP Analog", href: "/#catalog" },
+    { label: "CP PLUS IP STQC Series", href: "/#catalog" },
+    { label: "CP PLUS 2.4 MP Range", href: "/#catalog" },
+    { label: "CP PLUS 5 MP Range", href: "/#catalog" },
+    { label: "CP PLUS DVR & NVR Systems", href: "/#catalog" },
+    { label: "CP PLUS ACCESSORIES", href: "/#catalog" },
+    { label: "EzyKam WiFi & 4G Cameras", href: "/#catalog" },
   ];
 
   const policies = [

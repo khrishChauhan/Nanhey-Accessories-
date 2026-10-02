@@ -41,8 +41,14 @@ export default function ProductCatalog({ initialCategory = "all" }: ProductCatal
   const filteredProducts = useMemo(() => {
     return PRODUCTS.filter((product) => {
       // Category filter
-      if (filters.category !== "all" && product.category !== filters.category) {
-        return false;
+      if (filters.category !== "all") {
+        const isCatMatch =
+          product.category === filters.category ||
+          ((filters.category === "cp-accessories" || filters.category === "accessories") &&
+            (product.category === "cp-accessories" || product.category === "accessories"));
+        if (!isCatMatch) {
+          return false;
+        }
       }
 
       // Brand filter
@@ -121,7 +127,7 @@ export default function ProductCatalog({ initialCategory = "all" }: ProductCatal
             CP PLUS CAMERA CATALOG
           </h2>
           <p className="text-xs sm:text-sm text-slate-500 mt-2">
-            Browse 26 authentic CP PLUS cameras — 2MP · 4MP WDR · 6MP IP STQC series and 2.4MP & 5MP Analog cameras with official model codes and dealer pricing.
+            Browse 65 authentic CP PLUS products — IP STQC & Analog Cameras, HD DVRs, 4K NVRs, Smart WiFi & 4G, and Official Accessories with dealer pricing.
           </p>
         </div>
 

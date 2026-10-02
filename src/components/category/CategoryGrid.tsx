@@ -30,7 +30,7 @@ export default function CategoryGrid({ onSelectCategory }: CategoryGridProps) {
     },
     {
       id: "cp-2.4mp",
-      name: "CP PLUS 2.4MP Analog",
+      name: "CP PLUS 2.4 MP Range",
       count: "4 Models",
       tag: "1080P Full HD",
       description: "40M & 20M Smart Dual IR Domes & Bullets with Two-Way Coaxial Audio",
@@ -39,7 +39,7 @@ export default function CategoryGrid({ onSelectCategory }: CategoryGridProps) {
     },
     {
       id: "cp-5mp",
-      name: "CP PLUS 5MP Analog",
+      name: "CP PLUS 5 MP Range",
       count: "6 Models",
       tag: "Ultra HD 5MP",
       description: "5MP Ultra HD — Dual IR, Guard+ 24/7 Full Color Night Vision with Audio",
@@ -77,7 +77,7 @@ export default function CategoryGrid({ onSelectCategory }: CategoryGridProps) {
               onClick={(e) => handleCategoryClick(e, "all")}
               className="text-xs font-semibold text-zinc-700 hover:text-red-600 bg-zinc-100 hover:bg-red-50 border border-zinc-200 hover:border-red-200 px-3 py-1.5 rounded-lg transition-colors flex items-center gap-1.5"
             >
-              <span>View All 26 Cameras</span>
+              <span>View All Products</span>
               <ArrowRight className="h-3.5 w-3.5" />
             </button>
           </div>

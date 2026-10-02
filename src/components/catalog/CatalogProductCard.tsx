@@ -36,6 +36,18 @@ export default function CatalogProductCard({ product }: CatalogProductCardProps)
       case "cp-2.4mp":
         return Video;
       case "cp-5mp":
+        return Cctv;
+      case "cp-4ch-dvr":
+      case "cp-8ch-dvr":
+      case "cp-16ch-dvr":
+      case "cp-32ch-dvr":
+      case "nvr":
+        return HardDrive;
+      case "wifi-camera":
+        return Wifi;
+      case "cp-accessories":
+      case "accessories":
+        return Cable;
       default:
         return Cctv;
     }
