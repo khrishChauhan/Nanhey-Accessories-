@@ -73,8 +73,6 @@ export default function MainHeader({
     { label: "CCTV Cameras", href: "/#catalog" },
     { label: "DVR/NVR", href: "/#catalog" },
     { label: "WiFi Cameras", href: "/#catalog" },
-    { label: "Installation", href: "/installation" },
-    { label: "B2B Dealer", href: "/dealer" },
   ];
 
   return (
@@ -332,22 +330,6 @@ export default function MainHeader({
                   ))}
                 </div>
 
-                {/* Quick Services Section */}
-                <div className="mt-4 pt-3 border-t border-zinc-100">
-                  <div className="text-[10px] font-semibold text-zinc-400 uppercase tracking-wider px-3 mb-1.5">
-                    Direct Services
-                  </div>
-                  <div className="grid grid-cols-1 gap-2">
-                    <Link
-                      href="/installation"
-                      onClick={() => setMobileMenuOpen(false)}
-                      className="flex flex-col p-2 rounded-lg bg-zinc-50 border border-zinc-200/70 hover:border-red-300 hover:bg-red-50/20 transition-colors text-xs"
-                    >
-                      <span className="font-semibold text-zinc-900 text-[11px]">Doorstep Setup</span>
-                      <span className="text-[9px] text-zinc-500 mt-0.5">Certified Engineers</span>
-                    </Link>
-                  </div>
-                </div>
               </div>
 
               {/* Drawer Bottom Actions & Contacts */}

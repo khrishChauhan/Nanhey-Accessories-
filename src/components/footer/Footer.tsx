@@ -28,8 +28,6 @@ export default function Footer({ onRequestInstallation }: FooterProps) {
     { label: "About", href: "/about" },
     { label: "Package Configurator", href: "/#builder" },
     { label: "Equipment Catalog", href: "/#catalog" },
-    { label: "Installation Service", href: "/installation" },
-    { label: "Dealer Desk", href: "/dealer" },
     { label: "Showroom Contact", href: "/contact" },
   ];
 
