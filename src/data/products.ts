@@ -1,4 +1,4 @@
-export type CategoryType = "ip-camera" | "cp-2.4mp" | "cp-5mp";
+export type CategoryType = "ip-camera" | "cp-2.4mp" | "cp-5mp" | "nvr" | "accessories";
 
 export type BrandType = "CP Plus";
 
@@ -23,7 +23,7 @@ export interface Product {
   description: string;
 }
 
-export const PRODUCTS: Product[] = [
+export const CAMERAS: Product[] = [
 
   // ==================== CP PLUS 2MP IP STQC DIAMOND SERIES ====================
 
@@ -920,10 +920,289 @@ export const PRODUCTS: Product[] = [
   },
 ];
 
+// ==================== CP PLUS NVR RECORDERS ====================
+
+export const NVR_PRODUCTS: Product[] = [
+  {
+    id: "cp-unr-104f1",
+    model: "CP-UNR-104F1",
+    name: "CP Plus 4 Channel Network Video Recorder (40Mbps H.265+)",
+    brand: "CP Plus",
+    category: "nvr",
+    categoryName: "NVR",
+    price: 6711,
+    originalPrice: 8499,
+    discount: "21% OFF",
+    rating: 4.7,
+    reviewCount: 98,
+    inStock: true,
+    warranty: "2 Years Official CP Plus Warranty",
+    features: [
+      "4 Channel IP Video Input",
+      "40Mbps Incoming Bandwidth",
+      "H.265+ Smart Codec",
+      "HDMI & VGA Simultaneous Output",
+      "1 SATA Port",
+    ],
+    specs: {
+      channels: "4 Channels",
+      resolution: "4K Output Support",
+      connectivity: "1 RJ-45 Port",
+      storageCapacity: "1 SATA (Up to 6TB)",
+      compression: "H.265+ / H.265 / H.264",
+    },
+    isBestSeller: false,
+    isFeatured: false,
+    description:
+      "CP Plus 4-channel NVR with 40Mbps bandwidth and H.265+ compression — ideal for small home and shop CCTV setups with up to 4 IP cameras.",
+  },
+  {
+    id: "cp-unr-108f1",
+    model: "CP-UNR-108F1",
+    name: "CP Plus 8 Channel Network Video Recorder (80Mbps H.265+)",
+    brand: "CP Plus",
+    category: "nvr",
+    categoryName: "NVR",
+    price: 7518,
+    originalPrice: 9499,
+    discount: "21% OFF",
+    rating: 4.7,
+    reviewCount: 74,
+    inStock: true,
+    warranty: "2 Years Official CP Plus Warranty",
+    features: [
+      "8 Channel IP Camera Support",
+      "80Mbps Bandwidth",
+      "H.265+ Video Compression",
+      "Mobile View via App",
+      "1 SATA HDD Bay",
+    ],
+    specs: {
+      channels: "8 Channels",
+      resolution: "4K Support",
+      connectivity: "1 RJ-45 Port",
+      storageCapacity: "1 SATA (Up to 6TB)",
+      compression: "H.265+ / H.265 / H.264",
+    },
+    isBestSeller: true,
+    isFeatured: false,
+    description:
+      "CP Plus 8-channel NVR with 80Mbps bandwidth and H.265+ — perfect for medium-scale installations with up to 8 IP cameras and mobile remote viewing.",
+  },
+  {
+    id: "cp-unr-4k4082-v2",
+    model: "CP-UNR-4K4082-V2",
+    name: "CP Plus 8 Channel 4K Ultra HD NVR (200Mbps, Dual SATA)",
+    brand: "CP Plus",
+    category: "nvr",
+    categoryName: "NVR",
+    price: 12208,
+    originalPrice: 15499,
+    discount: "21% OFF",
+    rating: 4.8,
+    reviewCount: 62,
+    inStock: true,
+    warranty: "2 Years Official CP Plus Warranty",
+    features: [
+      "8 Channel 4K Recording",
+      "200Mbps High Bandwidth",
+      "Dual SATA Bays (2 HDD Support)",
+      "H.265+ AI Analytics Ready",
+    ],
+    specs: {
+      channels: "8 Channels",
+      resolution: "4K UHD",
+      connectivity: "Gigabit Ethernet",
+      storageCapacity: "2 SATA Ports (Up to 16TB)",
+      compression: "H.265+ / H.265",
+    },
+    isBestSeller: false,
+    isFeatured: true,
+    description:
+      "CP Plus 8-channel 4K UHD NVR with 200Mbps bandwidth and dual SATA bays — supports AI analytics-ready IP cameras with up to 16TB storage.",
+  },
+  {
+    id: "cp-unr-4k2161-v4",
+    model: "CP-UNR-4K2161-V4",
+    name: "CP Plus 16 Channel 4K NVR (160Mbps H.265+)",
+    brand: "CP Plus",
+    category: "nvr",
+    categoryName: "NVR",
+    price: 11329,
+    originalPrice: 14299,
+    discount: "21% OFF",
+    rating: 4.8,
+    reviewCount: 55,
+    inStock: true,
+    warranty: "2 Years Official CP Plus Warranty",
+    features: [
+      "16 Channel IP Support",
+      "160Mbps Bandwidth",
+      "4K Real-time Live Display",
+      "H.265+ Compression",
+      "1 SATA Bay",
+    ],
+    specs: {
+      channels: "16 Channels",
+      resolution: "4K Output",
+      connectivity: "1 RJ-45 Port",
+      storageCapacity: "1 SATA Port (Up to 8TB)",
+      compression: "H.265+ / H.265",
+    },
+    isBestSeller: false,
+    isFeatured: false,
+    description:
+      "CP Plus 16-channel 4K NVR with 160Mbps and H.265+ — delivers real-time 4K live display for medium to large IP camera deployments.",
+  },
+  {
+    id: "cp-unr-4k2162-v2",
+    model: "CP-UNR-4K2162-V2",
+    name: "CP Plus 16 Channel 4K NVR (320Mbps High Bandwidth, Dual SATA)",
+    brand: "CP Plus",
+    category: "nvr",
+    categoryName: "NVR",
+    price: 13901,
+    originalPrice: 17499,
+    discount: "21% OFF",
+    rating: 4.9,
+    reviewCount: 83,
+    inStock: true,
+    warranty: "2 Years Official CP Plus Warranty",
+    features: [
+      "16 Channels 4K Realtime Recording",
+      "320Mbps Ultra Bandwidth",
+      "2 SATA Hard Disk Bays",
+      "High Throughput for Enterprise IP Cams",
+    ],
+    specs: {
+      channels: "16 Channels",
+      resolution: "4K UHD",
+      connectivity: "Gigabit Ethernet",
+      storageCapacity: "2 SATA Ports (Up to 16TB)",
+      compression: "H.265+ / H.265",
+    },
+    isBestSeller: true,
+    isFeatured: true,
+    description:
+      "CP Plus 16-channel 4K UHD NVR with 320Mbps ultra-high bandwidth and dual SATA — the best-seller for enterprise IP camera installations.",
+  },
+  {
+    id: "cp-unr-4k4162-v2",
+    model: "CP-UNR-4K4162-V2",
+    name: "CP Plus 16 Channel 4K Enterprise NVR (320Mbps, Dual SATA, Premium Series)",
+    brand: "CP Plus",
+    category: "nvr",
+    categoryName: "NVR",
+    price: 16086,
+    originalPrice: 20299,
+    discount: "21% OFF",
+    rating: 4.9,
+    reviewCount: 47,
+    inStock: true,
+    warranty: "2 Years Official CP Plus Warranty",
+    features: [
+      "Enterprise 320Mbps Bandwidth",
+      "Supports 4K/6MP/5MP/4MP IP Cameras",
+      "2 SATA HDD Bays",
+      "Intelligent Video Analytics",
+    ],
+    specs: {
+      channels: "16 Channels",
+      resolution: "4K Ultra HD",
+      connectivity: "Gigabit LAN",
+      storageCapacity: "2 SATA Ports",
+      compression: "H.265+ / H.265",
+    },
+    isBestSeller: false,
+    isFeatured: true,
+    description:
+      "CP Plus 16-channel 4K enterprise-grade NVR with 320Mbps bandwidth — designed for 4K, 6MP, and 5MP IP cameras with intelligent video analytics.",
+  },
+  {
+    id: "cp-unr-4k4322-v2",
+    model: "CP-UNR-4K4322-V2",
+    name: "CP Plus 32 Channel 4K Commercial NVR (200Mbps H.265+)",
+    brand: "CP Plus",
+    category: "nvr",
+    categoryName: "NVR",
+    price: 20435,
+    originalPrice: 25999,
+    discount: "21% OFF",
+    rating: 4.9,
+    reviewCount: 39,
+    inStock: true,
+    warranty: "2 Years Official CP Plus Warranty",
+    features: [
+      "32 Channels Large Deployment",
+      "200Mbps Bandwidth",
+      "Simultaneous 16-Channel Playback",
+      "Dual SATA Support",
+      "Full Metal Body",
+    ],
+    specs: {
+      channels: "32 Channels",
+      resolution: "4K UHD",
+      connectivity: "Gigabit LAN",
+      storageCapacity: "2 SATA Ports (Up to 20TB)",
+      compression: "H.265+ / H.265",
+    },
+    isBestSeller: false,
+    isFeatured: true,
+    description:
+      "CP Plus 32-channel 4K commercial NVR with 200Mbps bandwidth and dual SATA — built for large-scale retail, commercial, and institutional deployments.",
+  },
+];
+
+// ==================== CP PLUS POE SWITCHES ====================
+
+export const ACCESSORIES_PRODUCTS: Product[] = [
+  {
+    id: "cp-anw-hp4h2-n65",
+    model: "CP-ANW-HP4H2-N65",
+    name: "CP Plus 4-Port Fast Ethernet PoE Switch with 2 Uplink Ports (65W)",
+    brand: "CP Plus",
+    category: "accessories",
+    categoryName: "Accessories",
+    price: 1560,
+    originalPrice: 2100,
+    discount: "26% OFF",
+    rating: 4.6,
+    reviewCount: 143,
+    inStock: true,
+    warranty: "2 Years Official CP Plus Warranty",
+    features: [
+      "4 PoE Ports + 2 Uplink Ports",
+      "65W Total PoE Budget",
+      "Plug-and-Play No Configuration",
+      "Supports IEEE 802.3af/at PoE",
+      "Powers IP Cameras without Separate Adapters",
+    ],
+    specs: {
+      poeports: "4 x Fast Ethernet PoE Ports",
+      uplinkPorts: "2 x Fast Ethernet Uplink",
+      poeBudget: "65W Total",
+      standard: "IEEE 802.3af / 802.3at",
+      speed: "10/100Mbps",
+    },
+    isBestSeller: true,
+    isFeatured: false,
+    description:
+      "CP Plus 4-port 65W PoE switch with 2 uplink ports — plug-and-play power and data over a single cable for up to 4 IP cameras with no separate power adapters needed.",
+  },
+];
+
+// All products merged for catalog use
+export const PRODUCTS: Product[] = [
+  ...CAMERAS,
+  ...NVR_PRODUCTS,
+  ...ACCESSORIES_PRODUCTS,
+];
+
 export const CATEGORIES_LIST = [
-  { id: "all", name: "All Cameras (26)" },
+  { id: "all", name: "All Products (35)" },
   { id: "ip-camera", name: "CP PLUS IP STQC Series (16)" },
   { id: "cp-2.4mp", name: "CP PLUS 2.4MP Analog (4)" },
   { id: "cp-5mp", name: "CP PLUS 5MP Analog (6)" },
+  { id: "nvr", name: "NVR Recorders (7)" },
+  { id: "accessories", name: "PoE Switches & Accessories (1)" },
 ] as const;
-
