@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
+import Image from "next/image";
 import {
   Check,
   Eye,
@@ -90,8 +91,18 @@ export default function BestSellingProducts() {
               className="w-full group flex flex-col sm:flex-row items-center justify-between p-3 rounded-lg bg-white border border-zinc-200/70 hover:border-zinc-300 transition-colors gap-3 cursor-pointer"
             >
               {/* Product Thumbnail / Icon */}
-              <div className="flex-shrink-0 flex h-14 w-14 items-center justify-center rounded bg-zinc-50 text-zinc-600 border border-zinc-100 group-hover:bg-zinc-100/60 transition-colors">
-                <Icon className="h-6 w-6 stroke-[1.5]" />
+              <div className="relative flex-shrink-0 flex h-14 w-14 items-center justify-center rounded bg-zinc-50 text-zinc-600 border border-zinc-100 group-hover:bg-zinc-100/60 transition-colors overflow-hidden">
+                {product.image ? (
+                  <Image
+                    src={product.image}
+                    alt={product.name}
+                    fill
+                    className="object-contain p-1"
+                    sizes="56px"
+                  />
+                ) : (
+                  <Icon className="h-6 w-6 stroke-[1.5]" />
+                )}
               </div>
 
               {/* Product Details */}

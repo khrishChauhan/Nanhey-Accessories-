@@ -32,6 +32,8 @@ export interface Product {
   isBestSeller: boolean;
   isFeatured: boolean;
   description: string;
+  image?: string;
+  images?: string[];
 }
 
 export const CAMERAS: Product[] = [

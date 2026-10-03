@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
+import Image from "next/image";
 import { createPortal } from "react-dom";
 import {
   X,
@@ -106,15 +107,26 @@ export default function ProductQuickViewModal() {
           <div className="grid grid-cols-1 md:grid-cols-12 gap-6 items-start">
             {/* Left Graphic & Trust (5 cols) */}
             <div className="md:col-span-5 space-y-3">
-              <div className="relative flex h-52 w-full items-center justify-center rounded-2xl bg-slate-50 border border-slate-200/80 p-4">
-                <Cctv className="h-24 w-24 text-slate-700" />
+              <div className="relative flex h-52 w-full items-center justify-center rounded-2xl bg-slate-50 border border-slate-200/80 p-4 overflow-hidden">
+                {product.image ? (
+                  <Image
+                    src={product.image}
+                    alt={product.name}
+                    fill
+                    className="object-contain p-4"
+                    sizes="(max-width: 768px) 100vw, 300px"
+                    priority
+                  />
+                ) : (
+                  <Cctv className="h-24 w-24 text-slate-700" />
+                )}
                 {product.discount && (
-                  <span className="absolute top-3 left-3 bg-brand-ruby text-white text-xs font-black px-2.5 py-0.5 rounded-full shadow-ruby">
+                  <span className="absolute top-3 left-3 bg-brand-ruby text-white text-xs font-black px-2.5 py-0.5 rounded-full shadow-ruby z-10">
                     {product.discount}
                   </span>
                 )}
                 {product.isBestSeller && (
-                  <span className="absolute top-3 right-3 bg-[#090D14] text-white text-[10px] font-black px-2.5 py-0.5 rounded-full shadow-sm uppercase border border-white/10">
+                  <span className="absolute top-3 right-3 bg-[#090D14] text-white text-[10px] font-black px-2.5 py-0.5 rounded-full shadow-sm uppercase border border-white/10 z-10">
                     Best Seller
                   </span>
                 )}

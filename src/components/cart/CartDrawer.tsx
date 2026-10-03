@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
+import Image from "next/image";
 import {
   X,
   Trash2,
@@ -150,8 +151,18 @@ export default function CartDrawer({ onRequestGSTQuotation }: CartDrawerProps) {
                     className="flex items-start gap-3 p-3.5 rounded-2xl bg-white border border-slate-200/80 shadow-sm hover:border-slate-300 hover:shadow-card-hover transition-all"
                   >
                     {/* Item Thumbnail */}
-                    <div className="flex h-16 w-16 items-center justify-center rounded-xl bg-slate-50 text-slate-700 shrink-0 border border-slate-200/80">
-                      <Cctv className="h-8 w-8 text-brand-ruby" />
+                    <div className="relative flex h-16 w-16 items-center justify-center rounded-xl bg-slate-50 text-slate-700 shrink-0 border border-slate-200/80 overflow-hidden">
+                      {item.product.image ? (
+                        <Image
+                          src={item.product.image}
+                          alt={item.product.name}
+                          fill
+                          className="object-contain p-1"
+                          sizes="64px"
+                        />
+                      ) : (
+                        <Cctv className="h-8 w-8 text-brand-ruby" />
+                      )}
                     </div>
 
                     {/* Details */}

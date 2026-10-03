@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
+import Image from "next/image";
 import {
   Check,
   Heart,
@@ -106,8 +107,18 @@ export default function CatalogProductCard({ product }: CatalogProductCardProps)
         </div>
 
         {/* Product Image / Icon Container */}
-        <div className="relative flex h-36 w-full items-center justify-center rounded bg-zinc-50/80 border border-zinc-100 p-4 mb-3 transition-colors group-hover:bg-red-50/20 group-hover:border-red-100">
-          <Icon className="h-10 w-10 text-zinc-600 group-hover:text-red-600 stroke-[1.5] transition-colors" />
+        <div className="relative flex h-36 w-full items-center justify-center rounded bg-zinc-50/80 border border-zinc-100 p-4 mb-3 transition-colors group-hover:bg-red-50/20 group-hover:border-red-100 overflow-hidden">
+          {product.image ? (
+            <Image
+              src={product.image}
+              alt={product.name}
+              fill
+              className="object-contain p-2"
+              sizes="(max-width: 768px) 100vw, 250px"
+            />
+          ) : (
+            <Icon className="h-10 w-10 text-zinc-600 group-hover:text-red-600 stroke-[1.5] transition-colors" />
+          )}
         </div>
 
         {/* Product Title */}
