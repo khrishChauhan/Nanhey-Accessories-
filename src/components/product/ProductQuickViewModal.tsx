@@ -31,14 +31,20 @@ export default function ProductQuickViewModal() {
 
   const [quantity, setQuantity] = useState(1);
   const [justAdded, setJustAdded] = useState(false);
+  const [selectedImage, setSelectedImage] = useState<string | null>(null);
 
   useEffect(() => {
     setMounted(true);
   }, []);
 
+  useEffect(() => {
+    setSelectedImage(null);
+  }, [quickViewProduct?.id]);
+
   if (!quickViewProduct || !mounted) return null;
 
   const product = quickViewProduct;
+  const displayImage = selectedImage || product.image;
   const wishlisted = isWishlisted(product.id);
 
   const handleAddToCart = () => {
@@ -108,9 +114,9 @@ export default function ProductQuickViewModal() {
             {/* Left Graphic & Trust (5 cols) */}
             <div className="md:col-span-5 space-y-3">
               <div className="relative flex h-52 w-full items-center justify-center rounded-2xl bg-slate-50 border border-slate-200/80 p-4 overflow-hidden">
-                {product.image ? (
+                {displayImage ? (
                   <Image
-                    src={product.image}
+                    src={displayImage}
                     alt={product.name}
                     fill
                     className="object-contain p-4"
@@ -131,6 +137,32 @@ export default function ProductQuickViewModal() {
                   </span>
                 )}
               </div>
+
+              {/* Gallery Thumbnails Strip */}
+              {product.images && product.images.length > 1 && (
+                <div className="flex items-center gap-2 overflow-x-auto pb-1 scrollbar-none">
+                  {product.images.map((img, idx) => (
+                    <button
+                      key={idx}
+                      onClick={() => setSelectedImage(img)}
+                      className={`relative h-12 w-12 rounded-xl border flex-shrink-0 bg-white p-1 transition-all overflow-hidden ${
+                        displayImage === img
+                          ? "border-red-600 ring-2 ring-red-500/30"
+                          : "border-slate-200 hover:border-slate-300"
+                      }`}
+                      title={`View Angle ${idx + 1}`}
+                    >
+                      <Image
+                        src={img}
+                        alt={`${product.name} angle ${idx + 1}`}
+                        fill
+                        className="object-contain p-0.5"
+                        sizes="48px"
+                      />
+                    </button>
+                  ))}
+                </div>
+              )}
 
               {/* Warranty & Delivery Badges */}
               <div className="rounded-2xl bg-slate-50 p-3.5 border border-slate-200/80 text-xs space-y-2">
