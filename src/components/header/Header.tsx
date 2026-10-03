@@ -12,11 +12,11 @@ export default function Header() {
 
   return (
     <>
-      <header className="w-full sticky top-0 z-40 backdrop-blur-md bg-white/95 border-b border-zinc-200/80 shadow-xs">
-        {/* Row 1: Micro Utility Bar (30px) */}
-        <TopBar />
+      {/* Row 1: Micro Utility Bar (30px) */}
+      <TopBar />
 
-        {/* Row 2: Consolidated 72px Main Navigation Bar */}
+      {/* Row 2: Sticky Main Navigation Bar (sticks on mobile and desktop) */}
+      <header className="w-full sticky top-0 z-50 backdrop-blur-md bg-white/95 border-b border-zinc-200/80 shadow-xs transition-all">
         <MainHeader
           onOpenAccount={() => setIsAuthModalOpen(true)}
           onRequestInstallation={() => setIsInstallationModalOpen(true)}
