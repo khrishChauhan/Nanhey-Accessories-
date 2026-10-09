@@ -107,3 +107,32 @@ h1, h2, h3, h4, h5, h6 {
     font-size: max(16px, 1em) !important;
   }
 }
+
+/* Mobile Left Drawer Animations */
+@keyframes slideInFromLeft {
+  from {
+    transform: translateX(-100%);
+  }
+  to {
+    transform: translateX(0);
+  }
+}
+
+@keyframes fadeInBackdrop {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.animate-drawer-left {
+  animation: slideInFromLeft 0.28s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  will-change: transform;
+}
+
+.animate-fade-in {
+  animation: fadeInBackdrop 0.2s ease-out forwards;
+}
+

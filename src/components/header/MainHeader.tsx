@@ -52,6 +52,16 @@ export default function MainHeader({
     };
   }, [mobileMenuOpen]);
 
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === "Escape" && mobileMenuOpen) {
+        setMobileMenuOpen(false);
+      }
+    };
+    window.addEventListener("keydown", handleKeyDown);
+    return () => window.removeEventListener("keydown", handleKeyDown);
+  }, [mobileMenuOpen]);
+
   const handleSearch = (e: React.FormEvent) => {
     e.preventDefault();
     const el = document.getElementById("catalog");
@@ -75,22 +85,43 @@ export default function MainHeader({
     { label: "WiFi Cameras", href: "/#catalog" },
   ];
 
+  const drawerNavLinks = [
+    { label: "All Products", href: "/#catalog" },
+    { label: "CCTV Cameras", href: "/#catalog" },
+    { label: "DVR/NVR", href: "/#catalog" },
+    { label: "WiFi Cameras", href: "/#catalog" },
+    { label: "About Us", href: "/about" },
+    { label: "Contact & Showroom", href: "/contact" },
+  ];
+
   return (
     <div className="relative z-30 transition-all bg-white/95">
       {/* Main 70px Bar */}
       <div className="h-[68px] sm:h-[72px] flex items-center px-4 sm:px-6">
         <div className="max-w-7xl mx-auto w-full flex items-center justify-between gap-3 sm:gap-6">
-          {/* 1. Official Brand Logo */}
-          <Link href="/" className="flex items-center group shrink-0 py-1">
-            <Image
-              src="/images/logo.png"
-              alt="Nanhey Accessories – CCTV & Security Solutions Begusarai"
-              width={190}
-              height={52}
-              priority
-              className="h-8 sm:h-9 md:h-10 w-auto object-contain transition-transform group-hover:scale-[1.02]"
-            />
-          </Link>
+          {/* 1. Official Brand Logo & Mobile Menu Toggle */}
+          <div className="flex items-center gap-1 sm:gap-2.5 shrink-0">
+            {/* Mobile Menu Toggle (Left-aligned for left drawer) */}
+            <button
+              onClick={() => setMobileMenuOpen(true)}
+              className="xl:hidden p-2 -ml-1 rounded-full text-zinc-700 hover:text-red-600 hover:bg-zinc-100 transition-colors"
+              aria-label="Open navigation menu"
+            >
+              <Menu className="h-5 w-5" />
+            </button>
+
+            {/* Brand Logo */}
+            <Link href="/" className="flex items-center group shrink-0 py-1">
+              <Image
+                src="/images/logo.png"
+                alt="Nanhey Accessories – CCTV & Security Solutions Begusarai"
+                width={190}
+                height={52}
+                priority
+                className="h-8 sm:h-9 md:h-10 w-auto object-contain transition-transform group-hover:scale-[1.02]"
+              />
+            </Link>
+          </div>
 
           {/* 2. Refined Navigation Links with Red Hover Underline */}
           <nav className="hidden xl:flex items-center gap-5 2xl:gap-6">
@@ -202,19 +233,11 @@ export default function MainHeader({
               <span>Request Installation</span>
             </button>
 
-            {/* Mobile Menu Toggle Button */}
-            <button
-              onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              className="xl:hidden p-2 rounded-full text-zinc-700 hover:text-red-600 hover:bg-red-50/50 transition-colors ml-0.5"
-              aria-label="Toggle navigation menu"
-            >
-              {mobileMenuOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
-            </button>
           </div>
         </div>
       </div>
 
-      {/* Portalized Mobile Menu Drawer rendered directly into document.body */}
+      {/* Portalized Mobile Menu Drawer (Opening from LEFT) rendered directly into document.body */}
       {mounted &&
         mobileMenuOpen &&
         typeof document !== "undefined" &&
@@ -223,11 +246,12 @@ export default function MainHeader({
             {/* Dark Backdrop Blur */}
             <div
               onClick={() => setMobileMenuOpen(false)}
-              className="fixed inset-0 bg-black/75 backdrop-blur-sm transition-opacity"
+              className="fixed inset-0 bg-black/70 backdrop-blur-xs transition-opacity animate-fade-in"
+              aria-hidden="true"
             />
 
-            {/* Slide-out Drawer Panel */}
-            <div className="fixed inset-y-0 right-0 w-full max-w-xs sm:max-w-sm bg-white shadow-2xl flex flex-col justify-between p-5 z-10 overflow-y-auto animate-in slide-in-from-right duration-200">
+            {/* Slide-out Drawer Panel (Opening from LEFT) */}
+            <div className="fixed inset-y-0 left-0 w-full max-w-xs sm:max-w-sm bg-white shadow-2xl flex flex-col justify-between p-5 z-10 overflow-y-auto animate-drawer-left border-r border-zinc-200">
               {/* Drawer Top: Logo + Close Button */}
               <div>
                 <div className="flex items-center justify-between pb-4 border-b border-zinc-100">
@@ -317,7 +341,7 @@ export default function MainHeader({
                   <div className="text-[10px] font-semibold text-zinc-400 uppercase tracking-wider px-3 mb-1.5">
                     Navigation
                   </div>
-                  {navLinks.map((link, idx) => (
+                  {drawerNavLinks.map((link, idx) => (
                     <Link
                       key={idx}
                       href={link.href}
