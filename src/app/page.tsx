@@ -55,23 +55,23 @@ export default function HomePage() {
         }}
       />
 
-      {/* 3. Value Proposition Icons Bar */}
-      <ValuePropositionStrip />
-
-      {/* 4. Full 50+ CCTV Interactive Product Catalog Explorer */}
+      {/* 3. Full 50+ CCTV Interactive Product Catalog Explorer */}
       <ProductCatalog
         key={activeCatalogCategory}
         initialCategory={activeCatalogCategory}
       />
 
-      {/* 5. 3-Column Featured Section (Builder + Best Sellers + Installation) */}
+      {/* 4. 3-Column Featured Section (Builder + Best Sellers + Installation) */}
       <FeaturedSection
         onBookInstallation={handleOpenGeneralInstallation}
         onBuildPackage={handleBuildPackage}
       />
 
-      {/* 6. Trust Badges Section */}
+      {/* 5. Trust Badges Section */}
       <TrustBadgesBar />
+
+      {/* 6. Value Proposition Icons Bar */}
+      <ValuePropositionStrip />
 
       {/* 7. Shop By Category Grid (CP PLUS Camera Series) */}
       <CategoryGrid onSelectCategory={handleSelectCategoryFromGrid} />
