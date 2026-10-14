@@ -54,35 +54,35 @@ export default function ProductFilterBar({
 
   return (
     <div className="bg-white rounded-2xl border border-zinc-200/90 p-3.5 sm:p-4.5 shadow-xs space-y-3">
-      {/* Row 1: Search & Quick Controls (Mobile: Stacked, Desktop: Row) */}
-      <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-2.5">
+      {/* Row 1: Search & Controls (Mobile: Streamlined Search + Sort, Desktop: Full Suite) */}
+      <div className="flex items-center justify-between gap-2">
         {/* Search inside catalog */}
-        <div className="relative flex-1">
+        <div className="relative flex-1 min-w-0">
           <Search className="absolute left-3.5 top-1/2 -translate-y-1/2 h-4 w-4 text-zinc-400" />
           <input
             type="text"
             placeholder="Search 65+ models, 4K, audio, PoE..."
             value={filters.searchQuery}
             onChange={(e) => onFilterChange({ searchQuery: e.target.value })}
-            className="w-full pl-9 pr-9 py-2 rounded-xl border border-zinc-200 text-xs sm:text-sm bg-zinc-50/70 focus:bg-white focus:border-zinc-400 focus:outline-none transition-all placeholder:text-zinc-400"
+            className="w-full pl-9 pr-8 py-2 rounded-xl border border-zinc-200 text-xs sm:text-sm bg-zinc-50/70 focus:bg-white focus:border-zinc-400 focus:outline-none transition-all placeholder:text-zinc-400"
           />
           {filters.searchQuery && (
             <button
               onClick={() => onFilterChange({ searchQuery: "" })}
               aria-label="Clear search"
-              className="absolute right-2.5 top-1/2 -translate-y-1/2 p-1 text-zinc-400 hover:text-zinc-700 hover:bg-zinc-200/60 rounded-full transition-colors"
+              className="absolute right-2 top-1/2 -translate-y-1/2 p-1 text-zinc-400 hover:text-zinc-700 hover:bg-zinc-200/60 rounded-full transition-colors"
             >
               <X className="h-3.5 w-3.5" />
             </button>
           )}
         </div>
 
-        {/* Quick Filters Group: In-Stock Toggle, Brand, Sort, Reset */}
-        <div className="flex items-center gap-2 overflow-x-auto no-scrollbar py-0.5 [-webkit-overflow-scrolling:touch] [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden shrink-0">
-          {/* In-Stock Filter Toggle */}
+        {/* Controls Group: In-Stock (Desktop only), Brand (Desktop only), Sort (All), Reset (All) */}
+        <div className="flex items-center gap-2 shrink-0">
+          {/* In-Stock Filter Toggle — Hidden on Mobile */}
           <button
             onClick={() => onFilterChange({ onlyInStock: !filters.onlyInStock })}
-            className={`shrink-0 flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-xs font-semibold border transition-all ${
+            className={`hidden sm:flex shrink-0 items-center gap-1.5 px-3 py-1.5 rounded-xl text-xs font-semibold border transition-all ${
               filters.onlyInStock
                 ? "bg-emerald-50 text-emerald-800 border-emerald-300 shadow-2xs"
                 : "bg-zinc-50 hover:bg-zinc-100 text-zinc-700 border-zinc-200/90"
@@ -96,8 +96,8 @@ export default function ProductFilterBar({
             <span className="whitespace-nowrap">In Stock</span>
           </button>
 
-          {/* Brand Segmented Control */}
-          <div className="shrink-0 inline-flex items-center rounded-xl bg-zinc-100 p-0.5 border border-zinc-200/80">
+          {/* Brand Segmented Control — Hidden on Mobile */}
+          <div className="hidden sm:inline-flex shrink-0 items-center rounded-xl bg-zinc-100 p-0.5 border border-zinc-200/80">
             {BRANDS.map((b) => {
               const isActive = filters.brand === b.id;
               return (
@@ -116,7 +116,7 @@ export default function ProductFilterBar({
             })}
           </div>
 
-          {/* Sort Dropdown */}
+          {/* Sort Dropdown — Visible on Mobile and Desktop */}
           <div className="relative shrink-0">
             <select
               value={filters.sortBy}
@@ -126,13 +126,13 @@ export default function ProductFilterBar({
                 })
               }
               aria-label="Sort products by"
-              className="appearance-none bg-zinc-50 hover:bg-zinc-100 border border-zinc-200/90 rounded-xl pl-3 pr-7 py-1.5 text-xs font-semibold text-zinc-700 focus:outline-none focus:border-zinc-400 cursor-pointer transition-colors"
+              className="appearance-none bg-zinc-50 hover:bg-zinc-100 border border-zinc-200/90 rounded-xl pl-2.5 sm:pl-3 pr-7 py-2 text-xs font-semibold text-zinc-700 focus:outline-none focus:border-zinc-400 cursor-pointer transition-colors max-w-[125px] sm:max-w-none truncate"
             >
-              <option value="featured">Sort: Featured</option>
-              <option value="bestseller">Sort: Best Sellers</option>
-              <option value="price-asc">Sort: Price Low → High</option>
-              <option value="price-desc">Sort: Price High → Low</option>
-              <option value="rating">Sort: Highest Rated</option>
+              <option value="featured">Featured</option>
+              <option value="bestseller">Best Sellers</option>
+              <option value="price-asc">Price: Low → High</option>
+              <option value="price-desc">Price: High → Low</option>
+              <option value="rating">Highest Rated</option>
             </select>
             <ChevronDown className="absolute right-2 top-1/2 -translate-y-1/2 h-3.5 w-3.5 text-zinc-400 pointer-events-none" />
           </div>
@@ -141,10 +141,10 @@ export default function ProductFilterBar({
           {isFiltered && (
             <button
               onClick={onResetFilters}
-              className="shrink-0 flex items-center gap-1 text-xs font-semibold text-red-600 hover:text-red-700 bg-red-50 hover:bg-red-100 border border-red-200 px-2.5 py-1.5 rounded-xl transition-colors whitespace-nowrap"
+              className="shrink-0 flex items-center gap-1 text-xs font-semibold text-red-600 hover:text-red-700 bg-red-50 hover:bg-red-100 border border-red-200 px-2 py-2 sm:px-2.5 rounded-xl transition-colors whitespace-nowrap"
             >
-              <X className="h-3 w-3 stroke-[2.5]" />
-              <span>Reset</span>
+              <X className="h-3.5 w-3.5 stroke-[2.5]" />
+              <span className="hidden sm:inline">Reset</span>
             </button>
           )}
         </div>
